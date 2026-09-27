@@ -1,0 +1,7748 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Nature's Sunshine · Administración</title>
+
+<style>
+
+/* =========================================================
+   VARIABLES
+========================================================= */
+
+:root{
+    --bg:#f5f7f4;
+    --card:#ffffff;
+    --card2:#f7f9f7;
+    --text:#173126;
+    --muted:#718078;
+    --line:#e3e9e4;
+
+    --green:#16845b;
+    --green2:#0f6d49;
+
+    --soft:#e9f6ef;
+
+    --orange:#e88a20;
+    --red:#d94b4b;
+
+    --sidebar:#103b2a;
+    --sidebar-text:#c9ded5;
+
+    --input:#ffffff;
+    --input-border:#d5ded8;
+
+    --shadow:
+        0 12px 35px rgba(24,55,42,.08);
+}
+
+
+/* =========================================================
+   DARK MODE
+========================================================= */
+
+body.dark{
+
+    --bg:#0f1512;
+    --card:#18211d;
+    --card2:#202a25;
+
+    --text:#f0f7f3;
+    --muted:#9aa9a1;
+    --line:#2d3933;
+
+    --soft:#20372d;
+
+    --sidebar:#091f16;
+    --sidebar-text:#b9cbc2;
+
+    --input:#141c18;
+    --input-border:#39483f;
+
+    --shadow:
+        0 15px 40px rgba(0,0,0,.28);
+}
+
+
+/* =========================================================
+   RESET
+========================================================= */
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:
+        Inter,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Arial,
+        sans-serif;
+
+    background:var(--bg);
+    color:var(--text);
+
+    min-height:100vh;
+
+    transition:
+        background .25s ease,
+        color .25s ease;
+}
+
+button,
+input,
+select{
+    font:inherit;
+}
+
+button{
+    border:0;
+    cursor:pointer;
+}
+
+input,
+select{
+    color:var(--text);
+}
+
+.hidden{
+    display:none!important;
+}
+
+
+/* =========================================================
+   LOGIN
+========================================================= */
+
+#login{
+    position:fixed;
+    inset:0;
+
+    background:
+        linear-gradient(
+            135deg,
+            #0f3f2d,
+            #16845b
+        );
+
+    display:grid;
+    place-items:center;
+
+    padding:20px;
+
+    z-index:1000;
+}
+
+.login-card{
+
+    width:min(410px,100%);
+
+    background:white;
+
+    padding:35px;
+
+    border-radius:24px;
+
+    box-shadow:
+        0 30px 80px
+        rgba(0,0,0,.3);
+}
+
+.brand-mark{
+
+    width:70px;
+    height:70px;
+
+    border-radius:20px;
+
+    background:#e7f6ed;
+
+    display:grid;
+    place-items:center;
+
+    font-size:35px;
+
+    margin:
+        0 auto 17px;
+}
+
+.login-card h1{
+    text-align:center;
+    font-size:29px;
+}
+
+.login-card p{
+    text-align:center;
+
+    color:#718078;
+
+    margin:
+        8px 0 25px;
+}
+
+.field{
+    margin-bottom:14px;
+}
+
+.field label{
+    display:block;
+
+    font-size:12px;
+
+    font-weight:800;
+
+    margin-bottom:6px;
+
+    color:var(--text);
+}
+
+.field input,
+.field select{
+
+    width:100%;
+
+    padding:
+        12px 13px;
+
+    border:
+        1px solid
+        var(--input-border);
+
+    border-radius:11px;
+
+    outline:none;
+
+    background:var(--input);
+
+    transition:.2s;
+}
+
+.field input:focus,
+.field select:focus{
+
+    border-color:
+        var(--green);
+
+    box-shadow:
+        0 0 0 3px
+        rgba(22,132,91,.12);
+}
+
+.primary{
+
+    background:
+        var(--green);
+
+    color:white;
+
+    padding:
+        11px 15px;
+
+    border-radius:10px;
+
+    font-weight:800;
+
+    transition:.2s;
+}
+
+.primary:hover{
+    background:
+        var(--green2);
+
+    transform:
+        translateY(-1px);
+}
+
+.full{
+    width:100%;
+
+    padding:13px;
+
+    margin-top:5px;
+}
+
+.login-error{
+
+    min-height:20px;
+
+    color:var(--red);
+
+    font-size:13px;
+
+    text-align:center;
+
+    margin-top:10px;
+}
+
+
+/* =========================================================
+   APP
+========================================================= */
+
+#app{
+    display:none;
+
+    min-height:100vh;
+}
+
+.layout{
+
+    display:grid;
+
+    grid-template-columns:
+        245px 1fr;
+
+    min-height:100vh;
+}
+
+
+/* =========================================================
+   SIDEBAR
+========================================================= */
+
+.sidebar{
+
+    background:
+        var(--sidebar);
+
+    color:white;
+
+    padding:
+        22px 14px;
+
+    position:sticky;
+
+    top:0;
+
+    height:100vh;
+
+    z-index:50;
+}
+
+.side-brand{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:11px;
+
+    padding:
+        7px 9px 24px;
+}
+
+.side-icon{
+
+    width:42px;
+    height:42px;
+
+    background:#e8f7ef;
+
+    color:#126b48;
+
+    border-radius:13px;
+
+    display:grid;
+
+    place-items:center;
+
+    font-size:22px;
+}
+
+.side-brand strong{
+    font-size:17px;
+}
+
+.side-brand small{
+
+    display:block;
+
+    color:
+        var(--sidebar-text);
+
+    font-size:11px;
+
+    margin-top:2px;
+}
+
+.nav{
+
+    display:grid;
+
+    gap:6px;
+}
+
+.nav button{
+
+    background:transparent;
+
+    color:
+        var(--sidebar-text);
+
+    text-align:left;
+
+    padding:
+        11px 12px;
+
+    border-radius:10px;
+
+    font-weight:700;
+
+    transition:.2s;
+}
+
+.nav button:hover,
+.nav button.active{
+
+    background:
+        rgba(255,255,255,.10);
+
+    color:white;
+}
+
+.side-bottom{
+
+    position:absolute;
+
+    bottom:20px;
+
+    left:14px;
+
+    right:14px;
+}
+
+.logout{
+
+    width:100%;
+
+    background:
+        rgba(255,255,255,.07);
+
+    color:white;
+
+    padding:10px;
+
+    border-radius:10px;
+
+    transition:.2s;
+}
+
+.logout:hover{
+    background:
+        rgba(255,255,255,.14);
+}
+
+
+/* =========================================================
+   MAIN
+========================================================= */
+
+.main{
+    min-width:0;
+}
+
+.topbar{
+
+    height:72px;
+
+    background:
+        var(--card);
+
+    border-bottom:
+        1px solid
+        var(--line);
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    padding:
+        0 28px;
+
+    position:sticky;
+
+    top:0;
+
+    z-index:20;
+
+    transition:.25s;
+}
+
+.topbar h2{
+    font-size:20px;
+}
+
+.user{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:9px;
+
+    font-weight:800;
+}
+
+.dot{
+
+    width:9px;
+    height:9px;
+
+    background:#27bd79;
+
+    border-radius:50%;
+}
+
+
+/* =========================================================
+   THEME BUTTON
+========================================================= */
+
+.theme-button{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    padding:
+        9px 12px;
+
+    border-radius:10px;
+
+    background:
+        var(--card2);
+
+    color:
+        var(--text);
+
+    border:
+        1px solid
+        var(--line);
+
+    font-weight:800;
+
+    transition:.2s;
+}
+
+.theme-button:hover{
+    transform:
+        translateY(-1px);
+}
+
+
+/* =========================================================
+   CONTENT
+========================================================= */
+
+.content{
+
+    padding:28px;
+
+    max-width:1500px;
+
+    margin:auto;
+}
+
+.view{
+    display:none;
+}
+
+.view.active{
+    display:block;
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero{
+
+    background:
+        linear-gradient(
+            135deg,
+            #103b2a,
+            #1c7752
+        );
+
+    color:white;
+
+    border-radius:22px;
+
+    padding:27px;
+
+    margin-bottom:20px;
+
+    box-shadow:var(--shadow);
+}
+
+.hero h1{
+
+    font-size:28px;
+
+    margin-bottom:6px;
+}
+
+.hero p{
+    color:#d7eee4;
+}
+
+
+/* =========================================================
+   STATS
+========================================================= */
+
+.stats{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(5,1fr);
+
+    gap:14px;
+
+    margin-bottom:20px;
+}
+
+.stat,
+.card{
+
+    background:
+        var(--card);
+
+    border:
+        1px solid
+        var(--line);
+
+    border-radius:17px;
+
+    box-shadow:
+        var(--shadow);
+
+    transition:
+        background .25s ease,
+        border .25s ease,
+        color .25s ease;
+}
+
+.stat{
+    padding:18px;
+}
+
+.stat small{
+
+    color:
+        var(--muted);
+
+    font-weight:700;
+}
+
+.stat strong{
+
+    display:block;
+
+    font-size:24px;
+
+    margin-top:8px;
+}
+
+.green{
+    color:
+        var(--green);
+}
+
+.red{
+    color:
+        var(--red);
+}
+
+
+/* =========================================================
+   CARDS
+========================================================= */
+
+.card{
+
+    padding:20px;
+
+    margin-bottom:18px;
+}
+
+.card-head{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:12px;
+
+    margin-bottom:16px;
+}
+
+.card-head h3{
+    font-size:17px;
+}
+
+.grid2{
+
+    display:grid;
+
+    grid-template-columns:
+        1.25fr .75fr;
+
+    gap:18px;
+}
+
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+
+.secondary{
+
+    background:
+        var(--card2);
+
+    color:
+        var(--text);
+
+    padding:
+        10px 13px;
+
+    border-radius:9px;
+
+    font-weight:800;
+
+    border:
+        1px solid
+        var(--line);
+}
+
+.secondary:hover{
+    filter:brightness(.95);
+}
+
+.danger{
+
+    background:#fff0f0;
+
+    color:var(--red);
+
+    padding:
+        9px 12px;
+
+    border-radius:9px;
+
+    font-weight:800;
+}
+
+body.dark .danger{
+    background:#351f20;
+}
+
+
+/* =========================================================
+   TOOLBAR
+========================================================= */
+
+.toolbar{
+
+    display:flex;
+
+    gap:9px;
+
+    flex-wrap:wrap;
+}
+
+.search{
+
+    padding:
+        10px 12px;
+
+    border:
+        1px solid
+        var(--input-border);
+
+    border-radius:9px;
+
+    outline:none;
+
+    min-width:220px;
+
+    background:
+        var(--input);
+}
+
+.search:focus{
+
+    border-color:
+        var(--green);
+}
+
+
+/* =========================================================
+   TABLE
+========================================================= */
+
+.table-wrap{
+    overflow:auto;
+}
+
+.table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+    min-width:720px;
+}
+
+.table th,
+.table td{
+
+    text-align:left;
+
+    padding:
+        12px 10px;
+
+    border-bottom:
+        1px solid
+        var(--line);
+
+    font-size:13px;
+}
+
+.table th{
+
+    color:
+        var(--muted);
+
+    font-size:11px;
+
+    text-transform:uppercase;
+
+    letter-spacing:.04em;
+}
+
+
+/* =========================================================
+   BADGES
+========================================================= */
+
+.badge{
+
+    display:inline-flex;
+
+    padding:
+        5px 8px;
+
+    border-radius:999px;
+
+    font-size:11px;
+
+    font-weight:800;
+}
+
+.ok{
+
+    background:#e8f7ef;
+
+    color:#16764f;
+}
+
+.low{
+
+    background:#fff5df;
+
+    color:#a76508;
+}
+
+.out{
+
+    background:#fff0f0;
+
+    color:#c83e3e;
+}
+
+body.dark .low{
+    background:#392e1c;
+}
+
+body.dark .out{
+    background:#351f20;
+}
+
+
+/* =========================================================
+   ACTIONS
+========================================================= */
+
+.actions{
+
+    display:flex;
+
+    gap:6px;
+}
+
+.icon-btn{
+
+    width:32px;
+
+    height:32px;
+
+    border-radius:8px;
+
+    background:
+        var(--card2);
+
+    color:
+        var(--text);
+}
+
+.icon-btn.del{
+
+    background:#fff0f0;
+
+    color:
+        var(--red);
+}
+
+body.dark .icon-btn.del{
+    background:#351f20;
+}
+
+
+/* =========================================================
+   PRODUCTS
+========================================================= */
+
+.product-grid{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap:14px;
+}
+
+.product{
+
+    border:
+        1px solid
+        var(--line);
+
+    border-radius:14px;
+
+    padding:16px;
+
+    background:
+        var(--card);
+}
+
+.product-top{
+
+    display:flex;
+
+    justify-content:
+        space-between;
+
+    gap:10px;
+}
+
+.product h4{
+    margin-bottom:4px;
+}
+
+.product small{
+    color:
+        var(--muted);
+}
+
+.product .prices{
+
+    display:grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap:8px;
+
+    margin:15px 0;
+}
+
+.pricebox{
+
+    background:
+        var(--card2);
+
+    border-radius:10px;
+
+    padding:9px;
+}
+
+.pricebox small{
+
+    display:block;
+
+    font-size:10px;
+}
+
+.pricebox strong{
+    font-size:15px;
+}
+
+.stock{
+    font-weight:900;
+}
+
+
+/* =========================================================
+   FORM
+========================================================= */
+
+.form-grid{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(2,1fr);
+
+    gap:12px;
+}
+
+.form-grid.three{
+
+    grid-template-columns:
+        repeat(3,1fr);
+}
+
+
+/* =========================================================
+   MODAL
+========================================================= */
+
+.modal{
+
+    position:fixed;
+
+    inset:0;
+
+    background:
+        rgba(0,0,0,.55);
+
+    display:none;
+
+    place-items:center;
+
+    padding:18px;
+
+    z-index:80;
+}
+
+.modal.open{
+    display:grid;
+}
+
+.modal-box{
+
+    background:
+        var(--card);
+
+    width:
+        min(570px,100%);
+
+    border-radius:19px;
+
+    padding:22px;
+
+    box-shadow:
+        0 25px 80px
+        rgba(0,0,0,.35);
+
+    max-height:90vh;
+
+    overflow:auto;
+}
+
+.modal-box h3{
+    margin-bottom:18px;
+}
+
+.modal-actions{
+
+    display:flex;
+
+    justify-content:flex-end;
+
+    gap:8px;
+
+    margin-top:18px;
+}
+
+
+/* =========================================================
+   RECEIPTS / RECENT
+========================================================= */
+
+.receipt-list,
+.recent{
+
+    display:grid;
+
+    gap:8px;
+}
+
+.receipt-item,
+.recent-item{
+
+    padding:12px;
+
+    background:
+        var(--card2);
+
+    border-radius:11px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    gap:12px;
+}
+
+.receipt-item small,
+.recent-item small{
+
+    display:block;
+
+    color:
+        var(--muted);
+
+    margin-top:3px;
+}
+
+
+/* =========================================================
+   NOTE
+========================================================= */
+
+.note{
+
+    padding:
+        11px 13px;
+
+    background:
+        var(--soft);
+
+    border:
+        1px solid
+        var(--line);
+
+    border-radius:10px;
+
+    color:
+        var(--text);
+
+    font-size:13px;
+
+    margin-bottom:15px;
+}
+
+
+/* =========================================================
+   REPORTS
+========================================================= */
+
+.filters{
+
+    display:flex;
+
+    gap:10px;
+
+    flex-wrap:wrap;
+
+    align-items:end;
+}
+
+.filters .field{
+    margin:0;
+}
+
+.filters input{
+    min-width:160px;
+}
+
+.report-cards{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(4,1fr);
+
+    gap:12px;
+
+    margin:
+        16px 0;
+}
+
+.report-card{
+
+    background:
+        var(--card2);
+
+    border:
+        1px solid
+        var(--line);
+
+    border-radius:13px;
+
+    padding:14px;
+}
+
+.report-card small{
+
+    color:
+        var(--muted);
+
+    display:block;
+}
+
+.report-card strong{
+
+    font-size:21px;
+
+    display:block;
+
+    margin-top:6px;
+}
+
+.calendar-table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+    margin-top:15px;
+}
+
+.calendar-table th,
+.calendar-table td{
+
+    padding:10px;
+
+    border-bottom:
+        1px solid
+        var(--line);
+
+    text-align:right;
+
+    font-size:13px;
+}
+
+.calendar-table th:first-child,
+.calendar-table td:first-child{
+    text-align:left;
+}
+
+.calendar-table th{
+
+    color:
+        var(--muted);
+
+    font-size:11px;
+}
+
+
+/* =========================================================
+   OFERTAS  (nuevo)
+========================================================= */
+
+.offer-grid{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(auto-fill,minmax(300px,1fr));
+
+    gap:14px;
+}
+
+.scenario-title{
+
+    font-size:11px;
+
+    font-weight:800;
+
+    color:var(--muted);
+
+    text-transform:uppercase;
+
+    letter-spacing:.04em;
+
+    margin:14px 0 6px;
+}
+
+.stat-mini-grid{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap:14px;
+
+    margin-bottom:0;
+}
+
+.offer-alert{
+
+    padding:
+        10px 12px;
+
+    background:#fff5df;
+
+    border:
+        1px solid #f0d38a;
+
+    border-radius:10px;
+
+    font-size:12px;
+
+    margin-bottom:12px;
+}
+
+.offer-alert.ended{
+
+    background:#fff0f0;
+
+    border-color:#f0a8a8;
+}
+
+body.dark .offer-alert{
+    background:#392e1c;
+    border-color:#5a4526;
+}
+
+body.dark .offer-alert.ended{
+    background:#351f20;
+    border-color:#5a2b2b;
+}
+
+
+/* =========================================================
+   EMPTY
+========================================================= */
+
+.empty{
+
+    text-align:center;
+
+    padding:30px;
+
+    color:
+        var(--muted);
+}
+
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+.toast{
+
+    position:fixed;
+
+    right:20px;
+
+    bottom:20px;
+
+    background:
+        #173b2d;
+
+    color:white;
+
+    padding:
+        12px 15px;
+
+    border-radius:11px;
+
+    box-shadow:
+        var(--shadow);
+
+    z-index:200;
+
+    transform:
+        translateY(20px);
+
+    opacity:0;
+
+    pointer-events:none;
+
+    transition:.2s;
+}
+
+.toast.show{
+
+    transform:none;
+
+    opacity:1;
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+.mobile-menu{
+    display:none;
+}
+
+@media(max-width:1100px){
+
+    .stats{
+        grid-template-columns:
+            repeat(3,1fr);
+    }
+
+    .product-grid{
+        grid-template-columns:
+            repeat(2,1fr);
+    }
+
+    .grid2{
+        grid-template-columns:1fr;
+    }
+
+    .report-cards{
+        grid-template-columns:
+            repeat(2,1fr);
+    }
+}
+
+@media(max-width:760px){
+
+    .layout{
+        display:block;
+    }
+
+    .sidebar{
+
+        position:fixed;
+
+        left:-260px;
+
+        top:0;
+
+        bottom:0;
+
+        width:245px;
+
+        transition:.2s;
+    }
+
+    .sidebar.open{
+        left:0;
+    }
+
+    .mobile-menu{
+
+        display:block;
+
+        background:
+            var(--card2);
+
+        color:
+            var(--text);
+
+        border-radius:9px;
+
+        padding:
+            8px 10px;
+
+        font-size:18px;
+    }
+
+    .topbar{
+        padding:0 15px;
+    }
+
+    .content{
+        padding:
+            18px 14px;
+    }
+
+    .stats{
+        grid-template-columns:
+            repeat(2,1fr);
+    }
+
+    .product-grid{
+        grid-template-columns:1fr;
+    }
+
+    .form-grid,
+    .form-grid.three{
+        grid-template-columns:1fr;
+    }
+
+    .search{
+
+        min-width:0;
+
+        width:100%;
+    }
+
+    .toolbar{
+        width:100%;
+    }
+
+    .report-cards{
+        grid-template-columns:
+            1fr 1fr;
+    }
+
+    .hero h1{
+        font-size:23px;
+    }
+
+    .theme-button span{
+        display:none;
+    }
+
+    .stat-mini-grid{
+        grid-template-columns:1fr;
+    }
+}
+
+@media(max-width:470px){
+
+    .stats{
+        grid-template-columns:1fr;
+    }
+
+    .card{
+        padding:15px;
+    }
+
+    .content{
+        padding:12px;
+    }
+
+    .modal-actions{
+        flex-direction:column;
+    }
+
+    .modal-actions button{
+        width:100%;
+    }
+}
+
+/* =========================================================
+   SYNC STATUS (nuevo)
+========================================================= */
+
+.sync-status{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    padding:
+        7px 12px;
+
+    border-radius:999px;
+
+    background:
+        var(--card2);
+
+    border:
+        1px solid
+        var(--line);
+
+    font-size:12px;
+
+    font-weight:800;
+}
+
+.sync-dot{
+
+    width:9px;
+    height:9px;
+
+    border-radius:50%;
+
+    background:#9aa9a1;
+
+    transition:.2s;
+}
+
+.migrate-btn{
+
+    background:#fff5df;
+
+    color:#8a5c07;
+
+    padding:
+        8px 12px;
+
+    border-radius:9px;
+
+    font-weight:800;
+
+    font-size:12px;
+
+    border:
+        1px solid #f0d38a;
+}
+
+body.dark .migrate-btn{
+    background:#392e1c;
+    color:#f0d38a;
+    border-color:#5a4526;
+}
+
+</style>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+    console.log("Supabase cargado:", typeof window.supabase);
+</script>
+
+</head>
+
+<body>
+
+
+<!-- =========================================================
+     LOGIN
+========================================================= -->
+
+<div id="login">
+
+    <div class="login-card">
+
+        <div class="brand-mark">
+            🌿
+        </div>
+
+        <h1>
+            Nature's Sunshine
+        </h1>
+
+        <p>
+            Panel de administración
+        </p>
+
+        <form id="loginForm">
+
+            <div class="field">
+
+                <label>
+                    CORREO ELECTRÓNICO
+                </label>
+
+                <input
+                    id="loginUser"
+                    type="email"
+                    required
+                    autocomplete="username"
+                    placeholder="tu@correo.com"
+                >
+
+            </div>
+
+            <div class="field">
+
+                <label>
+                    CONTRASEÑA
+                </label>
+
+                <input
+                    id="loginPass"
+                    type="password"
+                    required
+                    autocomplete="current-password"
+                    placeholder="Contraseña"
+                >
+
+            </div>
+
+            <button
+                class="primary full"
+                type="submit"
+            >
+                Entrar
+            </button>
+
+        </form>
+
+        <div
+            id="loginError"
+            class="login-error"
+        ></div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     APP
+========================================================= -->
+
+<div id="app">
+
+    <div class="layout">
+
+
+        <!-- =================================================
+             SIDEBAR
+        ================================================== -->
+
+        <aside
+            class="sidebar"
+            id="sidebar"
+        >
+
+            <div class="side-brand">
+
+                <div class="side-icon">
+                    🌿
+                </div>
+
+                <div>
+
+                    <strong>
+                        Nature's Sunshine
+                    </strong>
+
+                    <small>
+                        Administración
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <nav
+                class="nav"
+                id="nav"
+            >
+
+                <button
+                    class="active"
+                    data-view="dashboard"
+                >
+                    🏠 Dashboard
+                </button>
+
+                <button data-view="products">
+                    📦 Productos
+                </button>
+
+                <button data-view="inventory">
+                    🚚 Productos recibidos
+                </button>
+
+                <button data-view="clients">
+                    👥 Clientes
+                </button>
+
+                <button data-view="sales">
+                    🧾 Ventas
+                </button>
+
+                <button data-view="offers">
+                    🏷️ Ofertas
+                </button>
+
+                <button data-view="reports">
+                    📅 Calendario y reportes
+                </button>
+
+            </nav>
+
+
+            <div class="side-bottom">
+
+                <button
+                    class="logout"
+                    id="logout"
+                >
+                    Cerrar sesión
+                </button>
+
+            </div>
+
+        </aside>
+
+
+        <!-- =================================================
+             MAIN
+        ================================================== -->
+
+        <main class="main">
+
+
+            <header class="topbar">
+
+                <div
+                    style="
+                        display:flex;
+                        align-items:center;
+                        gap:10px;
+                    "
+                >
+
+                    <button
+                        class="mobile-menu"
+                        id="mobileMenu"
+                    >
+                        ☰
+                    </button>
+
+                    <h2 id="pageTitle">
+                        Dashboard
+                    </h2>
+
+                </div>
+
+
+                <div
+                    style="
+                        display:flex;
+                        align-items:center;
+                        gap:12px;
+                    "
+                >
+
+                    <button
+                        class="migrate-btn hidden"
+                        id="migrateBtn"
+                        type="button"
+                    >
+                        ☁️ Migrar datos a la nube
+                    </button>
+
+                    <div class="sync-status" id="syncStatus" title="Estado de sincronización">
+                        <span class="sync-dot" id="syncDot"></span>
+                        <span id="syncText">Conectando...</span>
+                    </div>
+
+                    <button
+                        class="theme-button"
+                        id="themeButton"
+                        type="button"
+                    >
+                        🌙
+                        <span>
+                            Modo oscuro
+                        </span>
+                    </button>
+
+                    <div class="user">
+
+                        <span class="dot"></span>
+
+                        <span id="userEmailLabel">Cuenta</span>
+
+                    </div>
+
+                </div>
+
+            </header>
+
+
+            <div class="content">
+
+
+                <!-- =================================================
+                     DASHBOARD
+                ================================================== -->
+
+                <section
+                    id="dashboard"
+                    class="view active"
+                >
+
+                    <div class="hero">
+
+                        <h1>
+                            Bienvenida a Nature's Sunshine 👋
+                        </h1>
+
+                        <p>
+                            Administra inventario, ventas,
+                            costos y ganancias desde un solo lugar.
+                        </p>
+
+                    </div>
+
+
+                    <div class="stats">
+
+                        <div class="stat">
+
+                            <small>
+                                Productos
+                            </small>
+
+                            <strong id="sProducts">
+                                0
+                            </strong>
+
+                        </div>
+
+
+                        <div class="stat">
+
+                            <small>
+                                Unidades en stock
+                            </small>
+
+                            <strong id="sStock">
+                                0
+                            </strong>
+
+                        </div>
+
+
+                        <div class="stat">
+
+                            <small>
+                                Ventas
+                            </small>
+
+                            <strong id="sSales">
+                                $0.00
+                            </strong>
+
+                        </div>
+
+
+                        <div class="stat">
+
+                            <small>
+                                Gasto en mercancía
+                            </small>
+
+                            <strong id="sSpend">
+                                $0.00
+                            </strong>
+
+                        </div>
+
+
+                        <div class="stat">
+
+                            <small>
+                                Ganancia
+                            </small>
+
+                            <strong
+                                class="green"
+                                id="sProfit"
+                            >
+                                $0.00
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- ======= NUEVO: resumen de Ofertas en el Dashboard ======= -->
+
+                    <div class="grid2" id="offersDashboardRow">
+
+                        <div class="card">
+
+                            <div class="card-head">
+
+                                <h3>
+                                    🔥 Ofertas activas
+                                </h3>
+
+                                <button
+                                    class="secondary"
+                                    data-go="offers"
+                                >
+                                    Ver ofertas
+                                </button>
+
+                            </div>
+
+                            <div class="stat-mini-grid">
+
+                                <div class="stat">
+                                    <small>Ofertas activas</small>
+                                    <strong id="oActiveCount">0</strong>
+                                </div>
+
+                                <div class="stat">
+                                    <small>Ganancia estimada</small>
+                                    <strong class="green" id="oActiveProfit">$0.00</strong>
+                                </div>
+
+                                <div class="stat">
+                                    <small>Ahorro para clientes</small>
+                                    <strong id="oActiveSavings">$0.00</strong>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="card">
+
+                            <div class="card-head">
+                                <h3>
+                                    💰 Ganancia estimada de ofertas
+                                </h3>
+                            </div>
+
+                            <div class="receipt-list">
+
+                                <div class="receipt-item">
+                                    <span>Ganancia inmediata</span>
+                                    <strong id="oImmediate">$0.00</strong>
+                                </div>
+
+                                <div class="receipt-item">
+                                    <span>Bono estimado</span>
+                                    <strong id="oBonus">$0.00</strong>
+                                </div>
+
+                                <div class="receipt-item" style="background:var(--soft)">
+                                    <span><b>Ganancia total estimada</b></span>
+                                    <strong class="green" id="oTotal">$0.00</strong>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="grid2">
+
+
+                        <div class="card">
+
+                            <div class="card-head">
+
+                                <h3>
+                                    📈 Últimas ventas
+                                </h3>
+
+                                <button
+                                    class="secondary"
+                                    data-go="sales"
+                                >
+                                    Ver todas
+                                </button>
+
+                            </div>
+
+                            <div
+                                id="recentSales"
+                                class="recent"
+                            ></div>
+
+                        </div>
+
+
+                        <div class="card">
+
+                            <div class="card-head">
+
+                                <h3>
+                                    ⚠️ Stock bajo
+                                </h3>
+
+                                <button
+                                    class="secondary"
+                                    data-go="products"
+                                >
+                                    Productos
+                                </button>
+
+                            </div>
+
+                            <div
+                                id="lowStock"
+                                class="recent"
+                            ></div>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- =================================================
+                     PRODUCTOS
+                ================================================== -->
+
+                <section
+                    id="products"
+                    class="view"
+                >
+
+                    <div class="card">
+
+                        <div class="card-head">
+
+                            <h3>
+                                📦 Productos
+                            </h3>
+
+                            <div class="toolbar">
+
+                                <input
+                                    class="search"
+                                    id="productSearch"
+                                    placeholder="Buscar producto..."
+                                >
+
+                                <button
+                                    class="secondary"
+                                    id="importCatalog"
+                                >
+                                    📥 Importar catálogo NSP
+                                </button>
+
+                                <button
+                                    class="primary"
+                                    id="addProduct"
+                                >
+                                    + Producto
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                        <div class="note">
+                            El botón <b>Importar catálogo NSP</b> carga
+                            o actualiza los precios (Cliente, Cliente
+                            Premium y Consultor) de la Lista de precios
+                            Consultor México vigente desde el 1 de
+                            abril de 2026. No toca tu stock ni tu costo
+                            real ya guardado en productos que ya
+                            existan; solo actualiza nombres, contenido,
+                            puntos y precios de catálogo.
+                        </div>
+
+                        <div
+                            id="productGrid"
+                            class="product-grid"
+                        ></div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- =================================================
+                     INVENTARIO
+                ================================================== -->
+
+                <section
+                    id="inventory"
+                    class="view"
+                >
+
+                    <div class="card">
+
+                        <div class="card-head">
+
+                            <h3>
+                                🚚 Productos recibidos
+                            </h3>
+
+                            <button
+                                class="primary"
+                                id="receiveProduct"
+                            >
+                                + Registrar llegada
+                            </button>
+
+                        </div>
+
+
+                        <div class="note">
+
+                            Selecciona un producto y registra
+                            cuántas unidades llegaron.
+                            El sistema las suma automáticamente
+                            al stock y registra cuánto gastaste.
+
+                        </div>
+
+
+                        <div
+                            id="receiptHistory"
+                            class="table-wrap"
+                        ></div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- =================================================
+                     CLIENTES
+                ================================================== -->
+
+                <section
+                    id="clients"
+                    class="view"
+                >
+
+                    <div class="card">
+
+                        <div class="card-head">
+
+                            <h3>
+                                👥 Clientes
+                            </h3>
+
+                            <div class="toolbar">
+
+                                <input
+                                    class="search"
+                                    id="clientSearch"
+                                    placeholder="Buscar cliente..."
+                                >
+
+                                <button
+                                    class="primary"
+                                    id="addClient"
+                                >
+                                    + Cliente
+                                </button>
+
+                            </div>
+
+                        </div>
+
+
+                        <div
+                            id="clientTable"
+                            class="table-wrap"
+                        ></div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- =================================================
+                     VENTAS
+                ================================================== -->
+
+                <section
+                    id="sales"
+                    class="view"
+                >
+
+                    <div class="card">
+
+                        <div class="card-head">
+
+                            <h3>
+                                🧾 Ventas
+                            </h3>
+
+                            <button
+                                class="primary"
+                                id="addSale"
+                            >
+                                + Registrar venta
+                            </button>
+
+                        </div>
+
+
+                        <div
+                            id="salesTable"
+                            class="table-wrap"
+                        ></div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- =================================================
+                     OFERTAS (nuevo)
+                ================================================== -->
+
+                <section
+                    id="offers"
+                    class="view"
+                >
+
+                    <div class="card">
+
+                        <div class="card-head">
+
+                            <h3>
+                                🏷️ Ofertas
+                            </h3>
+
+                            <div class="toolbar">
+
+                                <input
+                                    class="search"
+                                    id="offerSearch"
+                                    placeholder="Buscar oferta..."
+                                >
+
+                                <button
+                                    class="primary"
+                                    id="addOffer"
+                                >
+                                    + Nueva oferta
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                        <div class="note">
+
+                            Cada oferta calcula tu ganancia inmediata
+                            (precio de venta menos tu costo real de
+                            adquisición, ya con el descuento escalonado
+                            aplicado) y tu bono estimado por compras a
+                            tu nombre de forma separada, para que sepas
+                            exactamente de dónde viene tu ganancia. El
+                            bono no depende del precio al que vendas,
+                            por eso aparece igual en los tres escenarios
+                            de precio.
+
+                        </div>
+
+                        <div
+                            id="offerGrid"
+                            class="offer-grid"
+                        ></div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- =================================================
+                     REPORTES
+                ================================================== -->
+
+                <section
+                    id="reports"
+                    class="view"
+                >
+
+                    <div class="card">
+
+                        <div class="card-head">
+
+                            <h3>
+                                📅 Calendario de ventas y ganancias
+                            </h3>
+
+                        </div>
+
+
+                        <div class="filters">
+
+                            <div class="field">
+
+                                <label>
+                                    Desde
+                                </label>
+
+                                <input
+                                    type="date"
+                                    id="fromDate"
+                                >
+
+                            </div>
+
+
+                            <div class="field">
+
+                                <label>
+                                    Hasta
+                                </label>
+
+                                <input
+                                    type="date"
+                                    id="toDate"
+                                >
+
+                            </div>
+
+
+                            <button
+                                class="secondary"
+                                id="last7"
+                            >
+                                Últimos 7 días
+                            </button>
+
+
+                            <button
+                                class="secondary"
+                                id="last30"
+                            >
+                                Últimos 30 días
+                            </button>
+
+
+                            <button
+                                class="primary"
+                                id="applyReport"
+                            >
+                                Actualizar
+                            </button>
+
+                        </div>
+
+
+                        <div
+                            id="reportOutput"
+                        ></div>
+
+                    </div>
+
+                </section>
+
+            </div>
+
+        </main>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     MODAL
+========================================================= -->
+
+<div
+    class="modal"
+    id="modal"
+>
+
+    <div
+        class="modal-box"
+        id="modalBox"
+    ></div>
+
+</div>
+
+
+<!-- =========================================================
+     TOAST
+========================================================= -->
+
+<div
+    class="toast"
+    id="toast"
+></div>
+
+
+<script>
+
+/* =========================================================
+   CONFIGURACIÓN DE SUPABASE
+   ---------------------------------------------------------
+   1) Crea un proyecto en https://supabaseClient.com
+   2) Ve a Project Settings > API
+   3) Copia "Project URL" y pégalo en SUPABASE_URL
+   4) Copia la clave "anon public" y pégala en SUPABASE_ANON_KEY
+      (NUNCA la clave "service_role" — esa jamás va en el frontend)
+========================================================= */
+
+const SUPABASE_URL =
+    "https://ialnqnthcemlbtgrytlr.supabase.co";
+
+const SUPABASE_ANON_KEY =
+    "sb_publishable_eKonYWh5whaPcvGz7I-Hsw_FbqFRMpG";
+
+let supabaseClient = null;
+
+let supabaseConfigError = null;
+
+try{
+
+    const looksLikePlaceholder =
+        !SUPABASE_URL ||
+        !SUPABASE_ANON_KEY ||
+        SUPABASE_URL.includes("PON_AQUI") ||
+        SUPABASE_ANON_KEY.includes("PON_AQUI");
+
+    if(looksLikePlaceholder){
+        throw new Error(
+            "Faltan configurar SUPABASE_URL y/o SUPABASE_ANON_KEY en el código."
+        );
+    }
+
+    supabaseClient =
+    supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_ANON_KEY,
+        {
+            auth:{
+                persistSession:true,
+                autoRefreshToken:true
+            }
+        }
+    );
+}
+catch(err){
+
+    /* IMPORTANTE: este try/catch es la corrección clave del login.
+       Antes, si SUPABASE_URL/ANON_KEY eran inválidos (por ejemplo,
+       si quedaban los textos de ejemplo "PON_AQUI_..."), esta línea
+       lanzaba un error justo al cargar la página. Como era una
+       instrucción normal (sin try/catch) casi al inicio del script,
+       ese error detenía TODO el código que venía después, incluyendo
+       el addEventListener del formulario de login. Sin ese listener,
+       el navegador hacía el envío nativo del formulario (recarga la
+       página, limpia los campos, no muestra ningún error). Ahora el
+       error se captura aquí, se guarda en supabaseConfigError, y el
+       resto del script sigue ejecutándose con normalidad para poder
+       mostrar un mensaje claro en la pantalla de login. */
+
+    supabaseConfigError = err;
+
+    console.error(
+        "No se pudo inicializar Supabase:",
+        err
+    );
+
+}
+
+/* Claves de almacenamiento LOCAL (no de negocio) */
+
+const DATA_KEY =
+    "nature_sunshine_data"; // caché local / respaldo offline, ya no es la fuente principal
+
+const THEME_KEY =
+    "nature_sunshine_theme"; // preferencia visual, se queda 100% local
+
+const MIGRATED_KEY =
+    "ns_migrated_to_cloud";
+
+const OFFLINE_QUEUE_KEY =
+    "ns_offline_queue";
+
+let currentUser = null;
+
+let realtimeChannel = null;
+
+
+/* =========================================================
+   HELPERS
+========================================================= */
+
+const $ =
+    selector =>
+        document.querySelector(selector);
+
+const $$ =
+    selector =>
+        [...document.querySelectorAll(selector)];
+
+
+const money =
+    number =>
+        new Intl.NumberFormat(
+            "es-MX",
+            {
+                style:"currency",
+                currency:"MXN"
+            }
+        ).format(
+            Number(number) || 0
+        );
+
+
+const uid =
+    () =>
+        Date.now().toString(36) +
+        Math.random()
+            .toString(36)
+            .slice(2,8);
+
+
+const dateISO =
+    date => {
+
+        const d =
+            new Date(date);
+
+        return new Date(
+            d.getTime() -
+            d.getTimezoneOffset() * 60000
+        )
+        .toISOString()
+        .slice(0,10);
+    };
+
+
+const today =
+    () =>
+        dateISO(new Date());
+
+
+const fmtDate =
+    date =>
+        new Date(
+            date + "T12:00:00"
+        )
+        .toLocaleDateString(
+            "es-MX",
+            {
+                day:"2-digit",
+                month:"2-digit",
+                year:"numeric"
+            }
+        );
+
+
+const esc =
+    text =>
+        String(text ?? "")
+        .replace(
+            /[&<>'"]/g,
+            char =>
+                ({
+                    "&":"&amp;",
+                    "<":"&lt;",
+                    ">":"&gt;",
+                    "'":"&#39;",
+                    '"':"&quot;"
+                }[char])
+        );
+
+
+/* =========================================================
+   DATOS INICIALES
+   SIN PRODUCTOS NI CLIENTES DE PRUEBA
+========================================================= */
+
+const emptyData = {
+
+    products:[],
+
+    clients:[],
+
+    sales:[],
+
+    receipts:[],
+
+    offers:[]
+
+};
+
+
+let data = {
+    products:[],
+    clients:[],
+    sales:[],
+    receipts:[],
+    offers:[]
+};
+
+
+/* =========================================================
+   CAPA DE DATOS — CACHÉ LOCAL (respaldo / offline)
+   ---------------------------------------------------------
+   Esto YA NO es la fuente principal de verdad. Supabase lo
+   es. Esta caché sólo sirve para:
+     a) mostrar algo si se pierde la conexión, y
+     b) la migración de datos antiguos guardados aquí.
+========================================================= */
+
+function loadLocalCache(){
+
+    try{
+
+        const saved =
+            localStorage.getItem(DATA_KEY);
+
+        if(!saved){
+            return null;
+        }
+
+        const parsed =
+            JSON.parse(saved);
+
+        return {
+
+            products:
+                Array.isArray(parsed.products) ? parsed.products : [],
+
+            clients:
+                Array.isArray(parsed.clients) ? parsed.clients : [],
+
+            sales:
+                Array.isArray(parsed.sales) ? parsed.sales : [],
+
+            receipts:
+                Array.isArray(parsed.receipts) ? parsed.receipts : [],
+
+            offers:
+                Array.isArray(parsed.offers) ? parsed.offers : []
+
+        };
+
+    }
+    catch{
+
+        return null;
+
+    }
+
+}
+
+
+function saveLocalCache(){
+
+    try{
+
+        localStorage.setItem(
+            DATA_KEY,
+            JSON.stringify(data)
+        );
+
+    }
+    catch{
+        /* si falla (por ejemplo, cuota llena), no es crítico */
+    }
+
+}
+
+
+/* =========================================================
+   ESTADO DE CONEXIÓN / SINCRONIZACIÓN
+========================================================= */
+
+function setSyncStatus(state, text){
+
+    const dot = $("#syncDot");
+    const label = $("#syncText");
+
+    if(!dot || !label){
+        return;
+    }
+
+    const colors = {
+        ok:"#27bd79",
+        syncing:"#e8b800",
+        offline:"#d94b4b"
+    };
+
+    dot.style.background =
+        colors[state] || colors.offline;
+
+    label.textContent = text;
+
+}
+
+
+/* =========================================================
+   COLA OFFLINE (preparada de forma sencilla)
+   ---------------------------------------------------------
+   Si una operación falla por falta de conexión, se guarda
+   aquí. Cuando vuelve el internet, se reintenta en orden.
+========================================================= */
+
+function loadOfflineQueue(){
+
+    try{
+
+        const raw =
+            localStorage.getItem(OFFLINE_QUEUE_KEY);
+
+        return raw ? JSON.parse(raw) : [];
+
+    }
+    catch{
+
+        return [];
+
+    }
+
+}
+
+
+function saveOfflineQueue(queue){
+
+    localStorage.setItem(
+        OFFLINE_QUEUE_KEY,
+        JSON.stringify(queue)
+    );
+
+}
+
+
+function queueOffline(op){
+
+    const queue =
+        loadOfflineQueue();
+
+    queue.push(op);
+
+    saveOfflineQueue(queue);
+
+}
+
+
+async function flushOfflineQueue(){
+
+    let queue =
+        loadOfflineQueue();
+
+    if(!queue.length){
+        return;
+    }
+
+    setSyncStatus("syncing","Sincronizando pendientes...");
+
+    const remaining = [];
+
+    for(const op of queue){
+
+        try{
+
+            if(op.action === "insert"){
+                await supabaseClient.from(op.table).insert(op.row);
+            }
+            else if(op.action === "update"){
+                await supabaseClient.from(op.table).update(op.patch).eq("id", op.id);
+            }
+            else if(op.action === "delete"){
+                await supabaseClient.from(op.table).delete().eq("id", op.id);
+            }
+            else if(op.action === "rpc"){
+                await supabaseClient.rpc(op.fn, op.args);
+            }
+
+        }
+        catch(err){
+
+            console.error("No se pudo reenviar operación pendiente", err);
+            remaining.push(op);
+
+        }
+
+    }
+
+    saveOfflineQueue(remaining);
+
+    if(remaining.length){
+        toast("⚠️ Algunas operaciones no se pudieron sincronizar todavía");
+    }
+    else{
+        toast("✓ Datos sincronizados");
+    }
+
+}
+
+
+window.addEventListener("online", async () => {
+
+    setSyncStatus("syncing","Sincronizando...");
+
+    await flushOfflineQueue();
+    await loadAllFromCloud();
+
+    renderCurrentView();
+
+    setSyncStatus("ok","✓ Datos sincronizados");
+
+});
+
+
+window.addEventListener("offline", () => {
+
+    setSyncStatus("offline","Sin conexión");
+
+});
+
+
+/* =========================================================
+   MAPEO DE FILAS (Supabase <-> objetos que usa el resto
+   del código, que siguen teniendo exactamente la misma
+   forma que antes)
+========================================================= */
+
+function rowToProduct(r){
+    return {
+        id:r.id,
+        name:r.name,
+        category:r.category || "Sin categoría",
+        cost:Number(r.cost) || 0,
+        price:Number(r.price) || 0,
+        stock:Number(r.stock) || 0,
+        minStock:Number(r.min_stock) || 0,
+        cesna:r.cesna || "",
+        invoiceCode:r.invoice_code || "",
+        content:r.content || "",
+        points:Number(r.points) || 0,
+        clientPrice:Number(r.client_price) || 0,
+        premiumPrice:Number(r.premium_price) || 0,
+        consultantPrice:Number(r.consultant_price) || 0
+    };
+}
+
+function productToRow(p){
+    return {
+        id:p.id,
+        user_id:currentUser.id,
+        name:p.name,
+        category:p.category,
+        cost:p.cost,
+        price:p.price,
+        stock:p.stock,
+        min_stock:p.minStock,
+        cesna:p.cesna || null,
+        invoice_code:p.invoiceCode || null,
+        content:p.content || null,
+        points:p.points || 0,
+        client_price:p.clientPrice || 0,
+        premium_price:p.premiumPrice || 0,
+        consultant_price:p.consultantPrice || 0
+    };
+}
+
+function rowToClient(r){
+    return {
+        id:r.id,
+        name:r.name,
+        phone:r.phone || "",
+        email:r.email || "",
+        notes:r.notes || "",
+        created:r.created_at
+    };
+}
+
+function clientToRow(c){
+    return {
+        id:c.id,
+        user_id:currentUser.id,
+        name:c.name,
+        phone:c.phone || null,
+        email:c.email || null,
+        notes:c.notes || null
+    };
+}
+
+function rowToSale(r){
+    return {
+        id:r.id,
+        clientId:r.client_id,
+        clientName:r.client_name,
+        items:r.items || [],
+        productName:r.product_name,
+        qty:Number(r.qty) || 0,
+        total:Number(r.total) || 0,
+        profit:Number(r.profit) || 0,
+        date:r.date,
+        created:r.created_at
+    };
+}
+
+function rowToReceipt(r){
+    return {
+        id:r.id,
+        productId:r.product_id,
+        productName:r.product_name,
+        qty:Number(r.qty) || 0,
+        unitCost:Number(r.unit_cost) || 0,
+        totalCost:Number(r.total_cost) || 0,
+        date:r.date,
+        created:r.created_at
+    };
+}
+
+function receiptToRow(r){
+    return {
+        id:r.id,
+        user_id:currentUser.id,
+        product_id:r.productId,
+        product_name:r.productName,
+        qty:r.qty,
+        unit_cost:r.unitCost,
+        total_cost:r.totalCost,
+        date:r.date
+    };
+}
+
+function rowToOffer(r){
+    return {
+        id:r.id,
+        productId:r.product_id,
+        productName:r.product_name,
+        type:r.type,
+        normalPrice:Number(r.normal_price) || 0,
+        consultantPrice:Number(r.consultant_price) || 0,
+        premiumPrice:Number(r.premium_price) || 0,
+        offerPrice:Number(r.offer_price) || 0,
+        listCost:Number(r.list_cost) || 0,
+        escalatedDiscountPct:Number(r.escalated_discount_pct) || 0,
+        bonusPct:Number(r.bonus_pct) || 0,
+        bonusBase:r.bonus_base || "acq",
+        qtyAvailable:Number(r.qty_available) || 0,
+        startDate:r.start_date,
+        endDate:r.end_date,
+        enabled:r.enabled !== false,
+        created:r.created_at
+    };
+}
+
+function offerToRow(o){
+    return {
+        id:o.id,
+        user_id:currentUser.id,
+        product_id:o.productId,
+        product_name:o.productName,
+        type:o.type,
+        normal_price:o.normalPrice,
+        consultant_price:o.consultantPrice,
+        premium_price:o.premiumPrice,
+        offer_price:o.offerPrice,
+        list_cost:o.listCost,
+        escalated_discount_pct:o.escalatedDiscountPct,
+        bonus_pct:o.bonusPct,
+        bonus_base:o.bonusBase,
+        qty_available:o.qtyAvailable,
+        start_date:o.startDate,
+        end_date:o.endDate,
+        enabled:o.enabled !== false
+    };
+}
+
+
+/* =========================================================
+   CARGA DESDE LA NUBE
+========================================================= */
+
+async function loadAllFromCloud(){
+
+    setSyncStatus("syncing","Sincronizando...");
+
+    try{
+
+        const [p,c,s,r,o] = await Promise.all([
+            supabaseClient.from("products").select("*").order("created_at",{ascending:true}),
+            supabaseClient.from("clients").select("*").order("created_at",{ascending:true}),
+            supabaseClient.from("sales").select("*").order("created_at",{ascending:true}),
+            supabaseClient.from("receipts").select("*").order("created_at",{ascending:true}),
+            supabaseClient.from("offers").select("*").order("created_at",{ascending:true})
+        ]);
+
+        const firstError =
+            p.error || c.error || s.error || r.error || o.error;
+
+        if(firstError){
+            throw firstError;
+        }
+
+        data = {
+            products:p.data.map(rowToProduct),
+            clients:c.data.map(rowToClient),
+            sales:s.data.map(rowToSale),
+            receipts:r.data.map(rowToReceipt),
+            offers:o.data.map(rowToOffer)
+        };
+
+        saveLocalCache();
+
+        setSyncStatus("ok","✓ Datos sincronizados");
+
+    }
+    catch(err){
+
+        console.error("No se pudo cargar desde Supabase", err);
+
+        setSyncStatus("offline","Sin conexión");
+
+        const cached = loadLocalCache();
+
+        if(cached){
+            data = cached;
+            toast("Mostrando datos guardados localmente (sin conexión)");
+        }
+
+    }
+
+}
+
+
+/* =========================================================
+   CRUD REMOTO — PRODUCTOS
+========================================================= */
+
+async function createProductRemote(product){
+
+    const row = { ...product, id:uid() };
+    const dbRow = productToRow(row);
+
+    setSyncStatus("syncing","Sincronizando...");
+
+    const { data:inserted, error } =
+        await supabaseClient.from("products").insert(dbRow).select().single();
+
+    if(error){
+        console.error(error);
+        setSyncStatus("offline","⚠️ No se pudo sincronizar. Reintentando...");
+        queueOffline({ action:"insert", table:"products", row:dbRow });
+        toast("⚠️ No se pudo sincronizar. Se reintentará cuando vuelva la conexión.");
+        return row;
+    }
+
+    setSyncStatus("ok","✓ Datos sincronizados");
+
+    return rowToProduct(inserted);
+
+}
+
+async function updateProductRemote(id, patch){
+
+    const dbPatch = productToRow({ id, ...patch });
+    delete dbPatch.id;
+    delete dbPatch.user_id;
+
+    setSyncStatus("syncing","Sincronizando...");
+
+    const { error } =
+        await supabaseClient.from("products").update(dbPatch).eq("id", id);
+
+    if(error){
+        console.error(error);
+        setSyncStatus("offline","⚠️ No se pudo sincronizar. Reintentando...");
+        queueOffline({ action:"update", table:"products", id, patch:dbPatch });
+        toast("⚠️ No se pudo sincronizar. Se reintentará cuando vuelva la conexión.");
+        return false;
+    }
+
+    setSyncStatus("ok","✓ Datos sincronizados");
+    return true;
+
+}
+
+async function deleteProductRemote(id){
+
+    setSyncStatus("syncing","Sincronizando...");
+
+    const { error } =
+        await supabaseClient.from("products").delete().eq("id", id);
+
+    if(error){
+        console.error(error);
+        setSyncStatus("offline","⚠️ No se pudo sincronizar. Reintentando...");
+        queueOffline({ action:"delete", table:"products", id });
+        toast("⚠️ No se pudo sincronizar. Se reintentará cuando vuelva la conexión.");
+        return false;
+    }
+
+    setSyncStatus("ok","✓ Datos sincronizados");
+    return true;
+
+}
+
+
+/* =========================================================
+   CRUD REMOTO — CLIENTES
+========================================================= */
+
+async function createClientRemote(client){
+
+    const row = { ...client, id:uid() };
+    const dbRow = clientToRow(row);
+
+    setSyncStatus("syncing","Sincronizando...");
+
+    const { data:inserted, error } =
+        await supabaseClient.from("clients").insert(dbRow).select().single();
+
+    if(error){
+        console.error(error);
+        setSyncStatus("offline","⚠️ No se pudo sincronizar. Reintentando...");
+        queueOffline({ action:"insert", table:"clients", row:dbRow });
+        toast("⚠️ No se pudo sincronizar. Se reintentará cuando vuelva la conexión.");
+        return { ...row, created:new Date().toISOString() };
+    }
+
+    setSyncStatus("ok","✓ Datos sincronizados");
+    return rowToClient(inserted);
+
+}
+
+async function updateClientRemote(id, patch){
+
+    const dbPatch = clientToRow({ id, ...patch });
+    delete dbPatch.id;
+    delete dbPatch.user_id;
+
+    setSyncStatus("syncing","Sincronizando...");
+
+    const { error } =
+        await supabaseClient.from("clients").update(dbPatch).eq("id", id);
+
+    if(error){
+        console.error(error);
+        setSyncStatus("offline","⚠️ No se pudo sincronizar. Reintentando...");
+        queueOffline({ action:"update", table:"clients", id, patch:dbPatch });
+        toast("⚠️ No se pudo sincronizar. Se reintentará cuando vuelva la conexión.");
+        return false;
+    }
+
+    setSyncStatus("ok","✓ Datos sincronizados");
+    return true;
+
+}
+
+async function deleteClientRemote(id){
+
+    setSyncStatus("syncing","Sincronizando...");
+
+    const { error } =
+        await supabaseClient.from("clients").delete().eq("id", id);
+
+    if(error){
+        console.error(error);
+        setSyncStatus("offline","⚠️ No se pudo sincronizar. Reintentando...");
+        queueOffline({ action:"delete", table:"clients", id });
+        toast("⚠️ No se pudo sincronizar. Se reintentará cuando vuelva la conexión.");
+        return false;
+    }
+
+    setSyncStatus("ok","✓ Datos sincronizados");
+    return true;
+
+}
+
+
+/* =========================================================
+   CRUD REMOTO — RECEPCIONES (con incremento atómico de stock)
+========================================================= */
+
+async function createReceiptRemote(receipt){
+
+    const row = { ...receipt, id:uid() };
+    const dbRow = receiptToRow(row);
+
+    setSyncStatus("syncing","Sincronizando...");
+
+    try{
+
+        const { error:rpcError } =
+            await supabaseClient.rpc("adjust_stock", {
+                p_product_id:receipt.productId,
+                p_delta:receipt.qty
+            });
+
+        if(rpcError){
+            throw rpcError;
+        }
+
+        const { data:inserted, error } =
+            await supabaseClient.from("receipts").insert(dbRow).select().single();
+
+        if(error){
+            throw error;
+        }
+
+        setSyncStatus("ok","✓ Datos sincronizados");
+        return rowToReceipt(inserted);
+
+    }
+    catch(err){
+
+        console.error(err);
+        setSyncStatus("offline","⚠️ No se pudo sincronizar. Reintentando...");
+        toast("⚠️ No se pudo sincronizar. Se reintentará cuando vuelva la conexión.");
+
+        queueOffline({
+            action:"rpc",
+            fn:"adjust_stock",
+            args:{ p_product_id:receipt.productId, p_delta:receipt.qty }
+        });
+
+        queueOffline({ action:"insert", table:"receipts", row:dbRow });
+
+        return { ...row, created:new Date().toISOString() };
+
+    }
+
+}
+
+async function deleteReceiptRemote(id){
+
+    setSyncStatus("syncing","Sincronizando...");
+
+    const { error } =
+        await supabaseClient.from("receipts").delete().eq("id", id);
+
+    if(error){
+        console.error(error);
+        setSyncStatus("offline","⚠️ No se pudo sincronizar. Reintentando...");
+        queueOffline({ action:"delete", table:"receipts", id });
+        toast("⚠️ No se pudo sincronizar. Se reintentará cuando vuelva la conexión.");
+        return false;
+    }
+
+    setSyncStatus("ok","✓ Datos sincronizados");
+    return true;
+
+}
+
+
+/* =========================================================
+   CRUD REMOTO — VENTAS
+   ---------------------------------------------------------
+   Usa la función register_sale (ver SQL) para validar y
+   descontar el stock de forma atómica en una sola
+   transacción, evitando que dos dispositivos vendan más
+   unidades de las que hay disponibles.
+========================================================= */
+
+async function createSaleRemote(sale){
+
+    setSyncStatus("syncing","Sincronizando...");
+
+    try{
+
+        const { data:result, error } =
+            await supabaseClient.rpc("register_sale", {
+                p_client_id:sale.clientId,
+                p_client_name:sale.clientName,
+                p_items:sale.items,
+                p_product_name:sale.productName,
+                p_qty:sale.qty,
+                p_total:sale.total,
+                p_profit:sale.profit,
+                p_date:sale.date
+            });
+
+        if(error){
+            throw error;
+        }
+
+        setSyncStatus("ok","✓ Datos sincronizados");
+
+        /* register_sale regresa el id de la venta creada */
+        const newId =
+            Array.isArray(result) && result[0]
+                ? result[0].id
+                : uid();
+
+        return { ...sale, id:newId, created:new Date().toISOString() };
+
+    }
+catch(err){
+
+    console.error("ERROR REAL AL REGISTRAR VENTA:", err);
+
+    setSyncStatus("offline","⚠️ Error al sincronizar");
+
+    toast(
+        `❌ Error: ${err.message || "Error desconocido"}`
+    );
+
+    return null;
+}
+
+}
+
+async function deleteSaleRemote(id){
+
+    setSyncStatus("syncing","Sincronizando...");
+
+    const { error } =
+        await supabaseClient.from("sales").delete().eq("id", id);
+
+    if(error){
+        console.error(error);
+        setSyncStatus("offline","⚠️ No se pudo sincronizar. Reintentando...");
+        queueOffline({ action:"delete", table:"sales", id });
+        toast("⚠️ No se pudo sincronizar. Se reintentará cuando vuelva la conexión.");
+        return false;
+    }
+
+    setSyncStatus("ok","✓ Datos sincronizados");
+    return true;
+
+}
+
+
+/* =========================================================
+   CRUD REMOTO — OFERTAS
+========================================================= */
+
+async function createOfferRemote(offer){
+
+    const row = { ...offer, id:uid() };
+    const dbRow = offerToRow(row);
+
+    setSyncStatus("syncing","Sincronizando...");
+
+    const { data:inserted, error } =
+        await supabaseClient.from("offers").insert(dbRow).select().single();
+
+    if(error){
+        console.error(error);
+        setSyncStatus("offline","⚠️ No se pudo sincronizar. Reintentando...");
+        queueOffline({ action:"insert", table:"offers", row:dbRow });
+        toast("⚠️ No se pudo sincronizar. Se reintentará cuando vuelva la conexión.");
+        return { ...row, created:new Date().toISOString() };
+    }
+
+    setSyncStatus("ok","✓ Datos sincronizados");
+    return rowToOffer(inserted);
+
+}
+
+async function updateOfferRemote(id, patch){
+
+    const dbPatch = offerToRow({ id, ...patch });
+    delete dbPatch.id;
+    delete dbPatch.user_id;
+
+    setSyncStatus("syncing","Sincronizando...");
+
+    const { error } =
+        await supabaseClient.from("offers").update(dbPatch).eq("id", id);
+
+    if(error){
+        console.error(error);
+        setSyncStatus("offline","⚠️ No se pudo sincronizar. Reintentando...");
+        queueOffline({ action:"update", table:"offers", id, patch:dbPatch });
+        toast("⚠️ No se pudo sincronizar. Se reintentará cuando vuelva la conexión.");
+        return false;
+    }
+
+    setSyncStatus("ok","✓ Datos sincronizados");
+    return true;
+
+}
+
+async function deleteOfferRemote(id){
+
+    setSyncStatus("syncing","Sincronizando...");
+
+    const { error } =
+        await supabaseClient.from("offers").delete().eq("id", id);
+
+    if(error){
+        console.error(error);
+        setSyncStatus("offline","⚠️ No se pudo sincronizar. Reintentando...");
+        queueOffline({ action:"delete", table:"offers", id });
+        toast("⚠️ No se pudo sincronizar. Se reintentará cuando vuelva la conexión.");
+        return false;
+    }
+
+    setSyncStatus("ok","✓ Datos sincronizados");
+    return true;
+
+}
+
+
+/* =========================================================
+   TIEMPO REAL (Supabase Realtime)
+   ---------------------------------------------------------
+   Cuando otro dispositivo crea, edita o elimina algo, este
+   dispositivo recarga esa tabla y vuelve a pintar la
+   pantalla que esté abierta, sin recargar la página.
+========================================================= */
+
+function subscribeRealtime(){
+
+    if(realtimeChannel){
+        supabaseClient.removeChannel(realtimeChannel);
+        realtimeChannel = null;
+    }
+
+    realtimeChannel =
+        supabaseClient.channel("ns-changes")
+        .on("postgres_changes",
+            { event:"*", schema:"public", table:"products", filter:`user_id=eq.${currentUser.id}` },
+            () => refreshTableAndRender("products")
+        )
+        .on("postgres_changes",
+            { event:"*", schema:"public", table:"clients", filter:`user_id=eq.${currentUser.id}` },
+            () => refreshTableAndRender("clients")
+        )
+        .on("postgres_changes",
+            { event:"*", schema:"public", table:"sales", filter:`user_id=eq.${currentUser.id}` },
+            () => refreshTableAndRender("sales")
+        )
+        .on("postgres_changes",
+            { event:"*", schema:"public", table:"receipts", filter:`user_id=eq.${currentUser.id}` },
+            () => refreshTableAndRender("receipts")
+        )
+        .on("postgres_changes",
+            { event:"*", schema:"public", table:"offers", filter:`user_id=eq.${currentUser.id}` },
+            () => refreshTableAndRender("offers")
+        )
+        .subscribe();
+
+}
+
+
+async function refreshTableAndRender(table){
+
+    try{
+
+        const { data:rows, error } =
+            await supabaseClient.from(table).select("*").order("created_at",{ascending:true});
+
+        if(error){
+            throw error;
+        }
+
+        const mappers = {
+            products:rowToProduct,
+            clients:rowToClient,
+            sales:rowToSale,
+            receipts:rowToReceipt,
+            offers:rowToOffer
+        };
+
+        data[table] = rows.map(mappers[table]);
+
+        saveLocalCache();
+        setSyncStatus("ok","✓ Datos sincronizados");
+        renderCurrentView();
+
+    }
+    catch(err){
+
+        console.error("No se pudo refrescar", table, err);
+        setSyncStatus("offline","Sin conexión");
+
+    }
+
+}
+
+
+function currentViewId(){
+
+    const active =
+        document.querySelector(".view.active");
+
+    return active ? active.id : "dashboard";
+
+}
+
+
+function renderCurrentView(){
+
+    const id = currentViewId();
+
+    if(id === "dashboard") renderDashboard();
+    if(id === "products") renderProducts();
+    if(id === "inventory") renderReceipts();
+    if(id === "clients") renderClients();
+    if(id === "sales") renderSales();
+    if(id === "offers") renderOffers();
+    if(id === "reports") renderReport();
+
+    /* el resumen de ofertas en el dashboard depende de otras
+       vistas, así que se refresca siempre que llega un cambio */
+    if(id !== "dashboard"){
+        renderDashboard();
+    }
+
+}
+
+
+/* =========================================================
+   MIGRACIÓN DE DATOS ANTIGUOS (localStorage -> Supabase)
+========================================================= */
+
+async function checkAndOfferMigration(){
+
+    if(localStorage.getItem(MIGRATED_KEY) === "1"){
+        $("#migrateBtn").classList.add("hidden");
+        return;
+    }
+
+    const old = loadLocalCache();
+
+    const hasData =
+        old && (
+            old.products.length ||
+            old.clients.length ||
+            old.sales.length ||
+            old.receipts.length ||
+            old.offers.length
+        );
+
+    if(!hasData){
+        $("#migrateBtn").classList.add("hidden");
+        return;
+    }
+
+    $("#migrateBtn").classList.remove("hidden");
+
+    $("#migrateBtn").onclick =
+        () => openMigrationModal(old);
+
+}
+
+
+function openMigrationModal(old){
+
+    const summary = `
+        <div class="note">
+            Se detectaron datos guardados en este dispositivo,
+            de antes de activar la nube. Esto es lo que se
+            subirá a Supabase (se evitan duplicados por nombre /
+            id ya existente):
+        </div>
+        <ul style="margin:10px 0 0 18px; font-size:13px; line-height:1.9;">
+            <li><b>${old.products.length}</b> productos</li>
+            <li><b>${old.clients.length}</b> clientes</li>
+            <li><b>${old.sales.length}</b> ventas</li>
+            <li><b>${old.receipts.length}</b> productos recibidos</li>
+            <li><b>${old.offers.length}</b> ofertas</li>
+        </ul>
+        <div class="note" style="margin-top:14px;">
+            Tus datos locales NO se borrarán automáticamente,
+            aunque la migración falle o se cancele a la mitad.
+        </div>
+    `;
+
+    openModal(
+        "☁️ Migrar datos a la nube",
+        summary,
+        () => runMigration(old)
+    );
+
+}
+
+
+async function runMigration(old){
+
+    closeModal();
+    setSyncStatus("syncing","Migrando datos...");
+
+    let migrated = 0;
+    let skipped = 0;
+
+    try{
+
+        for(const product of old.products){
+
+            const exists =
+                data.products.some(p => p.name === product.name && p.cesna === product.cesna);
+
+            if(exists){ skipped++; continue; }
+
+            const dbRow = productToRow(product);
+
+            const { error } =
+                await supabaseClient.from("products").insert(dbRow);
+
+            if(!error){ migrated++; } else { console.error(error); }
+
+        }
+
+        for(const client of old.clients){
+
+            const exists =
+                data.clients.some(c => c.name === client.name && c.phone === client.phone);
+
+            if(exists){ skipped++; continue; }
+
+            const { error } =
+                await supabaseClient.from("clients").insert(clientToRow(client));
+
+            if(!error){ migrated++; } else { console.error(error); }
+
+        }
+
+        for(const receipt of old.receipts){
+
+            const exists =
+                data.receipts.some(r => r.id === receipt.id);
+
+            if(exists){ skipped++; continue; }
+
+            const { error } =
+                await supabaseClient.from("receipts").insert(receiptToRow(receipt));
+
+            if(!error){ migrated++; } else { console.error(error); }
+
+        }
+
+        for(const offer of old.offers){
+
+            const exists =
+                data.offers.some(o => o.id === offer.id);
+
+            if(exists){ skipped++; continue; }
+
+            const { error } =
+                await supabaseClient.from("offers").insert(offerToRow(offer));
+
+            if(!error){ migrated++; } else { console.error(error); }
+
+        }
+
+        for(const sale of old.sales){
+
+            const exists =
+                data.sales.some(s => s.id === sale.id);
+
+            if(exists){ skipped++; continue; }
+
+            const { error } =
+                await supabaseClient.from("sales").insert({
+                    id:sale.id,
+                    user_id:currentUser.id,
+                    client_id:sale.clientId || null,
+                    client_name:sale.clientName,
+                    items:sale.items || [],
+                    product_name:sale.productName,
+                    qty:sale.qty,
+                    total:sale.total,
+                    profit:sale.profit,
+                    date:sale.date
+                });
+
+            if(!error){ migrated++; } else { console.error(error); }
+
+        }
+
+        localStorage.setItem(MIGRATED_KEY, "1");
+        $("#migrateBtn").classList.add("hidden");
+
+        await loadAllFromCloud();
+        renderCurrentView();
+
+        toast(`☁️ Migración completa: ${migrated} registros subidos, ${skipped} ya existían`);
+
+    }
+    catch(err){
+
+        console.error("Error durante la migración", err);
+        toast("⚠️ La migración se detuvo por un error. Tus datos locales siguen intactos.");
+
+    }
+
+}
+
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+function toast(message){
+
+    const element =
+        $("#toast");
+
+    element.textContent =
+        message;
+
+    element.classList.add(
+        "show"
+    );
+
+    setTimeout(
+        () =>
+            element.classList.remove(
+                "show"
+            ),
+        2300
+    );
+
+}
+
+
+/* =========================================================
+   TEMA
+========================================================= */
+
+function loadTheme(){
+
+    const saved =
+        localStorage.getItem(
+            THEME_KEY
+        );
+
+    if(saved === "dark"){
+
+        document.body.classList.add(
+            "dark"
+        );
+
+    }
+
+    updateThemeButton();
+
+}
+
+
+function updateThemeButton(){
+
+    const button =
+        $("#themeButton");
+
+    if(!button){
+        return;
+    }
+
+    const dark =
+        document.body.classList.contains(
+            "dark"
+        );
+
+    button.innerHTML =
+        dark
+            ? "☀️ <span>Modo brillante</span>"
+            : "🌙 <span>Modo oscuro</span>";
+
+}
+
+
+$("#themeButton").addEventListener(
+    "click",
+    () => {
+
+        document.body.classList.toggle(
+            "dark"
+        );
+
+        const dark =
+            document.body.classList.contains(
+                "dark"
+            );
+
+        localStorage.setItem(
+            THEME_KEY,
+            dark
+                ? "dark"
+                : "light"
+        );
+
+        updateThemeButton();
+
+    }
+);
+
+
+/* =========================================================
+   NAVEGACIÓN
+========================================================= */
+
+function showView(id){
+
+    $$(".view")
+        .forEach(
+            view =>
+                view.classList.toggle(
+                    "active",
+                    view.id === id
+                )
+        );
+
+
+    $$("#nav button")
+        .forEach(
+            button =>
+                button.classList.toggle(
+                    "active",
+                    button.dataset.view === id
+                )
+        );
+
+
+    const titles = {
+
+        dashboard:
+            "Dashboard",
+
+        products:
+            "Productos",
+
+        inventory:
+            "Productos recibidos",
+
+        clients:
+            "Clientes",
+
+        sales:
+            "Ventas",
+
+        offers:
+            "Ofertas",
+
+        reports:
+            "Calendario y reportes"
+
+    };
+
+
+    $("#pageTitle").textContent =
+        titles[id] ||
+        "Dashboard";
+
+
+    $("#sidebar")
+        .classList.remove(
+            "open"
+        );
+
+
+    if(id === "dashboard")
+        renderDashboard();
+
+    if(id === "products")
+        renderProducts();
+
+    if(id === "inventory")
+        renderReceipts();
+
+    if(id === "clients")
+        renderClients();
+
+    if(id === "sales")
+        renderSales();
+
+    if(id === "offers")
+        renderOffers();
+
+    if(id === "reports")
+        renderReport();
+
+}
+
+
+$("#nav").addEventListener(
+    "click",
+    event => {
+
+        const button =
+            event.target.closest(
+                "button[data-view]"
+            );
+
+        if(button){
+
+            showView(
+                button.dataset.view
+            );
+
+        }
+
+    }
+);
+
+
+$$("[data-go]")
+    .forEach(
+        button =>
+            button.addEventListener(
+                "click",
+                () =>
+                    showView(
+                        button.dataset.go
+                    )
+            )
+    );
+
+
+$("#mobileMenu").onclick =
+    () =>
+        $("#sidebar")
+        .classList.toggle(
+            "open"
+        );
+
+
+/* =========================================================
+   DASHBOARD
+========================================================= */
+
+function renderDashboard(){
+
+    const salesTotal =
+        data.sales.reduce(
+            (sum,sale) =>
+                sum + sale.total,
+            0
+        );
+
+
+    const spending =
+        data.receipts.reduce(
+            (sum,receipt) =>
+                sum + receipt.totalCost,
+            0
+        );
+
+
+    const profit =
+        data.sales.reduce(
+            (sum,sale) =>
+                sum + sale.profit,
+            0
+        );
+
+
+    const stock =
+        data.products.reduce(
+            (sum,product) =>
+                sum + product.stock,
+            0
+        );
+
+
+    $("#sProducts").textContent =
+        data.products.length;
+
+
+    $("#sStock").textContent =
+        stock;
+
+
+    $("#sSales").textContent =
+        money(salesTotal);
+
+
+    $("#sSpend").textContent =
+        money(spending);
+
+
+    $("#sProfit").textContent =
+        money(profit);
+
+
+    /* ======= NUEVO: resumen de Ofertas ======= */
+
+    const activeOffers =
+        data.offers.filter(
+            offer =>
+                computeOfferStatus(offer) === "activa"
+        );
+
+    let activeSavings = 0;
+    let activeImmediate = 0;
+    let activeBonus = 0;
+
+    activeOffers.forEach(
+        offer => {
+
+            activeSavings +=
+                Math.max(
+                    0,
+                    (Number(offer.normalPrice) || 0) -
+                    (Number(offer.offerPrice) || 0)
+                );
+
+            const scenario =
+                offerScenario(
+                    offer,
+                    offer.offerPrice
+                );
+
+            activeImmediate += scenario.immediate;
+            activeBonus += scenario.bonus;
+
+        }
+    );
+
+    $("#oActiveCount").textContent =
+        activeOffers.length;
+
+    $("#oActiveProfit").textContent =
+        money(activeImmediate + activeBonus);
+
+    $("#oActiveSavings").textContent =
+        money(activeSavings);
+
+    $("#oImmediate").textContent =
+        money(activeImmediate);
+
+    $("#oBonus").textContent =
+        money(activeBonus);
+
+    $("#oTotal").textContent =
+        money(activeImmediate + activeBonus);
+
+
+    const recent =
+        [...data.sales]
+        .sort(
+            (a,b) =>
+                b.created.localeCompare(
+                    a.created
+                )
+        )
+        .slice(0,5);
+
+
+    $("#recentSales").innerHTML =
+        recent.length
+
+        ?
+
+        recent.map(
+            sale =>
+                `
+                <div class="recent-item">
+
+                    <div>
+
+                        <b>
+                            ${saleItemsLabel(sale)}
+                        </b>
+
+                        <small>
+                            ${esc(
+                                sale.clientName
+                            )}
+                            ·
+                            ${fmtDate(
+                                sale.date
+                            )}
+                            ·
+                            ${sale.qty}
+                            ud.
+                        </small>
+
+                    </div>
+
+                    <strong class="green">
+                        ${money(
+                            sale.total
+                        )}
+                    </strong>
+
+                </div>
+                `
+        ).join("")
+
+        :
+
+        `
+        <div class="empty">
+            Todavía no hay ventas.
+        </div>
+        `;
+
+
+    const low =
+        data.products.filter(
+            product =>
+                product.stock <=
+                product.minStock
+        );
+
+
+    $("#lowStock").innerHTML =
+        low.length
+
+        ?
+
+        low.map(
+            product =>
+                `
+                <div class="recent-item">
+
+                    <div>
+
+                        <b>
+                            ${esc(
+                                product.name
+                            )}
+                        </b>
+
+                        <small>
+                            ${product.stock}
+                            unidades disponibles
+                        </small>
+
+                    </div>
+
+                    <span
+                        class="badge
+                        ${
+                            product.stock === 0
+                            ? "out"
+                            : "low"
+                        }"
+                    >
+                        ${
+                            product.stock === 0
+                            ? "Agotado"
+                            : "Stock bajo"
+                        }
+                    </span>
+
+                </div>
+                `
+        ).join("")
+
+        :
+
+        `
+        <div class="empty">
+            Todo el inventario está
+            en buen nivel.
+        </div>
+        `;
+
+}
+
+
+/* =========================================================
+   PRODUCTOS
+========================================================= */
+
+function renderProducts(){
+
+    const query =
+        (
+            $("#productSearch")
+            ?.value ||
+            ""
+        )
+        .toLowerCase();
+
+
+    const products =
+        data.products.filter(
+            product =>
+                product.name
+                    .toLowerCase()
+                    .includes(query)
+
+                ||
+
+                product.category
+                    .toLowerCase()
+                    .includes(query)
+        );
+
+
+    $("#productGrid").innerHTML =
+
+        products.length
+
+        ?
+
+        products.map(
+            product =>
+                `
+                <div class="product">
+
+                    <div class="product-top">
+
+                        <div>
+
+                            <h4>
+                                ${esc(
+                                    product.name
+                                )}
+                            </h4>
+
+                            <small>
+                                ${esc(
+                                    product.category
+                                )}
+                            </small>
+
+                        </div>
+
+                        <span
+                            class="badge
+                            ${
+                                product.stock === 0
+                                ? "out"
+                                :
+                                product.stock <=
+                                product.minStock
+                                ? "low"
+                                : "ok"
+                            }"
+                        >
+                            ${product.stock}
+                            ud.
+                        </span>
+
+                    </div>
+
+
+                    <div class="prices">
+
+                        <div class="pricebox">
+
+                            <small>
+                                Te cuesta
+                            </small>
+
+                            <strong>
+                                ${money(
+                                    product.cost
+                                )}
+                            </strong>
+
+                        </div>
+
+
+                        <div class="pricebox">
+
+                            <small>
+                                Se vende
+                            </small>
+
+                            <strong>
+                                ${money(
+                                    product.price
+                                )}
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                    ${
+                        product.consultantPrice
+
+                        ?
+
+                        `
+                        <div class="note" style="margin-bottom:12px;">
+                            ${product.content ? `${esc(product.content)} · ` : ""}
+                            ${product.points ? `${product.points} pts · ` : ""}
+                            Cliente ${money(product.clientPrice)}
+                            · Premium ${money(product.premiumPrice)}
+                            · Consultor ${money(product.consultantPrice)}
+                        </div>
+                        `
+
+                        :
+
+                        ""
+                    }
+
+
+                    <div
+                        style="
+                            display:flex;
+                            justify-content:space-between;
+                            align-items:center;
+                            gap:8px;
+                        "
+                    >
+
+                        <span class="stock">
+
+                            Ganancia:
+
+                            <span class="green">
+
+                                ${money(
+                                    product.price -
+                                    product.cost
+                                )}
+
+                            </span>
+
+                        </span>
+
+
+                        <div class="actions">
+
+                            <button
+                                class="icon-btn"
+                                title="Editar"
+                                onclick="
+                                    editProduct(
+                                        '${product.id}'
+                                    )
+                                "
+                            >
+                                ✏️
+                            </button>
+
+                            <button
+                                class="
+                                    icon-btn
+                                    del
+                                "
+                                title="Eliminar"
+                                onclick="
+                                    deleteProduct(
+                                        '${product.id}'
+                                    )
+                                "
+                            >
+                                🗑️
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+                `
+        ).join("")
+
+        :
+
+        `
+        <div
+            class="empty"
+            style="grid-column:1/-1"
+        >
+            No hay productos.
+            <br>
+            Pulsa
+            <b>+ Producto</b>
+            para comenzar.
+        </div>
+        `;
+
+}
+
+
+$("#productSearch")
+    .addEventListener(
+        "input",
+        renderProducts
+    );
+
+
+/* =========================================================
+   MODALES
+========================================================= */
+
+function openModal(
+    title,
+    html,
+    onSave
+){
+
+    $("#modalBox").innerHTML =
+
+        `
+        <h3>
+            ${title}
+        </h3>
+
+        ${html}
+
+        <div class="modal-actions">
+
+            <button
+                class="secondary"
+                onclick="closeModal()"
+            >
+                Cancelar
+            </button>
+
+            <button
+                class="primary"
+                id="modalSave"
+            >
+                Guardar
+            </button>
+
+        </div>
+        `;
+
+
+    $("#modal")
+        .classList.add(
+            "open"
+        );
+
+
+    $("#modalSave").onclick =
+        () =>
+            onSave();
+
+}
+
+
+function closeModal(){
+
+    $("#modal")
+        .classList.remove(
+            "open"
+        );
+
+    $("#modalBox")
+        .innerHTML = "";
+
+}
+
+
+$("#modal").addEventListener(
+    "click",
+    event => {
+
+        if(
+            event.target.id ===
+            "modal"
+        ){
+
+            closeModal();
+
+        }
+
+    }
+);
+
+
+document.addEventListener(
+    "keydown",
+    event => {
+
+        if(
+            event.key ===
+            "Escape"
+        ){
+
+            closeModal();
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   FORMULARIO PRODUCTO
+========================================================= */
+
+function productForm(
+    product = {
+
+        name:"",
+        category:"",
+        cost:0,
+        price:0,
+        stock:0,
+        minStock:2,
+        cesna:"",
+        invoiceCode:"",
+        content:"",
+        points:0,
+        clientPrice:0,
+        premiumPrice:0,
+        consultantPrice:0
+
+    }
+){
+
+    return `
+
+        <div class="form-grid">
+
+            <div class="field">
+
+                <label>
+                    Nombre *
+                </label>
+
+                <input
+                    id="fName"
+                    value="${esc(
+                        product.name
+                    )}"
+                >
+
+            </div>
+
+
+            <div class="field">
+
+                <label>
+                    Categoría
+                </label>
+
+                <input
+                    id="fCategory"
+                    value="${esc(
+                        product.category
+                    )}"
+                >
+
+            </div>
+
+
+            <div class="field">
+
+                <label>
+                    Costo de compra *
+                </label>
+
+                <input
+                    id="fCost"
+                    type="number"
+                    min="0"
+                    step="0.01"
+                    value="${product.cost}"
+                >
+
+            </div>
+
+
+            <div class="field">
+
+                <label>
+                    Precio de venta *
+                </label>
+
+                <input
+                    id="fPrice"
+                    type="number"
+                    min="0"
+                    step="0.01"
+                    value="${product.price}"
+                >
+
+            </div>
+
+
+            <div class="field">
+
+                <label>
+                    Stock actual *
+                </label>
+
+                <input
+                    id="fStock"
+                    type="number"
+                    min="0"
+                    step="1"
+                    value="${product.stock}"
+                >
+
+            </div>
+
+
+            <div class="field">
+
+                <label>
+                    Avisar cuando queden
+                </label>
+
+                <input
+                    id="fMin"
+                    type="number"
+                    min="0"
+                    step="1"
+                    value="${product.minStock}"
+                >
+
+            </div>
+
+        </div>
+
+
+        <div class="scenario-title">
+            Datos de catálogo NSP (opcional)
+        </div>
+
+        <div class="form-grid three">
+
+            <div class="field">
+                <label>Clave CESNA</label>
+                <input id="fCesna" value="${esc(product.cesna || "")}">
+            </div>
+
+            <div class="field">
+                <label>Código factura</label>
+                <input id="fInvoiceCode" value="${esc(product.invoiceCode || "")}">
+            </div>
+
+            <div class="field">
+                <label>Contenido</label>
+                <input id="fContent" value="${esc(product.content || "")}" placeholder="ej. 100 cáps">
+            </div>
+
+        </div>
+
+        <div class="form-grid three" style="margin-top:12px;">
+
+            <div class="field">
+                <label>Puntos</label>
+                <input id="fPoints" type="number" min="0" step="0.01" value="${product.points || 0}">
+            </div>
+
+            <div class="field">
+                <label>Precio cliente</label>
+                <input id="fClientPrice" type="number" min="0" step="0.01" value="${product.clientPrice || 0}">
+            </div>
+
+            <div class="field">
+                <label>Precio cliente premium</label>
+                <input id="fPremiumPrice" type="number" min="0" step="0.01" value="${product.premiumPrice || 0}">
+            </div>
+
+        </div>
+
+        <div class="form-grid" style="margin-top:12px;">
+
+            <div class="field">
+                <label>Precio consultor</label>
+                <input id="fConsultantPrice" type="number" min="0" step="0.01" value="${product.consultantPrice || 0}">
+            </div>
+
+        </div>
+
+        <div class="note" style="margin-top:12px;">
+            Estos campos son opcionales: si los llenas, la sección de
+            Ofertas los usará para autocompletar el precio normal, el
+            precio consultora y el precio premium al elegir este
+            producto.
+        </div>
+
+    `;
+
+}
+
+
+$("#addProduct").onclick =
+    () => {
+
+        openModal(
+            "📦 Nuevo producto",
+            productForm(),
+            async () => {
+
+                const product =
+                    readProduct();
+
+                if(!product){
+                    return;
+                }
+
+                closeModal();
+
+                const created =
+                    await createProductRemote(product);
+
+                if(!created){
+                    return;
+                }
+
+                data.products.push(created);
+
+                saveLocalCache();
+
+                renderProducts();
+
+                renderDashboard();
+
+                toast(
+                    "Producto agregado"
+                );
+
+            }
+        );
+
+    };
+
+
+/* =========================================================
+   readProduct / editProduct / deleteProduct
+   (RECONSTRUIDO — esta parte faltaba/estaba dañada
+   en el archivo que se recibió)
+========================================================= */
+
+function readProduct(){
+
+    const name =
+        $("#fName")
+        .value
+        .trim();
+
+    const category =
+        $("#fCategory")
+        .value
+        .trim() ||
+        "Sin categoría";
+
+    const cost =
+        Number(
+            $("#fCost").value
+        );
+
+    const price =
+        Number(
+            $("#fPrice").value
+        );
+
+    const stock =
+        Number(
+            $("#fStock").value
+        );
+
+    const minStock =
+        Number(
+            $("#fMin").value
+        );
+
+    const cesna =
+        $("#fCesna")
+        ?.value
+        .trim() || "";
+
+    const invoiceCode =
+        $("#fInvoiceCode")
+        ?.value
+        .trim() || "";
+
+    const content =
+        $("#fContent")
+        ?.value
+        .trim() || "";
+
+    const points =
+        Number($("#fPoints")?.value) || 0;
+
+    const clientPrice =
+        Number($("#fClientPrice")?.value) || 0;
+
+    const premiumPrice =
+        Number($("#fPremiumPrice")?.value) || 0;
+
+    const consultantPrice =
+        Number($("#fConsultantPrice")?.value) || 0;
+
+    if(!name){
+        toast("El nombre es obligatorio");
+        return null;
+    }
+
+    if(
+        cost < 0 ||
+        price < 0 ||
+        stock < 0 ||
+        minStock < 0 ||
+        points < 0 ||
+        clientPrice < 0 ||
+        premiumPrice < 0 ||
+        consultantPrice < 0
+    ){
+        toast("Los valores no pueden ser negativos");
+        return null;
+    }
+
+    return {
+        name,
+        category,
+        cost,
+        price,
+        stock,
+        minStock,
+        cesna,
+        invoiceCode,
+        content,
+        points,
+        clientPrice,
+        premiumPrice,
+        consultantPrice
+    };
+
+}
+
+
+function editProduct(id){
+
+    const product =
+        data.products.find(
+            p => p.id === id
+        );
+
+    if(!product){
+        return;
+    }
+
+    openModal(
+        "✏️ Editar producto",
+        productForm(product),
+        async () => {
+
+            const updated =
+                readProduct();
+
+            if(!updated){
+                return;
+            }
+
+            closeModal();
+
+            const ok =
+                await updateProductRemote(id, updated);
+
+            if(!ok){
+                return;
+            }
+
+            Object.assign(product, updated);
+
+            saveLocalCache();
+            renderProducts();
+            renderDashboard();
+            toast("Producto actualizado");
+
+        }
+    );
+
+}
+
+
+async function deleteProduct(id){
+
+    if(!confirm("¿Eliminar este producto?")){
+        return;
+    }
+
+    const ok =
+        await deleteProductRemote(id);
+
+    if(!ok){
+        return;
+    }
+
+    data.products =
+        data.products.filter(
+            p => p.id !== id
+        );
+
+    saveLocalCache();
+    renderProducts();
+    renderDashboard();
+    toast("Producto eliminado");
+
+}
+
+
+function productOptions(selectedId){
+
+    return data.products.map(
+        product =>
+            `
+            <option
+                value="${product.id}"
+                ${
+                    product.id === selectedId
+                    ? "selected"
+                    : ""
+                }
+            >
+                ${esc(product.name)}
+            </option>
+            `
+    ).join("");
+
+}
+
+
+/* =========================================================
+   CATÁLOGO NSP
+   Lista de precios Consultor México, vigente desde el
+   1 de abril de 2026 (transcrita de las imágenes que
+   proporcionaste). Cada fila:
+   [cesna, nombre, códigoFactura, contenido, puntos,
+    precioCliente, precioClientePremium, precioConsultor]
+========================================================= */
+
+const NSP_CATALOG = [
+
+    ["1000410","Algas marinas","MX10410","100 cáps",9.69,480,360,288],
+    ["1000775","ALJ cápsulas","MX10775","100 cáps",9.62,477,358,286],
+    ["1003166","ALJ líquido","MX3166","59 ml",12.31,610,457,366],
+    ["1001679","Aloe Vera Gel","MX1679","236 ml",10.90,540,405,324],
+    ["1000140","Bardana","MX10140","100 cáps",9.79,485,364,291],
+    ["1002886","B-Build","MX2886","120 cáps",16.01,793,595,476],
+    ["1001683","Chloro-Feel","MX1683","473 ml",10.80,535,401,321],
+    ["23535","Powdered Chloro-Feel","MX23535","30 sobres",24.29,1219,918,738],
+    ["1003073","CMG","MX3073","150 tabs",12.65,627,470,376],
+    ["1003065","Collatrim","MX3065","180 cáps",13.83,685,514,411],
+    ["1003312","Coloid Min","MX3312","473 ml",15.44,765,574,459],
+    ["1001195","CRD-L","MX1195","60 cáps",19.48,965,724,579],
+    ["1000681","Espirulina","MX10681","100 cáps",14.36,712,534,427],
+    ["1000880","FCS II","MX10880","100 cáps",16.15,800,600,480],
+    ["1000885","Fenogreco & Tomillo","MX10885","100 cáps",8.38,415,311,249],
+    ["1000930","HS-II","MX10930","100 cáps",9.62,477,358,286],
+    ["1000935","HSN-W","MX10935","100 cáps",11.84,587,440,352],
+    ["1000970","K","MX10970","100 cáps",9.52,472,354,283],
+    ["1015986","LBS II","MX15986","90 cáps",10.87,538,403,323],
+    ["1001010","Liv-A","MX11010","100 cáps",11.57,573,430,344],
+    ["1004049","Mega-Chel","MX4049","90 tabs",20.39,1010,757,606],
+    ["1021367","N-SCHB","MX21367","100 cáps",22.37,1108,831,665],
+    ["1000090","Nogal negro","MX10090","100 cáps",10.16,503,377,302],
+    ["1006066","Noni","MX6066","473 ml",14.45,717,538,431],
+    ["1003225","Nopalmix","MX3225","120 g",9.65,501,381,310],
+    ["23588","NSP Shake Mix","MX23588","486 g",33.92,1694,1274,1022],
+    ["1000670","Olmo","MX670","100 cáps",11.98,593,445,356],
+    ["1000485","Papaya Mint","MX100485","70 tabs",10.06,498,373,299],
+    ["1000504","Pau D'Arco","MX10504","100 cáps",11.54,572,429,343],
+    ["1001706","Peppermint Oil","MX1706","5 ml",11.84,587,440,352],
+    ["1000070","Polen de abeja","MX10070","100 cáps",9.15,453,340,272],
+    ["23829","Power Açaí","MX23829","30 sobres",25.71,1285,967,775],
+    ["23476","Power Beets","MX23476","30 sobres",36.97,1832,1374,1099],
+    ["23541","Power Beets (Power Pouch)","MX23541","30 porciones",31.93,1582,1186,949],
+    ["23831","Power Mate","MX23831","30 porciones",22.37,1125,848,682],
+    ["23830","Power Protein Vainilla","MX23830","15 porciones",42.26,1821,1370,1099],
+    ["1001515","S-Omega 3","MX1515","60 cáps",28.33,1403,1052,842],
+    ["1001373","S-Supplemental","MX1373","30 tabs",7.27,360,270,216],
+    ["1001680","Savila","MX1680","946 ml",17.59,872,654,523],
+    ["23102","Savila F","MX23102","946 ml",10.06,498,373,299],
+    ["23651","Savila WS","MX23651","946 ml",17.49,867,650,520],
+    ["1001770","Seed Omega","MX1770","60 cáps",19.78,980,735,588],
+    ["1018007","Syner-Crom","MX18007","90 tabs",11.27,558,418,335],
+    ["1001105","UC3-J","MX11105","100 cáps",9.79,485,364,291],
+    ["1012878","URY","MX12878","120 cáps",14.74,730,547,438],
+    ["1004052","Vits-Mins","MX4052","60 cáps",10.73,532,399,319],
+    ["1024099","Zambroza","MX24099","450 ml",23.20,1150,862,691],
+
+    /* Herramientas de ventas — sin precio cliente/premium/consultor
+       diferenciado, se usa el mismo precio en las tres columnas */
+    ["7000073","Pastillero Sunshine","MX7000073","1 pza",0,65,65,65],
+    ["MX22622","Bolsa ecológica","MX22622","1 pza",0,25,25,25]
+
+];
+
+
+async function importCatalog(){
+
+    let added = 0;
+    let updated = 0;
+
+    const rowsToUpsert = [];
+
+    NSP_CATALOG.forEach(
+        row => {
+
+            const [
+                cesna,
+                name,
+                invoiceCode,
+                content,
+                points,
+                clientPrice,
+                premiumPrice,
+                consultantPrice
+            ] = row;
+
+            const category =
+                cesna.startsWith("MX22622") ||
+                cesna === "7000073"
+                    ? "Herramientas de venta"
+                    : "Suplementos herbales";
+
+            const existing =
+                data.products.find(
+                    p => p.cesna === cesna
+                );
+
+            if(existing){
+
+                existing.name = name;
+                existing.category = existing.category || category;
+                existing.invoiceCode = invoiceCode;
+                existing.content = content;
+                existing.points = points;
+                existing.clientPrice = clientPrice;
+                existing.premiumPrice = premiumPrice;
+                existing.consultantPrice = consultantPrice;
+
+                /* No se toca stock, minStock, cost ni price:
+                   esos ya fueron capturados/ajustados por ti. */
+
+                rowsToUpsert.push(productToRow(existing));
+
+                updated++;
+
+            }
+            else{
+
+                const newProduct = {
+                    id:uid(),
+                    name,
+                    category,
+                    cost:consultantPrice,
+                    price:clientPrice,
+                    stock:0,
+                    minStock:2,
+                    cesna,
+                    invoiceCode,
+                    content,
+                    points,
+                    clientPrice,
+                    premiumPrice,
+                    consultantPrice
+                };
+
+                data.products.push(newProduct);
+                rowsToUpsert.push(productToRow(newProduct));
+
+                added++;
+
+            }
+
+        }
+    );
+
+    setSyncStatus("syncing","Sincronizando catálogo...");
+
+    const { error } =
+        await supabaseClient.from("products")
+        .upsert(rowsToUpsert, { onConflict:"id" });
+
+    if(error){
+        console.error(error);
+        setSyncStatus("offline","⚠️ No se pudo sincronizar el catálogo");
+        toast("⚠️ El catálogo se guardó localmente pero no se pudo sincronizar todavía");
+    }
+    else{
+        setSyncStatus("ok","✓ Datos sincronizados");
+    }
+
+    saveLocalCache();
+    renderProducts();
+    renderDashboard();
+
+    toast(
+        `Catálogo importado: ${added} nuevos, ${updated} actualizados`
+    );
+
+}
+
+
+$("#importCatalog").onclick =
+    () => {
+
+        if(
+            !confirm(
+                "¿Importar / actualizar el catálogo NSP (" +
+                NSP_CATALOG.length +
+                " productos)? No se tocará tu stock ni tu costo real ya guardado."
+            )
+        ){
+            return;
+        }
+
+        importCatalog();
+
+    };
+
+
+/* =========================================================
+   PRODUCTOS RECIBIDOS (RECONSTRUIDO)
+========================================================= */
+
+function receiptForm(){
+
+    const firstProduct =
+        data.products[0];
+
+    return `
+
+        <div class="form-grid">
+
+            <div class="field">
+                <label>Producto *</label>
+                <select id="rProduct">
+                    ${productOptions()}
+                </select>
+            </div>
+
+            <div class="field">
+                <label>Cantidad recibida *</label>
+                <input id="rQty" type="number" min="1" step="1" value="1">
+            </div>
+
+            <div class="field">
+                <label>Costo unitario *</label>
+                <input
+                    id="rCost"
+                    type="number"
+                    min="0"
+                    step="0.01"
+                    value="${firstProduct ? firstProduct.cost : 0}"
+                >
+            </div>
+
+            <div class="field">
+                <label>Fecha *</label>
+                <input id="rDate" type="date" value="${today()}">
+            </div>
+
+        </div>
+
+    `;
+
+}
+
+
+$("#receiveProduct").onclick =
+    () => {
+
+        if(!data.products.length){
+            toast("Primero agrega un producto");
+            return;
+        }
+
+        openModal(
+            "🚚 Registrar llegada",
+            receiptForm(),
+            async () => {
+
+                const productId =
+                    $("#rProduct").value;
+
+                const product =
+                    data.products.find(
+                        p => p.id === productId
+                    );
+
+                const qty =
+                    Number($("#rQty").value);
+
+                const unitCost =
+                    Number($("#rCost").value);
+
+                const date =
+                    $("#rDate").value;
+
+                if(!product){
+                    toast("Selecciona un producto");
+                    return;
+                }
+
+                if(!qty || qty <= 0){
+                    toast("La cantidad debe ser mayor a 0");
+                    return;
+                }
+
+                if(unitCost < 0){
+                    toast("El costo no puede ser negativo");
+                    return;
+                }
+
+                if(!date){
+                    toast("Selecciona una fecha");
+                    return;
+                }
+
+                const totalCost =
+                    qty * unitCost;
+
+                closeModal();
+
+                const created =
+                    await createReceiptRemote({
+                        productId,
+                        productName:product.name,
+                        qty,
+                        unitCost,
+                        totalCost,
+                        date
+                    });
+
+                if(!created){
+                    return;
+                }
+
+                data.receipts.push(created);
+
+                /* actualización optimista local; la cifra real ya
+                   quedó ajustada de forma atómica en Supabase */
+                product.stock += qty;
+
+                saveLocalCache();
+                renderReceipts();
+                renderProducts();
+                renderDashboard();
+                toast("Llegada registrada");
+
+            }
+        );
+
+        const productSelect =
+            $("#rProduct");
+
+        if(productSelect){
+
+            productSelect.addEventListener(
+                "change",
+                () => {
+
+                    const product =
+                        data.products.find(
+                            p => p.id === productSelect.value
+                        );
+
+                    if(product){
+                        $("#rCost").value = product.cost;
+                    }
+
+                }
+            );
+
+        }
+
+    };
+
+
+async function deleteReceipt(id){
+
+    if(!confirm("¿Eliminar este registro? (el stock no se ajustará automáticamente)")){
+        return;
+    }
+
+    const ok =
+        await deleteReceiptRemote(id);
+
+    if(!ok){
+        return;
+    }
+
+    data.receipts =
+        data.receipts.filter(
+            r => r.id !== id
+        );
+
+    saveLocalCache();
+    renderReceipts();
+    toast("Registro eliminado");
+
+}
+
+
+function renderReceipts(){
+
+    const receipts =
+        [...data.receipts]
+        .sort(
+            (a,b) =>
+                b.date.localeCompare(a.date)
+        );
+
+    $("#receiptHistory").innerHTML =
+
+        receipts.length
+
+        ?
+
+        `
+        <table class="table">
+
+            <thead>
+                <tr>
+                    <th>Fecha</th>
+                    <th>Producto</th>
+                    <th>Cantidad</th>
+                    <th>Costo unit.</th>
+                    <th>Total</th>
+                    <th></th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                ${
+                    receipts.map(
+                        receipt =>
+                            `
+                            <tr>
+                                <td>${fmtDate(receipt.date)}</td>
+                                <td>${esc(receipt.productName)}</td>
+                                <td>${receipt.qty}</td>
+                                <td>${money(receipt.unitCost)}</td>
+                                <td>${money(receipt.totalCost)}</td>
+                                <td class="actions">
+                                    <button class="icon-btn del" title="Eliminar" onclick="deleteReceipt('${receipt.id}')">🗑️</button>
+                                </td>
+                            </tr>
+                            `
+                    ).join("")
+                }
+
+            </tbody>
+
+        </table>
+        `
+
+        :
+
+        `
+        <div class="empty">
+            Todavía no hay llegadas registradas.
+        </div>
+        `;
+
+}
+
+
+/* =========================================================
+   CLIENTES (RECONSTRUIDO)
+========================================================= */
+
+function clientForm(
+    client = {
+        name:"",
+        phone:"",
+        email:"",
+        notes:""
+    }
+){
+
+    return `
+
+        <div class="form-grid">
+
+            <div class="field">
+                <label>Nombre *</label>
+                <input id="cName" value="${esc(client.name)}">
+            </div>
+
+            <div class="field">
+                <label>Teléfono</label>
+                <input id="cPhone" value="${esc(client.phone)}">
+            </div>
+
+            <div class="field">
+                <label>Correo</label>
+                <input id="cEmail" value="${esc(client.email)}">
+            </div>
+
+            <div class="field">
+                <label>Notas</label>
+                <input id="cNotes" value="${esc(client.notes)}">
+            </div>
+
+        </div>
+
+    `;
+
+}
+
+
+$("#addClient").onclick =
+    () => {
+
+        openModal(
+            "👥 Nuevo cliente",
+            clientForm(),
+            async () => {
+
+                const name =
+                    $("#cName").value.trim();
+
+                if(!name){
+                    toast("El nombre es obligatorio");
+                    return;
+                }
+
+                const newClient = {
+                    name,
+                    phone:$("#cPhone").value.trim(),
+                    email:$("#cEmail").value.trim(),
+                    notes:$("#cNotes").value.trim()
+                };
+
+                closeModal();
+
+                const created =
+                    await createClientRemote(newClient);
+
+                if(!created){
+                    return;
+                }
+
+                data.clients.push(created);
+
+                saveLocalCache();
+                renderClients();
+                toast("Cliente agregado");
+
+            }
+        );
+
+    };
+
+
+function editClient(id){
+
+    const client =
+        data.clients.find(
+            c => c.id === id
+        );
+
+    if(!client){
+        return;
+    }
+
+    openModal(
+        "✏️ Editar cliente",
+        clientForm(client),
+        async () => {
+
+            const name =
+                $("#cName").value.trim();
+
+            if(!name){
+                toast("El nombre es obligatorio");
+                return;
+            }
+
+            const patch = {
+                name,
+                phone:$("#cPhone").value.trim(),
+                email:$("#cEmail").value.trim(),
+                notes:$("#cNotes").value.trim()
+            };
+
+            closeModal();
+
+            const ok =
+                await updateClientRemote(id, patch);
+
+            if(!ok){
+                return;
+            }
+
+            Object.assign(client, patch);
+
+            saveLocalCache();
+            renderClients();
+            toast("Cliente actualizado");
+
+        }
+    );
+
+}
+
+
+async function deleteClient(id){
+
+    if(!confirm("¿Eliminar este cliente?")){
+        return;
+    }
+
+    const ok =
+        await deleteClientRemote(id);
+
+    if(!ok){
+        return;
+    }
+
+    data.clients =
+        data.clients.filter(
+            c => c.id !== id
+        );
+
+    saveLocalCache();
+    renderClients();
+    toast("Cliente eliminado");
+
+}
+
+
+function renderClients(){
+
+    const query =
+        (
+            $("#clientSearch")
+            ?.value ||
+            ""
+        )
+        .toLowerCase();
+
+    const clients =
+        data.clients.filter(
+            client =>
+                client.name
+                .toLowerCase()
+                .includes(query)
+        );
+
+    $("#clientTable").innerHTML =
+
+        clients.length
+
+        ?
+
+        `
+        <table class="table">
+
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Teléfono</th>
+                    <th>Correo</th>
+                    <th></th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                ${
+                    clients.map(
+                        client =>
+                            `
+                            <tr>
+                                <td>${esc(client.name)}</td>
+                                <td>${esc(client.phone) || "—"}</td>
+                                <td>${esc(client.email) || "—"}</td>
+                                <td class="actions">
+                                    <button class="icon-btn" title="Editar" onclick="editClient('${client.id}')">✏️</button>
+                                    <button class="icon-btn del" title="Eliminar" onclick="deleteClient('${client.id}')">🗑️</button>
+                                </td>
+                            </tr>
+                            `
+                    ).join("")
+                }
+
+            </tbody>
+
+        </table>
+        `
+
+        :
+
+        `
+        <div class="empty">
+            No hay clientes registrados.
+        </div>
+        `;
+
+}
+
+
+$("#clientSearch")
+    .addEventListener(
+        "input",
+        renderClients
+    );
+
+
+/* =========================================================
+   VENTAS (RECONSTRUIDO)
+========================================================= */
+
+function clientOptions(selectedId){
+
+    return data.clients.map(
+        client =>
+            `
+            <option
+                value="${client.id}"
+                ${
+                    client.id === selectedId
+                    ? "selected"
+                    : ""
+                }
+            >
+                ${esc(client.name)}
+            </option>
+            `
+    ).join("");
+
+}
+
+
+let saleItemCounter = 0;
+
+
+function saleItemRowHtml(index){
+
+    return `
+        <div
+            class="sale-item-row"
+            data-row="${index}"
+            style="display:flex;gap:10px;align-items:end;flex-wrap:wrap;margin-bottom:10px;"
+        >
+
+            <div class="field" style="flex:2;min-width:180px;margin-bottom:0;">
+                <label>Producto *</label>
+                <select
+                    id="sItemProduct_${index}"
+                    onchange="onSaleItemProductChange(${index})"
+                >
+                    <option value="">Selecciona...</option>
+                    ${productOptions()}
+                </select>
+            </div>
+
+            <div class="field" style="flex:1;min-width:90px;margin-bottom:0;">
+                <label>Cantidad *</label>
+                <input
+                    id="sItemQty_${index}"
+                    type="number"
+                    min="1"
+                    step="1"
+                    value="1"
+                    oninput="updateSaleSummary()"
+                >
+            </div>
+
+            <div class="field" style="flex:1;min-width:110px;margin-bottom:0;">
+                <label>Precio unit. *</label>
+                <input
+                    id="sItemPrice_${index}"
+                    type="number"
+                    min="0"
+                    step="0.01"
+                    value="0"
+                    oninput="updateSaleSummary()"
+                >
+            </div>
+
+            <button
+                type="button"
+                class="icon-btn del"
+                title="Quitar producto"
+                onclick="removeSaleItemRow(${index})"
+            >
+                🗑️
+            </button>
+
+        </div>
+    `;
+
+}
+
+
+function addSaleItemRow(){
+
+    const container =
+        $("#saleItemsContainer");
+
+    if(!container){
+        return;
+    }
+
+    saleItemCounter++;
+
+    container.insertAdjacentHTML(
+        "beforeend",
+        saleItemRowHtml(saleItemCounter)
+    );
+
+}
+
+
+function removeSaleItemRow(index){
+
+    const rows =
+        $$(".sale-item-row");
+
+    if(rows.length <= 1){
+        toast("La venta necesita al menos un producto");
+        return;
+    }
+
+    const row =
+        document.querySelector(
+            `.sale-item-row[data-row="${index}"]`
+        );
+
+    if(row){
+        row.remove();
+    }
+
+    updateSaleSummary();
+
+}
+
+
+function onSaleItemProductChange(index){
+
+    const select =
+        $(`#sItemProduct_${index}`);
+
+    const product =
+        data.products.find(
+            p => p.id === select.value
+        );
+
+    if(product){
+        $(`#sItemPrice_${index}`).value = product.price;
+    }
+
+    updateSaleSummary();
+
+}
+
+
+function collectSaleItemInputs(){
+
+    const rows =
+        $$(".sale-item-row");
+
+    const items = [];
+
+    rows.forEach(
+        row => {
+
+            const index =
+                row.dataset.row;
+
+            const productId =
+                $(`#sItemProduct_${index}`)
+                ?.value ||
+                "";
+
+            const qty =
+                Number($(`#sItemQty_${index}`)?.value);
+
+            const price =
+                Number($(`#sItemPrice_${index}`)?.value);
+
+            if(productId){
+                items.push({ productId, qty, price });
+            }
+
+        }
+    );
+
+    return items;
+
+}
+
+
+function updateSaleSummary(){
+
+    const summary =
+        $("#saleSummary");
+
+    if(!summary){
+        return;
+    }
+
+    const items =
+        collectSaleItemInputs();
+
+    let total = 0;
+    let profit = 0;
+
+    items.forEach(
+        item => {
+
+            const product =
+                data.products.find(
+                    p => p.id === item.productId
+                );
+
+            if(!product){
+                return;
+            }
+
+            total += (item.qty || 0) * (item.price || 0);
+            profit += ((item.price || 0) - product.cost) * (item.qty || 0);
+
+        }
+    );
+
+    summary.innerHTML =
+        `
+        Total: <b>${money(total)}</b>
+        · Ganancia estimada: <b class="green">${money(profit)}</b>
+        `;
+
+}
+
+
+function saleForm(){
+
+    saleItemCounter = 0;
+
+    return `
+
+        <div class="form-grid">
+
+            <div class="field">
+                <label>Cliente</label>
+                <select id="sClient">
+                    <option value="">(Sin cliente / público general)</option>
+                    ${clientOptions()}
+                </select>
+            </div>
+
+            <div class="field">
+                <label>Fecha *</label>
+                <input id="sDate" type="date" value="${today()}">
+            </div>
+
+        </div>
+
+        <div class="scenario-title">
+            Productos de la venta
+        </div>
+
+        <div id="saleItemsContainer">
+            ${saleItemRowHtml(0)}
+        </div>
+
+        <button
+            type="button"
+            class="secondary"
+            onclick="addSaleItemRow()"
+        >
+            + Agregar producto
+        </button>
+
+        <div
+            class="note"
+            id="saleSummary"
+            style="margin-top:14px;"
+        >
+            Total: $0.00 · Ganancia estimada: $0.00
+        </div>
+
+    `;
+
+}
+
+
+$("#addSale").onclick =
+    () => {
+
+        if(!data.products.length){
+            toast("Primero agrega un producto");
+            return;
+        }
+
+        openModal(
+            "🧾 Registrar venta",
+            saleForm(),
+            async () => {
+
+                const clientId =
+                    $("#sClient").value;
+
+                const client =
+                    data.clients.find(
+                        c => c.id === clientId
+                    );
+
+                const date =
+                    $("#sDate").value;
+
+                const rawItems =
+                    collectSaleItemInputs();
+
+                if(!date){
+                    toast("Selecciona una fecha");
+                    return;
+                }
+
+                if(!rawItems.length){
+                    toast("Agrega al menos un producto a la venta");
+                    return;
+                }
+
+                for(const item of rawItems){
+
+                    const product =
+                        data.products.find(
+                            p => p.id === item.productId
+                        );
+
+                    if(!product){
+                        toast("Selecciona un producto válido en cada fila");
+                        return;
+                    }
+
+                    if(!item.qty || item.qty <= 0){
+                        toast(`La cantidad de "${product.name}" debe ser mayor a 0`);
+                        return;
+                    }
+
+                    if(item.price < 0){
+                        toast(`El precio de "${product.name}" no puede ser negativo`);
+                        return;
+                    }
+
+                }
+
+                /* si el mismo producto aparece en varias filas,
+                   se suman las cantidades para hacer una
+                   validación local rápida (la validación real y
+                   definitiva contra oversell ocurre en la base de
+                   datos, dentro de register_sale, con bloqueo de
+                   fila — así dos dispositivos vendiendo al mismo
+                   tiempo no pueden dejar el stock en negativo) */
+
+                const qtyByProduct = {};
+
+                rawItems.forEach(
+                    item => {
+                        qtyByProduct[item.productId] =
+                            (qtyByProduct[item.productId] || 0) +
+                            item.qty;
+                    }
+                );
+
+                for(const productId in qtyByProduct){
+
+                    const product =
+                        data.products.find(
+                            p => p.id === productId
+                        );
+
+                    if(qtyByProduct[productId] > product.stock){
+                        toast(`No hay stock suficiente de "${product.name}"`);
+                        return;
+                    }
+
+                }
+
+                const items =
+                    rawItems.map(
+                        item => {
+
+                            const product =
+                                data.products.find(
+                                    p => p.id === item.productId
+                                );
+
+                            const subtotal =
+                                item.qty * item.price;
+
+                            const itemProfit =
+                                (item.price - product.cost) * item.qty;
+
+                            return {
+                                productId:item.productId,
+                                productName:product.name,
+                                qty:item.qty,
+                                price:item.price,
+                                cost:product.cost,
+                                subtotal,
+                                profit:itemProfit
+                            };
+
+                        }
+                    );
+
+                const total =
+                    items.reduce(
+                        (sum,item) => sum + item.subtotal,
+                        0
+                    );
+
+                const profit =
+                    items.reduce(
+                        (sum,item) => sum + item.profit,
+                        0
+                    );
+
+                const totalQty =
+                    items.reduce(
+                        (sum,item) => sum + item.qty,
+                        0
+                    );
+
+                const saleDraft = {
+                    clientId:clientId || null,
+                    clientName:client ? client.name : "Público general",
+                    items,
+                    productName:
+                        items.length === 1
+                            ? items[0].productName
+                            : `${items.length} productos`,
+                    qty:totalQty,
+                    total,
+                    profit,
+                    date
+                };
+
+                closeModal();
+
+                const created =
+                    await createSaleRemote(saleDraft);
+
+                if(!created){
+                    /* register_sale rechazó la venta (por ejemplo,
+                       stock insuficiente detectado en el servidor,
+                       porque otro dispositivo vendió justo antes).
+                       Se refresca todo para reflejar el stock real. */
+                    await loadAllFromCloud();
+                    renderCurrentView();
+                    return;
+                }
+
+                data.sales.push(created);
+
+                items.forEach(
+                    item => {
+
+                        const product =
+                            data.products.find(
+                                p => p.id === item.productId
+                            );
+
+                        if(product){
+                            product.stock -= item.qty;
+                        }
+
+                    }
+                );
+
+                saveLocalCache();
+                renderSales();
+                renderProducts();
+                renderDashboard();
+                toast("Venta registrada");
+
+            }
+        );
+
+    };
+
+
+async function deleteSale(id){
+
+    if(!confirm("¿Eliminar esta venta? (el stock no se ajustará automáticamente)")){
+        return;
+    }
+
+    const ok =
+        await deleteSaleRemote(id);
+
+    if(!ok){
+        return;
+    }
+
+    data.sales =
+        data.sales.filter(
+            s => s.id !== id
+        );
+
+    saveLocalCache();
+    renderSales();
+    renderDashboard();
+    toast("Venta eliminada");
+
+}
+
+
+function saleItemsLabel(sale){
+
+    if(sale.items && sale.items.length){
+
+        return sale.items.map(
+            item =>
+                `${esc(item.productName)} × ${item.qty}`
+        ).join(", ");
+
+    }
+
+    return `${esc(sale.productName)} × ${sale.qty}`;
+
+}
+
+
+function renderSales(){
+
+    const sales =
+        [...data.sales]
+        .sort(
+            (a,b) =>
+                b.date.localeCompare(a.date)
+        );
+
+    $("#salesTable").innerHTML =
+
+        sales.length
+
+        ?
+
+        `
+        <table class="table">
+
+            <thead>
+                <tr>
+                    <th>Fecha</th>
+                    <th>Productos</th>
+                    <th>Cliente</th>
+                    <th>Cant.</th>
+                    <th>Total</th>
+                    <th>Ganancia</th>
+                    <th></th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                ${
+                    sales.map(
+                        sale =>
+                            `
+                            <tr>
+                                <td>${fmtDate(sale.date)}</td>
+                                <td>${saleItemsLabel(sale)}</td>
+                                <td>${esc(sale.clientName)}</td>
+                                <td>${sale.qty}</td>
+                                <td>${money(sale.total)}</td>
+                                <td class="green">${money(sale.profit)}</td>
+                                <td class="actions">
+                                    <button class="icon-btn del" title="Eliminar" onclick="deleteSale('${sale.id}')">🗑️</button>
+                                </td>
+                            </tr>
+                            `
+                    ).join("")
+                }
+
+            </tbody>
+
+        </table>
+        `
+
+        :
+
+        `
+        <div class="empty">
+            Todavía no hay ventas.
+        </div>
+        `;
+
+}
+
+
+/* =========================================================
+   OFERTAS (NUEVO)
+   ---------------------------------------------------------
+   Modelo de ganancia:
+
+   - Costo de adquisición = Costo de lista * (1 - % descuento escalonado)
+     (tu costo real después del descuento escalonado a $30,000 MXN+)
+
+   - Ganancia inmediata = Precio de venta usado - Costo de adquisición
+
+   - Bono estimado = Base del bono * % de bono
+     La base del bono es CONFIGURABLE por oferta:
+       "Costo de adquisición" (después del descuento escalonado) o
+       "Costo de lista" (antes del descuento).
+     Esto es intencional: tú dijiste que el % de bono (10-12%) se
+     calcula sobre lo que compraste a tu nombre, y como eso puede
+     interpretarse de dos formas, el sistema te deja elegir cuál usar
+     en vez de asumir una por ti.
+
+   - El bono NO depende del precio al que vendas, así que es el mismo
+     para el escenario "consultora", "premium" y "oferta".
+
+   - Ganancia total estimada = Ganancia inmediata + Bono estimado
+   - Margen = Ganancia total / Precio de venta usado
+========================================================= */
+
+function offerTypeLabel(type){
+
+    return {
+        percent:"Descuento porcentual",
+        special:"Precio especial",
+        "2x1":"2×1",
+        "3x2":"3×2",
+        qty:"Oferta por cantidad"
+    }[type] || type;
+
+}
+
+
+function computeOfferStatus(offer){
+
+    if(offer.enabled === false){
+        return "pausada";
+    }
+
+    const t = today();
+
+    if(!offer.startDate || !offer.endDate){
+        return "programada";
+    }
+
+    if(t < offer.startDate){
+        return "programada";
+    }
+
+    if(t > offer.endDate){
+        return "finalizada";
+    }
+
+    return "activa";
+
+}
+
+
+function offerStatusBadge(status){
+
+    return {
+        programada:{cls:"low", label:"Programada"},
+        activa:{cls:"ok", label:"Activa"},
+        finalizada:{cls:"out", label:"Finalizada"},
+        pausada:{cls:"out", label:"Pausada"}
+    }[status];
+
+}
+
+
+function daysUntil(dateStr){
+
+    const start =
+        new Date(today() + "T00:00:00");
+
+    const end =
+        new Date(dateStr + "T00:00:00");
+
+    return Math.round(
+        (end - start) / 86400000
+    );
+
+}
+
+
+function offerCostBasis(offer){
+
+    const listCost =
+        Number(offer.listCost) || 0;
+
+    const escPct =
+        Number(offer.escalatedDiscountPct) || 0;
+
+    const acqCost =
+        listCost * (1 - (escPct / 100));
+
+    return { listCost, acqCost };
+
+}
+
+
+function offerBonusAmount(offer){
+
+    const { listCost, acqCost } =
+        offerCostBasis(offer);
+
+    const base =
+        offer.bonusBase === "list"
+            ? listCost
+            : acqCost;
+
+    const pct =
+        Number(offer.bonusPct) || 0;
+
+    return base * (pct / 100);
+
+}
+
+
+function offerScenario(offer, salePrice){
+
+    const { acqCost } =
+        offerCostBasis(offer);
+
+    const immediate =
+        (Number(salePrice) || 0) - acqCost;
+
+    const bonus =
+        offerBonusAmount(offer);
+
+    const total =
+        immediate + bonus;
+
+    const margin =
+        salePrice
+            ? (total / Number(salePrice)) * 100
+            : 0;
+
+    return { immediate, bonus, total, margin };
+
+}
+
+
+function rentabilityBadge(margin){
+
+    if(margin >= 30){
+        return { icon:"🟢", label:"Rentabilidad saludable" };
+    }
+
+    if(margin >= 15){
+        return { icon:"🟡", label:"Rentabilidad reducida" };
+    }
+
+    return { icon:"🔴", label:"Ganancia muy baja o pérdida" };
+
+}
+
+
+function offerForm(
+    offer = {
+        productId:"",
+        type:"percent",
+        normalPrice:0,
+        consultantPrice:0,
+        premiumPrice:0,
+        offerPrice:0,
+        listCost:0,
+        escalatedDiscountPct:20,
+        bonusPct:10,
+        bonusBase:"acq",
+        qtyAvailable:0,
+        startDate:today(),
+        endDate:today()
+    }
+){
+
+    const bonusIsPreset =
+        String(offer.bonusPct) === "10" ||
+        String(offer.bonusPct) === "12";
+
+    return `
+
+        <div class="form-grid three">
+
+            <div class="field">
+                <label>Producto *</label>
+                <select id="oProduct" onchange="fillOfferFromProduct()">
+                    <option value="">Selecciona...</option>
+                    ${productOptions(offer.productId)}
+                </select>
+            </div>
+
+            <div class="field">
+                <label>Tipo de oferta *</label>
+                <select id="oType">
+                    <option value="percent" ${offer.type === "percent" ? "selected" : ""}>Descuento porcentual</option>
+                    <option value="special" ${offer.type === "special" ? "selected" : ""}>Precio especial</option>
+                    <option value="2x1" ${offer.type === "2x1" ? "selected" : ""}>2×1</option>
+                    <option value="3x2" ${offer.type === "3x2" ? "selected" : ""}>3×2</option>
+                    <option value="qty" ${offer.type === "qty" ? "selected" : ""}>Oferta por cantidad</option>
+                </select>
+            </div>
+
+            <div class="field">
+                <label>Cantidad disponible *</label>
+                <input id="oQty" type="number" min="0" step="1" value="${offer.qtyAvailable}">
+            </div>
+
+        </div>
+
+        <div class="form-grid three" style="margin-top:12px;">
+
+            <div class="field">
+                <label>Precio normal *</label>
+                <input id="oNormal" type="number" min="0" step="0.01" value="${offer.normalPrice}">
+            </div>
+
+            <div class="field">
+                <label>Precio consultora *</label>
+                <input id="oConsultant" type="number" min="0" step="0.01" value="${offer.consultantPrice}">
+            </div>
+
+            <div class="field">
+                <label>Precio premium</label>
+                <input id="oPremium" type="number" min="0" step="0.01" value="${offer.premiumPrice}">
+            </div>
+
+        </div>
+
+        <div class="form-grid three" style="margin-top:12px;">
+
+            <div class="field">
+                <label>Precio de oferta *</label>
+                <input id="oOfferPrice" type="number" min="0" step="0.01" value="${offer.offerPrice}">
+            </div>
+
+            <div class="field">
+                <label>Costo de lista *</label>
+                <input id="oListCost" type="number" min="0" step="0.01" value="${offer.listCost}">
+            </div>
+
+            <div class="field">
+                <label>Descuento escalonado %</label>
+                <input id="oEsc" type="number" min="0" max="100" step="0.1" value="${offer.escalatedDiscountPct}">
+            </div>
+
+        </div>
+
+        <div class="form-grid three" style="margin-top:12px;">
+
+            <div class="field">
+                <label>Bono %</label>
+                <select id="oBonusPct">
+                    <option value="10" ${String(offer.bonusPct) === "10" ? "selected" : ""}>10%</option>
+                    <option value="12" ${String(offer.bonusPct) === "12" ? "selected" : ""}>12%</option>
+                    <option value="custom" ${!bonusIsPreset ? "selected" : ""}>Personalizado</option>
+                </select>
+            </div>
+
+            <div class="field">
+                <label>% personalizado (si aplica)</label>
+                <input id="oBonusCustom" type="number" min="0" max="100" step="0.1" value="${!bonusIsPreset ? offer.bonusPct : ""}">
+            </div>
+
+            <div class="field">
+                <label>Base del bono</label>
+                <select id="oBonusBase">
+                    <option value="acq" ${offer.bonusBase === "acq" ? "selected" : ""}>Costo de adquisición (con descuento)</option>
+                    <option value="list" ${offer.bonusBase === "list" ? "selected" : ""}>Costo de lista (sin descuento)</option>
+                </select>
+            </div>
+
+        </div>
+
+        <div class="form-grid" style="margin-top:12px;">
+
+            <div class="field">
+                <label>Fecha de inicio *</label>
+                <input id="oStart" type="date" value="${offer.startDate}">
+            </div>
+
+            <div class="field">
+                <label>Fecha de finalización *</label>
+                <input id="oEnd" type="date" value="${offer.endDate}">
+            </div>
+
+        </div>
+
+        <div class="note" style="margin-top:14px;">
+            El bono se calcula sobre tu costo de compra, no sobre el
+            precio de venta — por eso es el mismo en los tres
+            escenarios de precio. El descuento escalonado del 20%
+            aplica cuando tu compra de línea alcanza $30,000 MXN o
+            más; ajústalo si tu compra fue distinta.
+        </div>
+
+    `;
+
+}
+
+
+function fillOfferFromProduct(){
+
+    const product =
+        data.products.find(
+            p => p.id === $("#oProduct").value
+        );
+
+    if(!product){
+        return;
+    }
+
+    $("#oNormal").value =
+        product.clientPrice || product.price;
+
+    $("#oConsultant").value =
+        product.consultantPrice || product.price;
+
+    $("#oPremium").value =
+        product.premiumPrice || 0;
+
+    $("#oListCost").value = product.cost;
+
+    if(!Number($("#oQty").value)){
+        $("#oQty").value = product.stock;
+    }
+
+}
+
+
+function readOfferForm(){
+
+    const productId =
+        $("#oProduct").value;
+
+    const product =
+        data.products.find(
+            p => p.id === productId
+        );
+
+    const type =
+        $("#oType").value;
+
+    const normalPrice =
+        Number($("#oNormal").value);
+
+    const consultantPrice =
+        Number($("#oConsultant").value);
+
+    const premiumPrice =
+        Number($("#oPremium").value) || 0;
+
+    const offerPrice =
+        Number($("#oOfferPrice").value);
+
+    const listCost =
+        Number($("#oListCost").value);
+
+    const escalatedDiscountPct =
+        Number($("#oEsc").value) || 0;
+
+    const bonusSelection =
+        $("#oBonusPct").value;
+
+    const bonusPct =
+        bonusSelection === "custom"
+            ? (Number($("#oBonusCustom").value) || 0)
+            : Number(bonusSelection);
+
+    const bonusBase =
+        $("#oBonusBase").value;
+
+    const qtyAvailable =
+        Number($("#oQty").value);
+
+    const startDate =
+        $("#oStart").value;
+
+    const endDate =
+        $("#oEnd").value;
+
+    if(!product){
+        toast("Selecciona un producto");
+        return null;
+    }
+
+    if(!startDate || !endDate){
+        toast("Selecciona ambas fechas");
+        return null;
+    }
+
+    if(endDate < startDate){
+        toast("La fecha final no puede ser anterior a la inicial");
+        return null;
+    }
+
+    if(
+        offerPrice < 0 ||
+        normalPrice < 0 ||
+        consultantPrice < 0 ||
+        premiumPrice < 0 ||
+        listCost < 0
+    ){
+        toast("Los precios y costos no pueden ser negativos");
+        return null;
+    }
+
+    if(qtyAvailable < 0){
+        toast("La cantidad disponible no puede ser negativa");
+        return null;
+    }
+
+    return {
+        productId,
+        productName:product.name,
+        type,
+        normalPrice,
+        consultantPrice,
+        premiumPrice,
+        offerPrice,
+        listCost,
+        escalatedDiscountPct,
+        bonusPct,
+        bonusBase,
+        qtyAvailable,
+        startDate,
+        endDate
+    };
+
+}
+
+
+$("#addOffer").onclick =
+    () => {
+
+        if(!data.products.length){
+            toast("Primero agrega un producto");
+            return;
+        }
+
+        openModal(
+            "🏷️ Nueva oferta",
+            offerForm(),
+            async () => {
+
+                const offer =
+                    readOfferForm();
+
+                if(!offer){
+                    return;
+                }
+
+                closeModal();
+
+                const created =
+                    await createOfferRemote({ ...offer, enabled:true });
+
+                if(!created){
+                    return;
+                }
+
+                data.offers.push(created);
+
+                saveLocalCache();
+                renderOffers();
+                renderDashboard();
+                toast("Oferta creada");
+
+            }
+        );
+
+    };
+
+
+function editOffer(id){
+
+    const offer =
+        data.offers.find(
+            o => o.id === id
+        );
+
+    if(!offer){
+        return;
+    }
+
+    openModal(
+        "✏️ Editar oferta",
+        offerForm(offer),
+        async () => {
+
+            const updated =
+                readOfferForm();
+
+            if(!updated){
+                return;
+            }
+
+            /* se conserva el estado activada/pausada; este
+               formulario no lo edita */
+            updated.enabled = offer.enabled !== false;
+
+            closeModal();
+
+            const ok =
+                await updateOfferRemote(id, updated);
+
+            if(!ok){
+                return;
+            }
+
+            Object.assign(offer, updated);
+
+            saveLocalCache();
+            renderOffers();
+            renderDashboard();
+            toast("Oferta actualizada");
+
+        }
+    );
+
+}
+
+
+async function deleteOffer(id){
+
+    if(!confirm("¿Eliminar esta oferta?")){
+        return;
+    }
+
+    const ok =
+        await deleteOfferRemote(id);
+
+    if(!ok){
+        return;
+    }
+
+    data.offers =
+        data.offers.filter(
+            o => o.id !== id
+        );
+
+    saveLocalCache();
+    renderOffers();
+    renderDashboard();
+    toast("Oferta eliminada");
+
+}
+
+
+async function toggleOfferEnabled(id){
+
+    const offer =
+        data.offers.find(
+            o => o.id === id
+        );
+
+    if(!offer){
+        return;
+    }
+
+    const newEnabled =
+        offer.enabled === false
+            ? true
+            : false;
+
+    const ok =
+        await updateOfferRemote(id, { ...offer, enabled:newEnabled });
+
+    if(!ok){
+        return;
+    }
+
+    offer.enabled = newEnabled;
+
+    saveLocalCache();
+    renderOffers();
+    renderDashboard();
+
+}
+
+
+function scenarioBlock(title, scenario){
+
+    return `
+        <div class="scenario-title">${title}</div>
+        <div class="receipt-item">
+            <span>Ganancia inmediata</span>
+            <b>${money(scenario.immediate)}</b>
+        </div>
+        <div class="receipt-item">
+            <span>Bono estimado</span>
+            <b>${money(scenario.bonus)}</b>
+        </div>
+        <div class="receipt-item" style="background:var(--soft)">
+            <span><b>Ganancia total</b></span>
+            <b class="green">${money(scenario.total)}</b>
+        </div>
+    `;
+
+}
+
+
+function renderOffers(){
+
+    const query =
+        (
+            $("#offerSearch")
+            ?.value ||
+            ""
+        )
+        .toLowerCase();
+
+    const offers =
+        data.offers.filter(
+            offer =>
+                offer.productName
+                .toLowerCase()
+                .includes(query)
+        );
+
+    $("#offerGrid").innerHTML =
+
+        offers.length
+
+        ?
+
+        offers.map(
+            offer => {
+
+                const status =
+                    computeOfferStatus(offer);
+
+                const badge =
+                    offerStatusBadge(status);
+
+                const savings =
+                    Math.max(
+                        0,
+                        (Number(offer.normalPrice) || 0) -
+                        (Number(offer.offerPrice) || 0)
+                    );
+
+                const consultantScenario =
+                    offerScenario(offer, offer.consultantPrice);
+
+                const premiumScenario =
+                    offer.premiumPrice
+                        ? offerScenario(offer, offer.premiumPrice)
+                        : null;
+
+                const offerScenarioCalc =
+                    offerScenario(offer, offer.offerPrice);
+
+                const rentability =
+                    rentabilityBadge(offerScenarioCalc.margin);
+
+                let alertHtml = "";
+
+                if(status === "activa"){
+
+                    const remaining =
+                        daysUntil(offer.endDate);
+
+                    if(remaining <= 2){
+
+                        alertHtml =
+                            `
+                            <div class="offer-alert">
+                                ⚠️ Esta oferta termina en
+                                ${remaining <= 0 ? "menos de 1" : remaining}
+                                día(s).
+                            </div>
+                            `;
+
+                    }
+
+                }
+                else if(status === "finalizada"){
+
+                    alertHtml =
+                        `
+                        <div class="offer-alert ended">
+                            Oferta finalizada.
+                        </div>
+                        `;
+
+                }
+
+                return `
+                    <div class="product">
+
+                        <div class="product-top">
+                            <div>
+                                <h4>${esc(offer.productName)}</h4>
+                                <small>${offerTypeLabel(offer.type)}</small>
+                            </div>
+                            <span class="badge ${badge.cls}">${badge.label}</span>
+                        </div>
+
+                        ${alertHtml}
+
+                        <div class="prices">
+                            <div class="pricebox">
+                                <small>Precio normal</small>
+                                <strong>${money(offer.normalPrice)}</strong>
+                            </div>
+                            <div class="pricebox">
+                                <small>Precio de oferta</small>
+                                <strong>${money(offer.offerPrice)}</strong>
+                            </div>
+                        </div>
+
+                        <div class="note">
+                            Ahorro para el cliente:
+                            <b>${money(savings)}</b>
+                            · Existencia:
+                            <b>${offer.qtyAvailable}</b>
+                            · Termina:
+                            <b>${fmtDate(offer.endDate)}</b>
+                        </div>
+
+                        ${scenarioBlock("Precio consultora", consultantScenario)}
+
+                        ${premiumScenario ? scenarioBlock("Precio premium", premiumScenario) : ""}
+
+                        ${scenarioBlock("Precio de oferta", offerScenarioCalc)}
+
+                        <div class="note" style="margin-top:12px;">
+                            ${rentability.icon} ${rentability.label}
+                            · Margen sobre precio de oferta:
+                            <b>${offerScenarioCalc.margin.toFixed(1)}%</b>
+                        </div>
+
+                        <div style="display:flex;justify-content:flex-end;gap:6px;flex-wrap:wrap;margin-top:10px;">
+                            <button class="secondary" onclick="toggleOfferEnabled('${offer.id}')">
+                                ${offer.enabled === false ? "Activar" : "Desactivar"}
+                            </button>
+                            <button class="icon-btn" title="Editar" onclick="editOffer('${offer.id}')">✏️</button>
+                            <button class="icon-btn del" title="Eliminar" onclick="deleteOffer('${offer.id}')">🗑️</button>
+                        </div>
+
+                    </div>
+                `;
+
+            }
+        ).join("")
+
+        :
+
+        `
+        <div class="empty" style="grid-column:1/-1">
+            No hay ofertas registradas.
+            <br>
+            Pulsa <b>+ Nueva oferta</b> para comenzar.
+        </div>
+        `;
+
+}
+
+
+$("#offerSearch")
+    .addEventListener(
+        "input",
+        renderOffers
+    );
+
+
+/* =========================================================
+   REPORTES
+========================================================= */
+
+$("#last7").onclick =
+    () => {
+
+        const to = today();
+
+        const from =
+            dateISO(
+                new Date(Date.now() - 6 * 86400000)
+            );
+
+        $("#fromDate").value = from;
+        $("#toDate").value = to;
+
+        renderReport();
+
+    };
+
+
+$("#last30").onclick =
+    () => {
+
+        const to = today();
+
+        const from =
+            dateISO(
+                new Date(Date.now() - 29 * 86400000)
+            );
+
+        $("#fromDate").value = from;
+        $("#toDate").value = to;
+
+        renderReport();
+
+    };
+
+
+$("#applyReport").onclick =
+    renderReport;
+
+
+function renderReport(){
+
+    let from =
+        $("#fromDate").value;
+
+    let to =
+        $("#toDate").value;
+
+    if(!from || !to){
+
+        to = today();
+
+        from =
+            dateISO(
+                new Date(Date.now() - 6 * 86400000)
+            );
+
+        $("#fromDate").value = from;
+        $("#toDate").value = to;
+
+    }
+
+    if(from > to){
+
+        toast("La fecha inicial debe ser anterior a la final");
+
+        [from, to] = [to, from];
+
+        $("#fromDate").value = from;
+        $("#toDate").value = to;
+
+    }
+
+    const sales =
+        data.sales.filter(
+            sale =>
+                sale.date >= from &&
+                sale.date <= to
+        );
+
+    const receipts =
+        data.receipts.filter(
+            receipt =>
+                receipt.date >= from &&
+                receipt.date <= to
+        );
+
+    const revenue =
+        sales.reduce(
+            (sum,sale) =>
+                sum + sale.total,
+            0
+        );
+
+    const costSales =
+        sales.reduce(
+            (sum,sale) =>
+                sum + (sale.cost * sale.qty),
+            0
+        );
+
+    const profit =
+        sales.reduce(
+            (sum,sale) =>
+                sum +
+                sale.profit,
+            0
+        );
+
+
+    const spending =
+        receipts.reduce(
+            (sum,receipt) =>
+                sum +
+                receipt.totalCost,
+            0
+        );
+
+
+    const units =
+        sales.reduce(
+            (sum,sale) =>
+                sum +
+                sale.qty,
+            0
+        );
+
+
+    const byProduct = {};
+
+
+    sales.forEach(
+        sale => {
+
+            byProduct[
+                sale.productName
+            ] =
+                (
+                    byProduct[
+                        sale.productName
+                    ] ||
+                    0
+                ) +
+                sale.qty;
+
+        }
+    );
+
+
+    const top =
+        Object.entries(
+            byProduct
+        )
+        .sort(
+            (a,b) =>
+                b[1] -
+                a[1]
+        )
+        .slice(0,5);
+
+
+    const rows = [];
+
+
+    for(
+        let date =
+            new Date(
+                from +
+                "T12:00:00"
+            );
+
+        dateISO(date) <= to;
+
+        date.setDate(
+            date.getDate() + 1
+        )
+    ){
+
+        const day =
+            dateISO(date);
+
+
+        const daySales =
+            sales.filter(
+                sale =>
+                    sale.date ===
+                    day
+            );
+
+
+        const dayReceipts =
+            receipts.filter(
+                receipt =>
+                    receipt.date ===
+                    day
+            );
+
+
+        const dayUnits =
+            daySales.reduce(
+                (sum,sale) =>
+                    sum +
+                    sale.qty,
+                0
+            );
+
+
+        const dayRevenue =
+            daySales.reduce(
+                (sum,sale) =>
+                    sum +
+                    sale.total,
+                0
+            );
+
+
+        const daySpending =
+            dayReceipts.reduce(
+                (sum,receipt) =>
+                    sum +
+                    receipt.totalCost,
+                0
+            );
+
+
+        const dayProfit =
+            daySales.reduce(
+                (sum,sale) =>
+                    sum +
+                    sale.profit,
+                0
+            );
+
+
+        rows.push(
+
+            `
+            <tr>
+
+                <td>
+                    <b>
+                        ${fmtDate(day)}
+                    </b>
+                </td>
+
+                <td>
+                    ${dayUnits}
+                </td>
+
+                <td>
+                    ${money(
+                        dayRevenue
+                    )}
+                </td>
+
+                <td>
+                    ${money(
+                        daySpending
+                    )}
+                </td>
+
+                <td class="green">
+
+                    <b>
+                        ${money(
+                            dayProfit
+                        )}
+                    </b>
+
+                </td>
+
+            </tr>
+            `
+
+        );
+
+    }
+
+
+    $("#reportOutput").innerHTML =
+
+        `
+
+        <div class="report-cards">
+
+            <div class="report-card">
+
+                <small>
+                    Ventas
+                </small>
+
+                <strong>
+                    ${money(
+                        revenue
+                    )}
+                </strong>
+
+            </div>
+
+
+            <div class="report-card">
+
+                <small>
+                    Gasto en entradas
+                </small>
+
+                <strong>
+                    ${money(
+                        spending
+                    )}
+                </strong>
+
+            </div>
+
+
+            <div class="report-card">
+
+                <small>
+                    Costo de lo vendido
+                </small>
+
+                <strong>
+                    ${money(
+                        costSales
+                    )}
+                </strong>
+
+            </div>
+
+
+            <div class="report-card">
+
+                <small>
+                    Ganancia
+                </small>
+
+                <strong class="green">
+                    ${money(
+                        profit
+                    )}
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <div class="grid2">
+
+
+            <div>
+
+                <h3>
+                    Día por día
+                </h3>
+
+                <div class="table-wrap">
+
+                    <table
+                        class="calendar-table"
+                    >
+
+                        <thead>
+
+                            <tr>
+
+                                <th>
+                                    Día
+                                </th>
+
+                                <th>
+                                    Unidades
+                                </th>
+
+                                <th>
+                                    Ventas
+                                </th>
+
+                                <th>
+                                    Gasto
+                                </th>
+
+                                <th>
+                                    Ganancia
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody>
+
+                            ${rows.join("")}
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+
+            <div>
+
+                <h3
+                    style="
+                        margin-bottom:10px;
+                    "
+                >
+                    🏆 Más vendidos
+                </h3>
+
+
+                ${
+                    top.length
+
+                    ?
+
+                    top.map(
+                        (item,index) =>
+                            `
+
+                            <div
+                                class="receipt-item"
+                            >
+
+                                <div>
+
+                                    <b>
+                                        ${
+                                            index + 1
+                                        }.
+
+                                        ${esc(
+                                            item[0]
+                                        )}
+                                    </b>
+
+                                    <small>
+                                        ${item[1]}
+                                        unidades vendidas
+                                    </small>
+
+                                </div>
+
+                            </div>
+
+                            `
+                    ).join("")
+
+                    :
+
+                    `
+                    <div class="empty">
+                        No hay ventas
+                        en este periodo.
+                    </div>
+                    `
+                }
+
+
+                <div
+                    class="note"
+                    style="
+                        margin-top:12px;
+                    "
+                >
+
+                    Periodo:
+
+                    <b>
+                        ${fmtDate(from)}
+                    </b>
+
+                    al
+
+                    <b>
+                        ${fmtDate(to)}
+                    </b>
+
+                    <br>
+
+                    Unidades vendidas:
+
+                    <b>
+                        ${units}
+                    </b>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        `;
+
+}
+
+
+/* =========================================================
+   LOGIN (Supabase Auth)
+========================================================= */
+
+$("#loginForm")
+    .addEventListener(
+        "submit",
+        async event => {
+
+            /* event.preventDefault() es la PRIMERA línea, sin
+               condiciones: esto es lo que evita que el navegador
+               recargue la página al enviar el formulario. Para que
+               esto funcione, este addEventListener tiene que
+               llegar a ejecutarse (ver el try/catch agregado más
+               arriba, en la creación del cliente de Supabase). */
+
+            event.preventDefault();
+
+            $("#loginError").textContent = "";
+
+            if(!supabaseClient){
+
+                $("#loginError").textContent =
+                    "Error de configuración: revisa SUPABASE_URL y SUPABASE_ANON_KEY en el código" +
+                    (
+                        supabaseConfigError
+                            ? ` (${supabaseConfigError.message})`
+                            : ""
+                    ) +
+                    ".";
+
+                return;
+
+            }
+
+            const email =
+                $("#loginUser").value.trim();
+
+            const password =
+                $("#loginPass").value;
+
+            const submitBtn =
+                $("#loginForm button[type=submit]");
+
+            if(submitBtn){
+                submitBtn.disabled = true;
+            }
+
+            try{
+
+                const { data:authData, error } =
+                    await supabaseClient.auth.signInWithPassword({ email, password });
+
+                if(error){
+
+                    /* Se muestra el mensaje real de Supabase cuando
+                       existe (por ejemplo "Invalid login credentials",
+                       "Email not confirmed", etc.) en vez de un
+                       genérico que podría ocultar la causa real. */
+
+                    $("#loginError").textContent =
+                        error.message ||
+                        "Usuario o contraseña incorrectos.";
+
+                    return;
+
+                }
+
+                $("#loginForm").reset();
+
+                await onAuthReady(authData.session);
+
+            }
+            catch(err){
+
+                /* Si signInWithPassword lanza una excepción (por
+                   ejemplo, sin conexión a internet, o una URL de
+                   Supabase inválida) esto lo captura y lo muestra
+                   en pantalla, en vez de dejar el botón bloqueado
+                   sin ninguna explicación. */
+
+                console.error("Error al iniciar sesión:", err);
+
+                $("#loginError").textContent =
+                    "No se pudo conectar con el servidor. Verifica tu conexión a internet o la configuración de Supabase.";
+
+            }
+            finally{
+
+                if(submitBtn){
+                    submitBtn.disabled = false;
+                }
+
+            }
+
+        }
+    );
+
+
+/* =========================================================
+   LOGOUT
+========================================================= */
+
+$("#logout").onclick =
+    async () => {
+
+        await supabaseClient.auth.signOut();
+        /* la UI se actualiza en onAuthStateChange (evento SIGNED_OUT) */
+
+    };
+
+
+/* =========================================================
+   ARRANQUE DE LA APP UNA VEZ AUTENTICADO
+========================================================= */
+
+async function onAuthReady(session){
+
+    if(!session){
+        return;
+    }
+
+    currentUser = session.user;
+
+    $("#login").style.display = "none";
+    $("#app").style.display = "block";
+
+    const emailLabel = $("#userEmailLabel");
+    if(emailLabel){
+        emailLabel.textContent = currentUser.email || "Cuenta";
+    }
+
+    subscribeRealtime();
+
+    await loadAllFromCloud();
+
+    showView("dashboard");
+
+    await checkAndOfferMigration();
+
+    if(navigator.onLine){
+        await flushOfflineQueue();
+    }
+
+}
+
+
+function onSignedOut(){
+
+    currentUser = null;
+
+    if(realtimeChannel){
+        supabaseClient.removeChannel(realtimeChannel);
+        realtimeChannel = null;
+    }
+
+    data = { products:[], clients:[], sales:[], receipts:[], offers:[] };
+
+    $("#app").style.display = "none";
+    $("#login").style.display = "grid";
+
+}
+
+
+/* =========================================================
+   INICIO
+========================================================= */
+
+loadTheme();
+
+if(supabaseClient){
+
+    supabaseClient.auth.onAuthStateChange(
+        (event, session) => {
+
+            if(event === "SIGNED_OUT"){
+                onSignedOut();
+            }
+
+        }
+    );
+
+    setSyncStatus("syncing","Conectando...");
+
+    supabaseClient.auth.getSession().then(
+        async ({ data:{ session } }) => {
+
+            if(session){
+                await onAuthReady(session);
+            }
+            else{
+                setSyncStatus("offline","Sin sesión");
+            }
+
+        }
+    );
+
+}
+else{
+
+    /* El cliente de Supabase no se pudo crear (ver el try/catch de
+       arriba). Se avisa de inmediato en la pantalla de login en vez
+       de dejar el botón "Entrar" fallando en silencio. */
+
+    setSyncStatus("offline","Error de configuración");
+
+    $("#loginError").textContent =
+        "Error de configuración: revisa SUPABASE_URL y SUPABASE_ANON_KEY en el código" +
+        (
+            supabaseConfigError
+                ? ` (${supabaseConfigError.message})`
+                : ""
+        ) +
+        ".";
+
+}
+
+</script>
+
+</body>
+</html>
