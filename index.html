@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Nature's Sunshine · Administración</title>
+<title>BASE DE LOLITA · Administración</title>
 
 <style>
 
@@ -1345,6 +1345,621 @@ body.dark .offer-alert.ended{
     border-color:#5a2b2b;
 }
 
+/* =========================================================
+   BASE DE LOLITA · PULIDO PROFESIONAL
+========================================================= */
+
+/* =========================================================
+   BASE DE LOLITA · REDESIGN SYSTEM
+========================================================= */
+
+body{
+    background:
+        radial-gradient(circle at top left, rgba(22,132,91,.10), transparent 34%),
+        linear-gradient(180deg,#f7faf6 0%,#eef4ef 100%);
+}
+
+body.dark{
+    background:
+        radial-gradient(circle at top left, rgba(22,132,91,.18), transparent 32%),
+        linear-gradient(180deg,#0e1512 0%,#101a15 100%);
+}
+
+.layout{
+    align-items:stretch;
+}
+
+.sidebar{
+    border-right:1px solid rgba(255,255,255,.08);
+    box-shadow:18px 0 45px rgba(16,59,42,.12);
+}
+
+.side-brand{
+    padding:18px 16px;
+    border-radius:18px;
+    background:rgba(255,255,255,.08);
+    margin-bottom:18px;
+}
+
+.side-icon{
+    font-size:15px;
+    font-weight:1000;
+    letter-spacing:.08em;
+}
+
+.nav button{
+    min-height:44px;
+    border-radius:13px;
+    font-weight:850;
+}
+
+.nav button.active{
+    background:white;
+    color:var(--sidebar);
+    box-shadow:0 10px 24px rgba(0,0,0,.13);
+}
+
+.main{
+    min-width:0;
+}
+
+.topbar{
+    backdrop-filter:blur(18px);
+    background:color-mix(in srgb,var(--bg) 82%,transparent);
+    border-bottom:1px solid var(--line);
+}
+
+.topbar h2{
+    letter-spacing:0;
+}
+
+.content{
+    max-width:1440px;
+    margin:0 auto;
+    width:100%;
+}
+
+.card{
+    border-radius:20px;
+    box-shadow:var(--shadow);
+}
+
+.card-head{
+    align-items:flex-start;
+}
+
+.card-head h3{
+    font-size:19px;
+}
+
+.toolbar{
+    align-items:center;
+}
+
+.search,
+.field input,
+.field select{
+    border-radius:12px;
+}
+
+.primary,
+.secondary,
+.icon-btn,
+.theme-button,
+.logout{
+    border-radius:12px;
+    min-height:38px;
+}
+
+.primary{
+    box-shadow:0 10px 24px rgba(22,132,91,.22);
+}
+
+.hero{
+    border:1px solid rgba(22,132,91,.16);
+    background:
+        linear-gradient(135deg,rgba(22,132,91,.16),rgba(255,255,255,.80)),
+        var(--card);
+    border-radius:26px;
+    overflow:hidden;
+    position:relative;
+}
+
+body.dark .hero{
+    background:
+        linear-gradient(135deg,rgba(22,132,91,.20),rgba(24,33,29,.82)),
+        var(--card);
+}
+
+.hero:after{
+    content:"";
+    position:absolute;
+    right:-90px;
+    top:-120px;
+    width:320px;
+    height:320px;
+    border-radius:50%;
+    border:42px solid rgba(22,132,91,.10);
+    pointer-events:none;
+}
+
+.base-command-grid{
+    display:grid;
+    grid-template-columns:minmax(0,1.35fr) minmax(320px,.65fr);
+    gap:18px;
+    margin-bottom:18px;
+}
+
+.base-hero-panel{
+    background:
+        linear-gradient(135deg,rgba(22,132,91,.16),rgba(255,255,255,.88));
+    border:1px solid rgba(22,132,91,.18);
+    border-radius:26px;
+    padding:26px;
+    box-shadow:var(--shadow);
+    min-height:220px;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+    overflow:hidden;
+    position:relative;
+}
+
+.base-hero-panel:after{
+    content:"";
+    position:absolute;
+    right:-70px;
+    bottom:-90px;
+    width:250px;
+    height:250px;
+    border-radius:50%;
+    background:rgba(22,132,91,.09);
+}
+
+body.dark .base-hero-panel{
+    background:
+        linear-gradient(135deg,rgba(22,132,91,.20),rgba(24,33,29,.92));
+}
+
+.base-eyebrow{
+    display:inline-flex;
+    width:max-content;
+    background:var(--soft);
+    color:var(--green2);
+    border-radius:999px;
+    padding:7px 12px;
+    font-size:12px;
+    font-weight:1000;
+    letter-spacing:.05em;
+    text-transform:uppercase;
+    margin-bottom:14px;
+}
+
+.base-hero-panel h1{
+    font-size:clamp(30px,4vw,48px);
+    line-height:1;
+    letter-spacing:0;
+    max-width:720px;
+}
+
+.base-hero-panel p{
+    color:var(--muted);
+    margin-top:12px;
+    max-width:680px;
+    font-size:15px;
+}
+
+.base-quick-actions{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-top:22px;
+    position:relative;
+    z-index:1;
+}
+
+.base-side-summary{
+    display:grid;
+    gap:12px;
+}
+
+.base-side-summary .stat{
+    min-height:0;
+}
+
+.base-section-title{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    gap:14px;
+    margin:22px 0 12px;
+}
+
+.base-section-title h3{
+    font-size:20px;
+}
+
+.base-section-title small{
+    color:var(--muted);
+}
+
+.product-grid{
+    grid-template-columns:repeat(auto-fill,minmax(290px,1fr));
+}
+
+.base-product-card{
+    border-radius:18px;
+    border:1px solid var(--line);
+    background:var(--card);
+    padding:16px;
+    box-shadow:var(--shadow);
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+}
+
+.base-product-card h4{
+    font-size:17px;
+}
+
+.base-product-code{
+    color:var(--muted);
+    font-size:12px;
+    font-weight:800;
+    margin-top:4px;
+}
+
+.base-price-row{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:8px;
+}
+
+.base-price-cell{
+    background:var(--card2);
+    border:1px solid var(--line);
+    border-radius:13px;
+    padding:10px;
+}
+
+.base-price-cell small{
+    display:block;
+    color:var(--muted);
+    font-size:10px;
+    font-weight:1000;
+    text-transform:uppercase;
+}
+
+.base-price-cell b{
+    display:block;
+    margin-top:4px;
+}
+
+.base-profit-line{
+    display:flex;
+    justify-content:space-between;
+    gap:12px;
+    align-items:center;
+    padding-top:4px;
+}
+
+.base-table-card{
+    border-radius:18px;
+    border:1px solid var(--line);
+    background:var(--card);
+    overflow:hidden;
+    box-shadow:var(--shadow);
+}
+
+/* =========================================================
+   BASE DE LOLITA · LOGIN PRO
+========================================================= */
+
+#login{
+    background:
+        radial-gradient(circle at 18% 18%, rgba(255,255,255,.20), transparent 26%),
+        radial-gradient(circle at 82% 12%, rgba(232,138,32,.20), transparent 24%),
+        linear-gradient(135deg,#082418 0%,#103b2a 47%,#16845b 100%);
+    overflow:hidden;
+}
+
+#login:before{
+    content:"";
+    position:absolute;
+    inset:24px;
+    border:1px solid rgba(255,255,255,.13);
+    border-radius:32px;
+    pointer-events:none;
+}
+
+.login-card{
+    position:relative;
+    width:min(980px,100%);
+    display:grid;
+    grid-template-columns:minmax(0,.95fr) minmax(330px,.7fr);
+    gap:0;
+    padding:0;
+    overflow:hidden;
+    border:1px solid rgba(255,255,255,.30);
+    background:rgba(255,255,255,.96);
+}
+
+.login-card:before{
+    content:"";
+    position:absolute;
+    inset:0 auto 0 0;
+    width:54%;
+    background:
+        linear-gradient(135deg,rgba(22,132,91,.16),rgba(233,246,239,.86));
+    pointer-events:none;
+}
+
+.login-panel{
+    position:relative;
+    padding:38px;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+    min-height:520px;
+}
+
+.login-panel h2{
+    font-size:clamp(34px,4vw,54px);
+    line-height:1;
+    max-width:460px;
+    letter-spacing:0;
+}
+
+.login-panel p{
+    margin-top:14px;
+    color:#466558;
+    max-width:460px;
+}
+
+.login-badges{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:10px;
+    margin-top:28px;
+    max-width:520px;
+}
+
+.login-badge{
+    background:white;
+    border:1px solid #dfe9e3;
+    border-radius:16px;
+    padding:13px;
+    box-shadow:0 12px 28px rgba(24,55,42,.08);
+}
+
+.login-badge small{
+    display:block;
+    color:#718078;
+    font-weight:900;
+    text-transform:uppercase;
+    font-size:10px;
+    margin-bottom:4px;
+}
+
+.login-badge b{
+    color:#173126;
+}
+
+.login-form-panel{
+    position:relative;
+    padding:38px;
+    background:white;
+}
+
+.login-form-panel .brand-mark{
+    margin:0 0 17px;
+}
+
+.login-form-panel h1,
+.login-form-panel p{
+    text-align:left;
+}
+
+.login-form-panel .primary{
+    min-height:46px;
+    border-radius:14px;
+}
+
+.login-safe-note{
+    margin-top:18px;
+    color:#718078;
+    font-size:12px;
+    line-height:1.45;
+}
+
+@media(max-width:840px){
+    .login-card{
+        grid-template-columns:1fr;
+    }
+
+    .login-card:before,
+    .login-panel{
+        display:none;
+    }
+}
+
+.table th{
+    font-size:11px;
+    text-transform:uppercase;
+    letter-spacing:.04em;
+}
+
+@media(max-width:980px){
+    .base-command-grid{
+        grid-template-columns:1fr;
+    }
+
+    .base-price-row,
+    .lolita-mini-grid,
+    .stat-mini-grid{
+        grid-template-columns:1fr;
+    }
+}
+
+.lolita-brand-kicker{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:6px 11px;
+    border-radius:999px;
+    background:var(--soft);
+    color:var(--green2);
+    font-size:12px;
+    font-weight:900;
+    letter-spacing:.05em;
+    text-transform:uppercase;
+    margin-bottom:12px;
+}
+
+.lolita-offer-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(310px,1fr));
+    gap:16px;
+}
+
+.lolita-offer-card{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:18px;
+    padding:18px;
+    box-shadow:var(--shadow);
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+    min-width:0;
+}
+
+.lolita-offer-top{
+    display:flex;
+    justify-content:space-between;
+    gap:14px;
+    align-items:flex-start;
+}
+
+.lolita-offer-top h4{
+    font-size:18px;
+    line-height:1.2;
+    margin-bottom:5px;
+}
+
+.lolita-offer-meta{
+    color:var(--muted);
+    font-size:12px;
+    font-weight:800;
+}
+
+.lolita-price-hero{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+}
+
+.lolita-price-main{
+    background:linear-gradient(135deg,var(--green),var(--green2));
+    color:white;
+    border-radius:15px;
+    padding:16px;
+}
+
+.lolita-price-main small,
+.lolita-price-soft small{
+    display:block;
+    font-size:11px;
+    font-weight:900;
+    opacity:.82;
+    text-transform:uppercase;
+    margin-bottom:5px;
+}
+
+.lolita-price-main strong{
+    font-size:27px;
+    line-height:1;
+}
+
+.lolita-price-soft{
+    background:var(--soft);
+    border:1px solid var(--line);
+    border-radius:15px;
+    padding:16px;
+}
+
+.lolita-price-soft strong{
+    font-size:20px;
+}
+
+.lolita-mini-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:8px;
+}
+
+.lolita-mini{
+    background:var(--card2);
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:10px;
+}
+
+.lolita-mini small{
+    color:var(--muted);
+    display:block;
+    font-size:10px;
+    font-weight:900;
+    text-transform:uppercase;
+    margin-bottom:3px;
+}
+
+.lolita-mini b{
+    font-size:14px;
+}
+
+.bulk-lines{
+    width:100%;
+    min-height:170px;
+    resize:vertical;
+    padding:13px;
+    border:1px solid var(--input-border);
+    background:var(--input);
+    color:var(--text);
+    border-radius:13px;
+    font:13px/1.45 ui-monospace,SFMono-Regular,Consolas,monospace;
+}
+
+.bulk-preview{
+    margin-top:12px;
+    max-height:260px;
+    overflow:auto;
+}
+
+.offer-template-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(120px,1fr));
+    gap:8px;
+    margin:10px 0 14px;
+}
+
+.offer-template{
+    border:1px solid var(--line);
+    background:var(--card2);
+    color:var(--text);
+    border-radius:13px;
+    padding:10px;
+    font-weight:900;
+    text-align:left;
+}
+
+.offer-template small{
+    display:block;
+    color:var(--muted);
+    font-size:10px;
+    margin-top:2px;
+}
+
 
 /* =========================================================
    EMPTY
@@ -1646,7 +2261,7 @@ body.dark .migrate-btn{
         </div>
 
         <h1>
-            Nature's Sunshine
+            BASE DE LOLITA
         </h1>
 
         <p>
@@ -1733,7 +2348,7 @@ body.dark .migrate-btn{
                 <div>
 
                     <strong>
-                        Nature's Sunshine
+                        BASE DE LOLITA
                     </strong>
 
                     <small>
@@ -1889,7 +2504,7 @@ body.dark .migrate-btn{
                     <div class="hero">
 
                         <h1>
-                            Bienvenida a Nature's Sunshine 👋
+                            Bienvenida a BASE DE LOLITA
                         </h1>
 
                         <p>
@@ -2133,7 +2748,7 @@ body.dark .migrate-btn{
                                     class="secondary"
                                     id="importCatalog"
                                 >
-                                    📥 Importar catálogo NSP
+                                    📥 Importar catálogo BASE
                                 </button>
 
                                 <button
@@ -2148,7 +2763,7 @@ body.dark .migrate-btn{
                         </div>
 
                         <div class="note">
-                            El botón <b>Importar catálogo NSP</b> carga
+                            El botón <b>Importar catálogo BASE</b> carga
                             o actualiza los precios (Cliente, Cliente
                             Premium y Consultor) de la Lista de precios
                             Consultor México vigente desde el 1 de
@@ -2376,6 +2991,34 @@ body.dark .migrate-btn{
                                 📅 Calendario de ventas y ganancias
                             </h3>
 
+
+                            <div class="toolbar">
+
+                                <button
+                                    class="secondary"
+                                    id="exportStats"
+                                >
+                                    Exportar estadísticas
+                                </button>
+
+
+                                <button
+                                    class="primary"
+                                    id="importStats"
+                                >
+                                    Importar estadísticas
+                                </button>
+
+
+                                <input
+                                    type="file"
+                                    id="importStatsFile"
+                                    accept="application/json,.json"
+                                    style="display:none;"
+                                >
+
+                            </div>
+
                         </div>
 
 
@@ -2431,6 +3074,7 @@ body.dark .migrate-btn{
                             >
                                 Actualizar
                             </button>
+
 
                         </div>
 
@@ -4680,7 +5324,7 @@ function productForm(
 
 
         <div class="scenario-title">
-            Datos de catálogo NSP (opcional)
+            Datos de catálogo BASE (opcional)
         </div>
 
         <div class="form-grid three">
@@ -5016,7 +5660,7 @@ const NSP_CATALOG = [
     ["1000090","Nogal negro","MX10090","100 cáps",10.16,503,377,302],
     ["1006066","Noni","MX6066","473 ml",14.45,717,538,431],
     ["1003225","Nopalmix","MX3225","120 g",9.65,501,381,310],
-    ["23588","NSP Shake Mix","MX23588","486 g",33.92,1694,1274,1022],
+    ["23588","Shake Mix BASE DE LOLITA","MX23588","486 g",33.92,1694,1274,1022],
     ["1000670","Olmo","MX670","100 cáps",11.98,593,445,356],
     ["1000485","Papaya Mint","MX100485","70 tabs",10.06,498,373,299],
     ["1000504","Pau D'Arco","MX10504","100 cáps",11.54,572,429,343],
@@ -5041,7 +5685,7 @@ const NSP_CATALOG = [
 
     /* Herramientas de ventas — sin precio cliente/premium/consultor
        diferenciado, se usa el mismo precio en las tres columnas */
-    ["7000073","Pastillero Sunshine","MX7000073","1 pza",0,65,65,65],
+    ["7000073","Pastillero BASE DE LOLITA","MX7000073","1 pza",0,65,65,65],
     ["MX22622","Bolsa ecológica","MX22622","1 pza",0,25,25,25]
 
 ];
@@ -5158,7 +5802,7 @@ $("#importCatalog").onclick =
 
         if(
             !confirm(
-                "¿Importar / actualizar el catálogo NSP (" +
+                "¿Importar / actualizar el catálogo BASE (" +
                 NSP_CATALOG.length +
                 " productos)? No se tocará tu stock ni tu costo real ya guardado."
             )
@@ -6170,7 +6814,7 @@ function saleItemsLabel(sale){
 
         return sale.items.map(
             item =>
-                `${esc(item.productName)} × ${item.qty}`
+                `${esc(item.productName)} × ${item.qty}${item.offerName ? ` (${esc(item.offerName)})` : ""}`
         ).join(", ");
 
     }
@@ -7020,6 +7664,2017 @@ $("#offerSearch")
     );
 
 
+/* ===== BASE DE LOLITA UPGRADE ===== */
+var LOLITA_BRAND_NAME = "BASE DE LOLITA";
+var LOLITA_CATALOG = (typeof NSP_CATALOG !== "undefined" ? NSP_CATALOG : []).map(
+    row => ({
+        clave:String(row[0]),
+        nombre:String(row[1]).toUpperCase(),
+        codigo:String(row[2]),
+        contenido:String(row[3]),
+        puntos:Number(row[4]) || 0,
+        precio:Number(row[5]) || 0,
+        premium:Number(row[6]) || 0,
+        consultor:Number(row[7]) || 0
+    })
+);
+
+function lolitaNormalizeCode(value){
+    return String(value || "").trim().toUpperCase();
+}
+
+function lolitaFindProduct(code){
+    const q = lolitaNormalizeCode(code);
+    const catalog =
+        (typeof LOLITA_CATALOG !== "undefined" ? LOLITA_CATALOG : []);
+
+    const catalogProduct =
+        catalog.find(
+            product =>
+                lolitaNormalizeCode(product.codigo) === q ||
+                lolitaNormalizeCode(product.clave) === q
+        );
+
+    if(catalogProduct){
+        return catalogProduct;
+    }
+
+    const appProduct =
+        (data.products || []).find(
+            product =>
+                lolitaNormalizeCode(product.invoiceCode) === q ||
+                lolitaNormalizeCode(product.cesna) === q ||
+                lolitaNormalizeCode(product.name) === q
+        );
+
+    if(!appProduct){
+        return null;
+    }
+
+    return {
+        clave:appProduct.cesna,
+        nombre:appProduct.name,
+        codigo:appProduct.invoiceCode,
+        contenido:appProduct.content,
+        puntos:appProduct.points,
+        precio:appProduct.clientPrice || appProduct.price,
+        premium:appProduct.premiumPrice,
+        consultor:appProduct.consultantPrice || appProduct.cost,
+        appProduct
+    };
+}
+
+function lolitaParseBulkInventory(text){
+    return String(text || "")
+        .split(/\r?\n/)
+        .map(line => line.trim())
+        .filter(Boolean)
+        .map(line => {
+            const parts =
+                line.split(/[\t,;]+/).map(part => part.trim());
+
+            return {
+                code:parts[0] || "",
+                qty:Math.trunc(Number(parts[1])) || 0,
+                note:parts.slice(2).join(" ").trim()
+            };
+        })
+        .filter(row => row.code && row.qty > 0);
+}
+
+function applyLolitaBranding(){
+    document.title = LOLITA_BRAND_NAME + " · Administración";
+
+    document.querySelectorAll("h1,h2,h3,strong,p,small,button,.note,span,title")
+        .forEach(node => {
+            if(node.children && node.children.length){
+                return;
+            }
+
+            node.textContent = node.textContent
+                .replace(/Nature's Sunshine/g, LOLITA_BRAND_NAME)
+                .replace(/Nature’s Sunshine/g, LOLITA_BRAND_NAME)
+                .replace(/NSP/g, "BASE DE LOLITA");
+        });
+
+    document.querySelectorAll(".brand-mark,.side-icon")
+        .forEach(node => {
+            node.textContent = "BL";
+        });
+
+    const hero = document.querySelector("#dashboard .hero");
+
+    if(hero && !hero.querySelector(".lolita-brand-kicker")){
+        hero.insertAdjacentHTML(
+            "afterbegin",
+            `<div class="lolita-brand-kicker">Administración premium</div>`
+        );
+    }
+}
+
+function lolitaEnhanceLogin(){
+    const loginCard = document.querySelector(".login-card");
+
+    if(!loginCard || loginCard.dataset.lolitaEnhanced === "1"){
+        return;
+    }
+
+    const loginForm = document.querySelector("#loginForm");
+    const loginError = document.querySelector("#loginError");
+
+    if(!loginForm || !loginError){
+        return;
+    }
+
+    loginCard.dataset.lolitaEnhanced = "1";
+    loginCard.innerHTML = `
+        <section class="login-panel">
+            <div>
+                <div class="base-eyebrow">BASE DE LOLITA</div>
+                <h2>Tu negocio, claro desde el primer clic.</h2>
+                <p>
+                    Entra a tu panel para controlar inventario, productos recibidos,
+                    ventas, ofertas y ganancias con una vista más limpia.
+                </p>
+                <div class="login-badges">
+                    <div class="login-badge">
+                        <small>Control</small>
+                        <b>Inventario</b>
+                    </div>
+                    <div class="login-badge">
+                        <small>Vista</small>
+                        <b>Ofertas</b>
+                    </div>
+                    <div class="login-badge">
+                        <small>Reporte</small>
+                        <b>Ganancia</b>
+                    </div>
+                </div>
+            </div>
+            <p class="login-safe-note">
+                Datos conectados a Supabase. Tu sesión se mantiene segura y sincronizada.
+            </p>
+        </section>
+        <section class="login-form-panel">
+            <div class="brand-mark">BL</div>
+            <h1>BASE DE LOLITA</h1>
+            <p>Inicia sesión para continuar</p>
+        </section>
+    `;
+
+    const formPanel = loginCard.querySelector(".login-form-panel");
+    formPanel.appendChild(loginForm);
+    formPanel.appendChild(loginError);
+}
+
+function lolitaProductOptionRows(selectedId){
+    return data.products.map(
+        product =>
+            `<option value="${product.id}" ${product.id === selectedId ? "selected" : ""}>
+                ${esc(product.name)}${product.invoiceCode ? " · " + esc(product.invoiceCode) : ""}
+            </option>`
+    ).join("");
+}
+
+function bulkReceiptRow(row = {}){
+    return `
+        <div class="bulk-row form-grid three" style="margin-top:10px;align-items:end;">
+            <div class="field">
+                <label>Producto</label>
+                <select class="bulk-product">${lolitaProductOptionRows(row.productId || "")}</select>
+            </div>
+            <div class="field">
+                <label>Cantidad</label>
+                <input class="bulk-qty" type="number" min="1" step="1" value="${row.qty || 1}">
+            </div>
+            <div class="field">
+                <label>Costo unitario</label>
+                <input class="bulk-cost" type="number" min="0" step="0.01" value="${row.unitCost || 0}">
+            </div>
+            <div class="field">
+                <label>Nota / lote</label>
+                <input class="bulk-note" value="${esc(row.note || "")}" placeholder="Opcional">
+            </div>
+            <button class="secondary" type="button" onclick="this.closest('.bulk-row').remove();lolitaBulkTotals();">
+                Quitar
+            </button>
+        </div>
+    `;
+}
+
+function lolitaBulkTotals(){
+    const box = $("#bulkTotal");
+
+    if(!box){
+        return;
+    }
+
+    let units = 0;
+    let total = 0;
+
+    document.querySelectorAll(".bulk-row").forEach(row => {
+        const qty = Number(row.querySelector(".bulk-qty").value) || 0;
+        const cost = Number(row.querySelector(".bulk-cost").value) || 0;
+        units += qty;
+        total += qty * cost;
+    });
+
+    box.innerHTML =
+        `<b>${units}</b> unidades · Inversión registrada: <b>${money(total)}</b>`;
+}
+
+async function lolitaPersistBulkProductCosts(updates){
+    const cleanUpdates =
+        updates.filter(
+            update =>
+                update.product &&
+                Number.isFinite(update.unitCost) &&
+                update.unitCost >= 0 &&
+                Number(update.product.cost) !== Number(update.unitCost)
+        );
+
+    for(const update of cleanUpdates){
+        update.product.cost = update.unitCost;
+
+        try{
+            const { error } =
+                await supabaseClient
+                    .from("products")
+                    .update({ cost:update.unitCost })
+                    .eq("id", update.product.id);
+
+            if(error){
+                throw error;
+            }
+        }
+        catch(err){
+            console.error(err);
+            queueOffline({
+                action:"update",
+                table:"products",
+                id:update.product.id,
+                patch:{ cost:update.unitCost }
+            });
+        }
+    }
+}
+
+function lolitaBindBulkRow(row){
+    const productSelect = row.querySelector(".bulk-product");
+    const costInput = row.querySelector(".bulk-cost");
+
+    productSelect.addEventListener("change", () => {
+        const product =
+            data.products.find(p => p.id === productSelect.value);
+
+        if(product){
+            costInput.value = product.cost || product.consultantPrice || 0;
+        }
+
+        lolitaBulkTotals();
+    });
+
+    row.querySelectorAll("input,select").forEach(input => {
+        input.addEventListener("input", lolitaBulkTotals);
+        input.addEventListener("change", lolitaBulkTotals);
+    });
+}
+
+function lolitaAddBulkRow(row){
+    $("#bulkRows").insertAdjacentHTML("beforeend", bulkReceiptRow(row));
+    lolitaBindBulkRow($("#bulkRows .bulk-row:last-child"));
+    lolitaBulkTotals();
+}
+
+function lolitaBulkFromText(){
+    const rows =
+        lolitaParseBulkInventory($("#bulkPaste").value)
+            .map(item => {
+                const found = lolitaFindProduct(item.code);
+                const product =
+                    found && found.appProduct
+                        ? found.appProduct
+                        : data.products.find(
+                            p =>
+                                lolitaNormalizeCode(p.invoiceCode) === lolitaNormalizeCode(item.code) ||
+                                lolitaNormalizeCode(p.cesna) === lolitaNormalizeCode(item.code)
+                        );
+
+                if(!product){
+                    return null;
+                }
+
+                return {
+                    productId:product.id,
+                    qty:item.qty,
+                    unitCost:product.cost || product.consultantPrice || 0,
+                    note:item.note
+                };
+            })
+            .filter(Boolean);
+
+    if(!rows.length){
+        toast("No encontré productos de esas líneas. Usa código factura o clave CESNA.");
+        return;
+    }
+
+    rows.forEach(lolitaAddBulkRow);
+    $("#bulkPaste").value = "";
+}
+
+function lolitaBulkReceiptModal(){
+    if(!data.products.length){
+        toast("Primero agrega o importa productos");
+        return;
+    }
+
+    openModal(
+        "🚚 Registrar llegada masiva",
+        `
+        <div class="note">
+            Registra muchos productos al mismo tiempo. Puedes agregarlos con el botón o pegar líneas como:
+            <b>MX10410, 6, Compra inicial</b>
+        </div>
+        <div class="form-grid">
+            <div class="field">
+                <label>Fecha para esta llegada</label>
+                <input id="bulkDate" type="date" value="${today()}">
+            </div>
+            <div class="field">
+                <label>Pegar códigos y cantidades</label>
+                <textarea id="bulkPaste" class="bulk-lines" placeholder="MX10410, 6, Compra inicial&#10;1000775, 3, Reposición"></textarea>
+            </div>
+        </div>
+        <div class="modal-actions" style="justify-content:flex-start;margin-top:8px;">
+            <button class="secondary" type="button" onclick="lolitaBulkFromText()">Convertir pegado</button>
+            <button class="secondary" type="button" onclick="lolitaAddBulkRow()">+ Agregar fila</button>
+        </div>
+        <div id="bulkRows" class="bulk-preview"></div>
+        <div id="bulkTotal" class="note" style="margin-top:12px;">0 unidades · Inversión registrada: $0.00</div>
+        `,
+        async () => {
+            const date = $("#bulkDate").value;
+            const rows =
+                [...document.querySelectorAll(".bulk-row")].map(row => {
+                    const productId = row.querySelector(".bulk-product").value;
+                    const product = data.products.find(p => p.id === productId);
+                    const qty = Math.trunc(Number(row.querySelector(".bulk-qty").value));
+                    const unitCost = Number(row.querySelector(".bulk-cost").value);
+                    const note = row.querySelector(".bulk-note").value.trim();
+
+                    return { product, qty, unitCost, note };
+                });
+
+            if(!date){
+                toast("Selecciona una fecha");
+                return;
+            }
+
+            if(!rows.length){
+                toast("Agrega al menos un producto");
+                return;
+            }
+
+            if(rows.some(row => !row.product || row.qty <= 0 || row.unitCost < 0)){
+                toast("Revisa productos, cantidades y costos");
+                return;
+            }
+
+            closeModal();
+
+            let saved = 0;
+            const costUpdates = [];
+
+            for(const row of rows){
+                const receipt = {
+                    productId:row.product.id,
+                    productName:row.product.name,
+                    qty:row.qty,
+                    unitCost:row.unitCost,
+                    totalCost:row.qty * row.unitCost,
+                    date,
+                    note:row.note
+                };
+
+                const created = await createReceiptRemote(receipt);
+
+                if(created){
+                    data.receipts.push(created);
+                    row.product.stock += row.qty;
+                    costUpdates.push({
+                        product:row.product,
+                        unitCost:row.unitCost
+                    });
+                    saved++;
+                }
+            }
+
+            await lolitaPersistBulkProductCosts(costUpdates);
+
+            saveLocalCache();
+            renderReceipts();
+            renderProducts();
+            renderDashboard();
+            toast(`Llegada masiva registrada: ${saved} producto(s)`);
+        }
+    );
+
+    lolitaAddBulkRow();
+}
+
+function lolitaSingleReceiptModal(){
+    if(!data.products.length){
+        toast("Primero agrega un producto");
+        return;
+    }
+
+    openModal(
+        "🚚 Registrar llegada",
+        receiptForm(),
+        async () => {
+            const productId = $("#rProduct").value;
+            const product = data.products.find(p => p.id === productId);
+            const qty = Number($("#rQty").value);
+            const unitCost = Number($("#rCost").value);
+            const date = $("#rDate").value;
+
+            if(!product){
+                toast("Selecciona un producto");
+                return;
+            }
+
+            if(!qty || qty <= 0){
+                toast("La cantidad debe ser mayor a 0");
+                return;
+            }
+
+            if(unitCost < 0){
+                toast("El costo no puede ser negativo");
+                return;
+            }
+
+            if(!date){
+                toast("Selecciona una fecha");
+                return;
+            }
+
+            closeModal();
+
+            const created =
+                await createReceiptRemote({
+                    productId,
+                    productName:product.name,
+                    qty,
+                    unitCost,
+                    totalCost:qty * unitCost,
+                    date
+                });
+
+            if(!created){
+                return;
+            }
+
+            data.receipts.push(created);
+            product.stock += qty;
+            await lolitaPersistBulkProductCosts([{ product, unitCost }]);
+
+            saveLocalCache();
+            renderReceipts();
+            renderProducts();
+            renderDashboard();
+            toast("Llegada registrada");
+        }
+    );
+
+    const productSelect = $("#rProduct");
+
+    if(productSelect){
+        productSelect.addEventListener("change", () => {
+            const product =
+                data.products.find(p => p.id === productSelect.value);
+
+            if(product){
+                $("#rCost").value = product.cost;
+            }
+        });
+    }
+}
+
+function installLolitaBulkButton(){
+    if(typeof $ !== "function"){
+        return;
+    }
+
+    const button = $("#receiveProduct");
+
+    if(!button || $("#receiveBulkProduct")){
+        return;
+    }
+
+    button.insertAdjacentHTML(
+        "afterend",
+        `<button class="secondary" id="receiveBulkProduct" type="button">+ Llegada masiva</button>`
+    );
+
+    $("#receiveBulkProduct").onclick = lolitaBulkReceiptModal;
+}
+
+const lolitaOfferTemplates = [
+    ["percent20","20% off","Descuento directo"],
+    ["percent30","30% off","Oferta fuerte"],
+    ["2x1","2x1","Paga 1"],
+    ["3x2","3x2","Paga 2"],
+    ["4x3","4x3","Paga 3"],
+    ["5x4","5x4","Paga 4"],
+    ["second50","2da -50%","Combo"],
+    ["clearance","Liquidación","Salida rápida"],
+    ["vip","VIP","Precio especial"]
+];
+
+function lolitaOfferTemplateButtons(){
+    return `
+        <div class="scenario-title">Plantillas rápidas</div>
+        <div class="offer-template-grid">
+            ${lolitaOfferTemplates.map(t => `
+                <button class="offer-template" type="button" onclick="lolitaApplyOfferTemplate('${t[0]}')">
+                    ${t[1]}
+                    <small>${t[2]}</small>
+                </button>
+            `).join("")}
+        </div>
+    `;
+}
+
+function lolitaOfferTypeOptions(type){
+    const options = [
+        ["percent","Descuento porcentual"],
+        ["special","Precio especial libre"],
+        ["2x1","2x1"],
+        ["3x2","3x2"],
+        ["4x3","4x3"],
+        ["5x4","5x4"],
+        ["second50","Segunda unidad al 50%"],
+        ["clearance","Liquidación"],
+        ["vip","Oferta VIP"],
+        ["qty","Oferta por cantidad"]
+    ];
+
+    return options.map(
+        opt => `<option value="${opt[0]}" ${type === opt[0] ? "selected" : ""}>${opt[1]}</option>`
+    ).join("");
+}
+
+function lolitaApplyOfferTemplate(type){
+    const typeInput = $("#oType");
+    const normalInput = $("#oNormal");
+    const offerInput = $("#oOfferPrice");
+
+    if(!typeInput || !normalInput || !offerInput){
+        return;
+    }
+
+    const normal = Number(normalInput.value) || 0;
+    let price = normal;
+
+    if(type === "percent20") price = normal * .80;
+    else if(type === "percent30") price = normal * .70;
+    else if(type === "2x1") price = normal;
+    else if(type === "3x2") price = normal * 2;
+    else if(type === "4x3") price = normal * 3;
+    else if(type === "5x4") price = normal * 4;
+    else if(type === "second50") price = normal * 1.5;
+    else if(type === "clearance") price = normal * .65;
+    else if(type === "vip") price = Number($("#oPremium")?.value) || normal * .85;
+
+    typeInput.value =
+        type.startsWith("percent")
+            ? "percent"
+            : type;
+
+    offerInput.value = price.toFixed(2);
+}
+
+if(typeof offerTypeLabel === "function"){
+    offerTypeLabel = function(type){
+        return {
+            percent:"Descuento porcentual",
+            special:"Precio especial",
+            "2x1":"2x1",
+            "3x2":"3x2",
+            "4x3":"4x3",
+            "5x4":"5x4",
+            second50:"Segunda unidad al 50%",
+            clearance:"Liquidación",
+            vip:"Oferta VIP",
+            qty:"Oferta por cantidad"
+        }[type] || type;
+    };
+}
+
+if(typeof offerForm === "function"){
+    offerForm = function(offer = {
+        productId:"",
+        type:"special",
+        normalPrice:0,
+        consultantPrice:0,
+        premiumPrice:0,
+        offerPrice:0,
+        listCost:0,
+        escalatedDiscountPct:20,
+        bonusPct:10,
+        bonusBase:"acq",
+        qtyAvailable:0,
+        startDate:today(),
+        endDate:today()
+    }){
+        const bonusIsPreset =
+            String(offer.bonusPct) === "10" ||
+            String(offer.bonusPct) === "12";
+
+        return `
+            ${lolitaOfferTemplateButtons()}
+
+        <div class="form-grid three">
+            <div class="field">
+                <label>Producto *</label>
+                <select id="oProduct" onchange="fillOfferFromProduct()">
+                    <option value="">Selecciona...</option>
+                    ${productOptions(offer.productId)}
+                </select>
+            </div>
+
+            <div class="field">
+                <label>Tipo de oferta *</label>
+                <select id="oType">
+                    ${lolitaOfferTypeOptions(offer.type)}
+                </select>
+            </div>
+
+            <div class="field">
+                <label>Cantidad disponible *</label>
+                <input id="oQty" type="number" min="0" step="1" value="${offer.qtyAvailable}">
+            </div>
+        </div>
+
+        <div class="form-grid three" style="margin-top:12px;">
+            <div class="field">
+                <label>Precio normal *</label>
+                <input id="oNormal" type="number" min="0" step="0.01" value="${offer.normalPrice}">
+            </div>
+
+            <div class="field">
+                <label>Precio consultora *</label>
+                <input id="oConsultant" type="number" min="0" step="0.01" value="${offer.consultantPrice}">
+            </div>
+
+            <div class="field">
+                <label>Precio premium</label>
+                <input id="oPremium" type="number" min="0" step="0.01" value="${offer.premiumPrice}">
+            </div>
+        </div>
+
+        <div class="form-grid three" style="margin-top:12px;">
+            <div class="field">
+                <label>Precio de oferta / paquete *</label>
+                <input id="oOfferPrice" type="number" min="0" step="0.01" value="${offer.offerPrice}">
+            </div>
+
+            <div class="field">
+                <label>Costo de lista *</label>
+                <input id="oListCost" type="number" min="0" step="0.01" value="${offer.listCost}">
+            </div>
+
+            <div class="field">
+                <label>Descuento escalonado %</label>
+                <input id="oEsc" type="number" min="0" max="100" step="0.1" value="${offer.escalatedDiscountPct}">
+            </div>
+        </div>
+
+        <div class="form-grid three" style="margin-top:12px;">
+            <div class="field">
+                <label>Bono %</label>
+                <select id="oBonusPct">
+                    <option value="10" ${String(offer.bonusPct) === "10" ? "selected" : ""}>10%</option>
+                    <option value="12" ${String(offer.bonusPct) === "12" ? "selected" : ""}>12%</option>
+                    <option value="custom" ${!bonusIsPreset ? "selected" : ""}>Personalizado</option>
+                </select>
+            </div>
+
+            <div class="field">
+                <label>% personalizado</label>
+                <input id="oBonusCustom" type="number" min="0" max="100" step="0.1" value="${!bonusIsPreset ? offer.bonusPct : ""}">
+            </div>
+
+            <div class="field">
+                <label>Base del bono</label>
+                <select id="oBonusBase">
+                    <option value="acq" ${offer.bonusBase === "acq" ? "selected" : ""}>Costo con descuento</option>
+                    <option value="list" ${offer.bonusBase === "list" ? "selected" : ""}>Costo de lista</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-grid" style="margin-top:12px;">
+            <div class="field">
+                <label>Fecha de inicio *</label>
+                <input id="oStart" type="date" value="${offer.startDate}">
+            </div>
+
+            <div class="field">
+                <label>Fecha de finalización *</label>
+                <input id="oEnd" type="date" value="${offer.endDate}">
+            </div>
+        </div>
+
+        <div class="note" style="margin-top:14px;">
+            Puedes usar plantillas o escribir cualquier precio. Para 4x3 y 5x4 el precio de oferta representa el paquete completo.
+        </div>
+        `;
+    };
+}
+
+function lolitaOfferMetric(label, value, tone = ""){
+    return `
+        <div class="lolita-mini">
+            <small>${label}</small>
+            <b class="${tone}">${value}</b>
+        </div>
+    `;
+}
+
+function lolitaOfferCard(offer){
+    const status = computeOfferStatus(offer);
+    const badge = offerStatusBadge(status);
+    const normalPrice = Number(offer.normalPrice) || 0;
+    const offerPrice = Number(offer.offerPrice) || 0;
+    const savings = Math.max(0, normalPrice - offerPrice);
+    const savingsPct = normalPrice
+        ? (savings / normalPrice) * 100
+        : 0;
+    const offerCalc = offerScenario(offer, offerPrice);
+    const rentability = rentabilityBadge(offerCalc.margin);
+    const daysLeft = daysUntil(offer.endDate);
+    const stock = Number(offer.qtyAvailable) || 0;
+    const endingSoon =
+        status === "activa" &&
+        daysLeft <= 2;
+
+    const alertHtml = endingSoon
+        ? `<div class="offer-alert">⚠️ Termina en ${daysLeft <= 0 ? "menos de 1" : daysLeft} día(s).</div>`
+        : status === "finalizada"
+            ? `<div class="offer-alert ended">Oferta finalizada.</div>`
+            : "";
+
+    return `
+        <article class="lolita-offer-card">
+            <div class="lolita-offer-top">
+                <div>
+                    <h4>${esc(offer.productName)}</h4>
+                    <div class="lolita-offer-meta">
+                        ${offerTypeLabel(offer.type)} · hasta ${fmtDate(offer.endDate)}
+                    </div>
+                </div>
+                <span class="badge ${badge.cls}">${badge.label}</span>
+            </div>
+
+            ${alertHtml}
+
+            <div class="lolita-price-hero">
+                <div class="lolita-price-main">
+                    <small>Precio de oferta</small>
+                    <strong>${money(offerPrice)}</strong>
+                </div>
+                <div class="lolita-price-soft">
+                    <small>Precio normal</small>
+                    <strong>${money(normalPrice)}</strong>
+                </div>
+            </div>
+
+            <div class="lolita-mini-grid">
+                ${lolitaOfferMetric("Ahorro", money(savings), "green")}
+                ${lolitaOfferMetric("Descuento", `${savingsPct.toFixed(1)}%`)}
+                ${lolitaOfferMetric("Stock", stock)}
+                ${lolitaOfferMetric("Ganancia", money(offerCalc.total), "green")}
+                ${lolitaOfferMetric("Margen", `${offerCalc.margin.toFixed(1)}%`)}
+                ${lolitaOfferMetric("Estado", rentability.label)}
+            </div>
+
+            <div class="note">
+                ${rentability.icon} ${rentability.label}. La ganancia suma margen directo y bono estimado.
+            </div>
+
+            <div style="display:flex;justify-content:flex-end;gap:8px;flex-wrap:wrap;">
+                <button class="secondary" onclick="toggleOfferEnabled('${offer.id}')">
+                    ${offer.enabled === false ? "Activar" : "Pausar"}
+                </button>
+                <button class="icon-btn" title="Editar" onclick="editOffer('${offer.id}')">✏️</button>
+                <button class="icon-btn del" title="Eliminar" onclick="deleteOffer('${offer.id}')">🗑️</button>
+            </div>
+        </article>
+    `;
+}
+
+if(typeof renderOffers === "function"){
+    renderOffers = function(){
+        const query =
+            (
+                $("#offerSearch")
+                ?.value ||
+                ""
+            )
+            .toLowerCase();
+
+        const offers =
+            data.offers.filter(
+                offer =>
+                    String(offer.productName || "")
+                    .toLowerCase()
+                    .includes(query) ||
+                    String(offerTypeLabel(offer.type) || "")
+                    .toLowerCase()
+                    .includes(query)
+            );
+
+        const grid = $("#offerGrid");
+
+        if(!grid){
+            return;
+        }
+
+        grid.className = "lolita-offer-grid";
+        grid.innerHTML =
+            offers.length
+                ? offers.map(lolitaOfferCard).join("")
+                : `
+                    <div class="empty" style="grid-column:1/-1">
+                        No hay ofertas registradas.
+                        <br>
+                        Crea una oferta con plantillas como 2x1, 3x2, 4x3, liquidación o precio VIP.
+                    </div>
+                `;
+    };
+
+    if(typeof $ === "function"){
+        $("#offerSearch")?.addEventListener("input", () => renderOffers());
+    }
+}
+
+function lolitaStockBadge(product){
+    const cls =
+        product.stock === 0
+            ? "out"
+            : product.stock <= product.minStock
+                ? "low"
+                : "ok";
+
+    const label =
+        product.stock === 0
+            ? "Agotado"
+            : product.stock <= product.minStock
+                ? "Stock bajo"
+                : "Disponible";
+
+    return `<span class="badge ${cls}">${label} · ${product.stock} ud.</span>`;
+}
+
+function lolitaRenderDashboardShell(){
+    const root = $("#dashboard");
+
+    if(!root){
+        return;
+    }
+
+    const salesTotal =
+        data.sales.reduce((sum,sale) => sum + sale.total, 0);
+
+    const spending =
+        data.receipts.reduce((sum,receipt) => sum + receipt.totalCost, 0);
+
+    const profit =
+        data.sales.reduce((sum,sale) => sum + sale.profit, 0);
+
+    const stock =
+        data.products.reduce((sum,product) => sum + product.stock, 0);
+
+    const lowStock =
+        data.products.filter(
+            product => product.stock <= product.minStock
+        );
+
+    const activeOffers =
+        data.offers.filter(
+            offer => computeOfferStatus(offer) === "activa"
+        );
+
+    const offerTotals =
+        activeOffers.reduce(
+            (acc,offer) => {
+                const scenario = offerScenario(offer, offer.offerPrice);
+                acc.immediate += scenario.immediate;
+                acc.bonus += scenario.bonus;
+                acc.savings += Math.max(0, Number(offer.normalPrice || 0) - Number(offer.offerPrice || 0));
+                return acc;
+            },
+            { immediate:0, bonus:0, savings:0 }
+        );
+
+    const recent =
+        [...data.sales]
+            .sort((a,b) => String(b.created || "").localeCompare(String(a.created || "")))
+            .slice(0,5);
+
+    root.innerHTML = `
+        <div class="base-command-grid">
+            <section class="base-hero-panel">
+                <div>
+                    <div class="base-eyebrow">BASE DE LOLITA</div>
+                    <h1>Control profesional para ventas, inventario y ofertas.</h1>
+                    <p>
+                        Una vista limpia para saber qué tienes, qué vendiste, cuánto invertiste
+                        y dónde están tus oportunidades de ganancia.
+                    </p>
+                </div>
+                <div class="base-quick-actions">
+                    <button class="primary" onclick="showView('sales')">+ Registrar venta</button>
+                    <button class="secondary" onclick="showView('inventory')">+ Registrar llegada</button>
+                    <button class="secondary" onclick="showView('offers')">Crear oferta</button>
+                    <button class="secondary" onclick="showView('products')">Ver productos</button>
+                </div>
+            </section>
+
+            <aside class="base-side-summary">
+                <div class="stat"><small>Ventas totales</small><strong>${money(salesTotal)}</strong></div>
+                <div class="stat"><small>Ganancia registrada</small><strong class="green">${money(profit)}</strong></div>
+                <div class="stat"><small>Inversión en mercancía</small><strong>${money(spending)}</strong></div>
+            </aside>
+        </div>
+
+        <div class="stats">
+            <div class="stat"><small>Productos</small><strong>${data.products.length}</strong></div>
+            <div class="stat"><small>Unidades en stock</small><strong>${stock}</strong></div>
+            <div class="stat"><small>Ofertas activas</small><strong>${activeOffers.length}</strong></div>
+            <div class="stat"><small>Ahorro activo</small><strong>${money(offerTotals.savings)}</strong></div>
+            <div class="stat"><small>Ganancia estimada en ofertas</small><strong class="green">${money(offerTotals.immediate + offerTotals.bonus)}</strong></div>
+        </div>
+
+        <div class="grid2">
+            <div class="card">
+                <div class="card-head">
+                    <h3>Últimas ventas</h3>
+                    <button class="secondary" onclick="showView('sales')">Ver ventas</button>
+                </div>
+                <div class="recent">
+                    ${
+                        recent.length
+                            ? recent.map(sale => `
+                                <div class="recent-item">
+                                    <div>
+                                        <b>${saleItemsLabel(sale)}</b>
+                                        <small>${esc(sale.clientName)} · ${fmtDate(sale.date)} · ${sale.qty} ud.</small>
+                                    </div>
+                                    <strong class="green">${money(sale.total)}</strong>
+                                </div>
+                            `).join("")
+                            : `<div class="empty">Todavía no hay ventas.</div>`
+                    }
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-head">
+                    <h3>Prioridades de inventario</h3>
+                    <button class="secondary" onclick="showView('products')">Ver catálogo</button>
+                </div>
+                <div class="recent">
+                    ${
+                        lowStock.length
+                            ? lowStock.slice(0,6).map(product => `
+                                <div class="recent-item">
+                                    <div>
+                                        <b>${esc(product.name)}</b>
+                                        <small>${esc(product.invoiceCode || product.category || "Producto")} · mínimo ${product.minStock}</small>
+                                    </div>
+                                    ${lolitaStockBadge(product)}
+                                </div>
+                            `).join("")
+                            : `<div class="empty">Todo el inventario está en buen nivel.</div>`
+                    }
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-head">
+                <h3>Resumen de ofertas</h3>
+                <button class="secondary" onclick="showView('offers')">Gestionar ofertas</button>
+            </div>
+            <div class="stat-mini-grid">
+                <div class="stat"><small>Ganancia inmediata</small><strong>${money(offerTotals.immediate)}</strong></div>
+                <div class="stat"><small>Bono estimado</small><strong>${money(offerTotals.bonus)}</strong></div>
+                <div class="stat"><small>Total estimado</small><strong class="green">${money(offerTotals.immediate + offerTotals.bonus)}</strong></div>
+            </div>
+        </div>
+    `;
+}
+
+function lolitaRenderProductCatalog(){
+    const grid = $("#productGrid");
+
+    if(!grid){
+        return;
+    }
+
+    const query =
+        ($("#productSearch")?.value || "").toLowerCase();
+
+    const products =
+        data.products.filter(
+            product =>
+                [product.name, product.category, product.invoiceCode, product.cesna, product.content]
+                    .join(" ")
+                    .toLowerCase()
+                    .includes(query)
+        );
+
+    grid.className = "product-grid";
+
+    grid.innerHTML =
+        products.length
+            ? products.map(product => {
+                const margin = Number(product.price || 0) - Number(product.cost || 0);
+                const catalogPrice = product.clientPrice || product.price;
+                const premiumPrice = product.premiumPrice || 0;
+                const consultantPrice = product.consultantPrice || product.cost;
+
+                return `
+                    <article class="base-product-card">
+                        <div class="product-top">
+                            <div>
+                                <h4>${esc(product.name)}</h4>
+                                <div class="base-product-code">
+                                    ${esc(product.invoiceCode || product.cesna || product.category || "Sin código")}
+                                    ${product.content ? " · " + esc(product.content) : ""}
+                                </div>
+                            </div>
+                            ${lolitaStockBadge(product)}
+                        </div>
+
+                        <div class="base-price-row">
+                            <div class="base-price-cell">
+                                <small>Cliente</small>
+                                <b>${money(catalogPrice)}</b>
+                            </div>
+                            <div class="base-price-cell">
+                                <small>Premium</small>
+                                <b>${money(premiumPrice)}</b>
+                            </div>
+                            <div class="base-price-cell">
+                                <small>Consultor</small>
+                                <b>${money(consultantPrice)}</b>
+                            </div>
+                        </div>
+
+                        <div class="base-price-row">
+                            <div class="base-price-cell">
+                                <small>Costo real</small>
+                                <b>${money(product.cost)}</b>
+                            </div>
+                            <div class="base-price-cell">
+                                <small>Venta actual</small>
+                                <b>${money(product.price)}</b>
+                            </div>
+                            <div class="base-price-cell">
+                                <small>Puntos</small>
+                                <b>${Number(product.points || 0).toFixed(2)}</b>
+                            </div>
+                        </div>
+
+                        <div class="base-profit-line">
+                            <span class="stock">Ganancia configurada: <span class="green">${money(margin)}</span></span>
+                            <div class="actions">
+                                <button class="icon-btn" title="Editar" onclick="editProduct('${product.id}')">✏️</button>
+                                <button class="icon-btn del" title="Eliminar" onclick="deleteProduct('${product.id}')">🗑️</button>
+                            </div>
+                        </div>
+                    </article>
+                `;
+            }).join("")
+            : `
+                <div class="empty" style="grid-column:1/-1">
+                    No hay productos con ese filtro.
+                </div>
+            `;
+}
+
+function lolitaRenderReceiptsPanel(){
+    const target = $("#receiptHistory");
+
+    if(!target){
+        return;
+    }
+
+    const query =
+        ($("#receiptSearch")?.value || "").toLowerCase();
+
+    const from =
+        $("#receiptFrom")?.value || "";
+
+    const to =
+        $("#receiptTo")?.value || "";
+
+    const receipts =
+        [...data.receipts]
+            .filter(receipt => {
+                const matchesText =
+                    !query ||
+                    [receipt.productName, receipt.date, receipt.qty, receipt.unitCost]
+                        .join(" ")
+                        .toLowerCase()
+                        .includes(query);
+
+                const matchesFrom =
+                    !from || receipt.date >= from;
+
+                const matchesTo =
+                    !to || receipt.date <= to;
+
+                return matchesText && matchesFrom && matchesTo;
+            })
+            .sort((a,b) => String(b.date || "").localeCompare(String(a.date || "")));
+
+    const totalUnits =
+        receipts.reduce((sum,receipt) => sum + receipt.qty, 0);
+
+    const totalSpend =
+        receipts.reduce((sum,receipt) => sum + receipt.totalCost, 0);
+
+    target.innerHTML = `
+        <div class="base-section-title">
+            <div>
+                <h3>Historial de llegadas</h3>
+                <small>Busca por producto o filtra por fechas para revisar compras y reposiciones.</small>
+            </div>
+        </div>
+        <div class="filters">
+            <input class="search" id="receiptSearch" placeholder="Buscar producto recibido..." value="${esc(query)}">
+            <input type="date" id="receiptFrom" aria-label="Desde" value="${esc(from)}">
+            <input type="date" id="receiptTo" aria-label="Hasta" value="${esc(to)}">
+            <button class="secondary" type="button" id="receiptClearFilters">Limpiar filtros</button>
+        </div>
+        <div class="stats" style="margin-bottom:16px;">
+            <div class="stat"><small>Entradas registradas</small><strong>${receipts.length}</strong></div>
+            <div class="stat"><small>Unidades recibidas</small><strong>${totalUnits}</strong></div>
+            <div class="stat"><small>Inversión registrada</small><strong>${money(totalSpend)}</strong></div>
+        </div>
+        ${
+            receipts.length
+                ? `
+                    <div class="base-table-card">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Fecha</th>
+                                    <th>Producto</th>
+                                    <th>Cantidad</th>
+                                    <th>Costo unit.</th>
+                                    <th>Total</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${receipts.map(receipt => `
+                                    <tr>
+                                        <td>${fmtDate(receipt.date)}</td>
+                                        <td>${esc(receipt.productName)}</td>
+                                        <td>${receipt.qty}</td>
+                                        <td>${money(receipt.unitCost)}</td>
+                                        <td>${money(receipt.totalCost)}</td>
+                                        <td class="actions">
+                                            <button class="icon-btn del" title="Eliminar" onclick="deleteReceipt('${receipt.id}')">🗑️</button>
+                                        </td>
+                                    </tr>
+                                `).join("")}
+                            </tbody>
+                        </table>
+                    </div>
+                `
+                : `<div class="empty">Todavía no hay llegadas registradas.</div>`
+        }
+    `;
+
+    lolitaReceiptFilters();
+}
+
+function lolitaRenderInventorySection(){
+    const section = $("#inventory");
+
+    if(!section){
+        return;
+    }
+
+    const totalUnits =
+        data.receipts.reduce((sum,receipt) => sum + receipt.qty, 0);
+
+    const totalSpend =
+        data.receipts.reduce((sum,receipt) => sum + receipt.totalCost, 0);
+
+    const lastReceipt =
+        [...data.receipts].sort((a,b) => String(b.date || "").localeCompare(String(a.date || "")))[0];
+
+    section.innerHTML = `
+        <div class="base-command-grid">
+            <section class="base-hero-panel">
+                <div>
+                    <div class="base-eyebrow">Productos recibidos</div>
+                    <h1>Registra entradas de mercancía sin perder control.</h1>
+                    <p>
+                        Captura una llegada individual o muchas al mismo tiempo, revisa inversión,
+                        unidades recibidas y mantén tu stock actualizado.
+                    </p>
+                </div>
+                <div class="base-quick-actions">
+                    <button class="primary" id="receiveProduct" type="button">+ Registrar llegada</button>
+                    <button class="secondary" id="receiveBulkProduct" type="button">+ Llegada masiva</button>
+                    <button class="secondary" onclick="showView('products')" type="button">Ver productos</button>
+                </div>
+            </section>
+
+            <aside class="base-side-summary">
+                <div class="stat"><small>Entradas registradas</small><strong>${data.receipts.length}</strong></div>
+                <div class="stat"><small>Unidades recibidas</small><strong>${totalUnits}</strong></div>
+                <div class="stat"><small>Inversión total</small><strong>${money(totalSpend)}</strong></div>
+            </aside>
+        </div>
+
+        <div class="card">
+            <div class="card-head">
+                <div>
+                    <h3>Historial de productos recibidos</h3>
+                    <p class="note" style="margin-top:8px;">
+                        ${lastReceipt ? `Última llegada: <b>${esc(lastReceipt.productName)}</b> · ${fmtDate(lastReceipt.date)}` : "Todavía no hay llegadas registradas."}
+                    </p>
+                </div>
+            </div>
+            <div id="receiptHistory"></div>
+        </div>
+    `;
+
+    $("#receiveProduct").onclick = lolitaSingleReceiptModal;
+    $("#receiveBulkProduct").onclick = lolitaBulkReceiptModal;
+
+    lolitaRenderReceiptsPanel();
+}
+
+function lolitaOpenSaleModal(){
+    if(!data.products.length){
+        toast("Primero agrega un producto");
+        return;
+    }
+
+    openModal(
+        "🧾 Registrar venta",
+        lolitaEnhancedSaleForm(),
+        async () => {
+            await lolitaSubmitEnhancedSale();
+        }
+    );
+
+    lolitaAddEnhancedSaleItemRow();
+}
+
+let lolitaSaleItemCounter = 0;
+
+function lolitaEnhancedSaleForm(){
+    lolitaSaleItemCounter = 0;
+
+    return `
+        <div class="form-grid">
+            <div class="field">
+                <label>Cliente</label>
+                <select id="sClient">
+                    <option value="">Público general</option>
+                    ${clientOptions()}
+                </select>
+            </div>
+
+            <div class="field">
+                <label>Fecha de venta</label>
+                <input id="sDate" type="date" value="${today()}">
+            </div>
+        </div>
+
+        <div class="base-section-title" style="margin:12px 0 8px;">
+            <div>
+                <h3 style="font-size:16px;">Productos de la venta</h3>
+                <small>Agrega uno o varios productos. El total, stock y ganancia se calculan en vivo.</small>
+            </div>
+        </div>
+
+        <div id="saleItemsContainer"></div>
+
+        <div class="modal-actions" style="justify-content:flex-start;margin-top:8px;">
+            <button type="button" class="secondary" onclick="lolitaAddEnhancedSaleItemRow()">+ Agregar producto</button>
+        </div>
+
+        <div id="saleLiveSummary" class="stats" style="margin-top:14px;">
+            <div class="stat"><small>Total</small><strong>$0.00</strong></div>
+            <div class="stat"><small>Ganancia estimada</small><strong class="green">$0.00</strong></div>
+            <div class="stat"><small>Unidades</small><strong>0</strong></div>
+            <div class="stat"><small>Margen</small><strong>0.0%</strong></div>
+        </div>
+
+        <div id="saleWarnings"></div>
+    `;
+}
+
+function lolitaBundleQty(type){
+    return {
+        "2x1":2,
+        "3x2":3,
+        "4x3":4,
+        "5x4":5,
+        second50:2
+    }[type] || 1;
+}
+
+function lolitaActiveOffersForProduct(productId){
+    return (data.offers || [])
+        .filter(
+            offer =>
+                offer.productId === productId &&
+                computeOfferStatus(offer) === "activa" &&
+                offer.enabled !== false &&
+                Number(offer.qtyAvailable) > 0
+        );
+}
+
+function lolitaSaleOfferUnitPrice(offer){
+    const bundleQty = lolitaBundleQty(offer.type);
+    const price = Number(offer.offerPrice) || 0;
+
+    return bundleQty > 1
+        ? price / bundleQty
+        : price;
+}
+
+function lolitaSaleOfferOptions(productId, selected = ""){
+    const offers = lolitaActiveOffersForProduct(productId);
+
+    if(!offers.length){
+        return `<option value="">Sin oferta activa</option>`;
+    }
+
+    return `
+        <option value="">Precio normal</option>
+        ${offers.map(offer => {
+            const bundleQty = lolitaBundleQty(offer.type);
+            const label =
+                bundleQty > 1
+                    ? `${offerTypeLabel(offer.type)} · paquete ${bundleQty} pzas · ${money(offer.offerPrice)}`
+                    : `${offerTypeLabel(offer.type)} · ${money(offer.offerPrice)}`;
+
+            return `
+                <option value="${offer.id}" ${selected === offer.id ? "selected" : ""}>
+                    ${label}
+                </option>
+            `;
+        }).join("")}
+    `;
+}
+
+function lolitaRefreshSaleOfferSelect(index, selected = ""){
+    const productId = $(`#sItemProduct_${index}`)?.value || "";
+    const select = $(`#sItemOffer_${index}`);
+
+    if(!select){
+        return;
+    }
+
+    select.innerHTML = lolitaSaleOfferOptions(productId, selected);
+    select.disabled = !lolitaActiveOffersForProduct(productId).length;
+}
+
+function lolitaEnhancedSaleItemRowHtml(index){
+    return `
+        <div class="sale-item-row base-table-card" data-row="${index}" style="padding:12px;margin-bottom:10px;">
+            <div class="form-grid three" style="align-items:end;">
+                <div class="field" style="margin-bottom:0;">
+                    <label>Producto *</label>
+                    <select id="sItemProduct_${index}" onchange="lolitaOnSaleItemProductChange(${index})">
+                        <option value="">Selecciona...</option>
+                        ${productOptions()}
+                    </select>
+                </div>
+
+                <div class="field" style="margin-bottom:0;">
+                    <label>Oferta</label>
+                    <select id="sItemOffer_${index}" onchange="lolitaApplySaleOffer(${index})" disabled>
+                        <option value="">Sin oferta activa</option>
+                    </select>
+                </div>
+
+                <div class="field" style="margin-bottom:0;">
+                    <label>Cantidad *</label>
+                    <input id="sItemQty_${index}" type="number" min="1" step="1" value="1" oninput="lolitaUpdateSaleSummary()">
+                </div>
+
+                <div class="field" style="margin-bottom:0;">
+                    <label>Precio unitario *</label>
+                    <input id="sItemPrice_${index}" type="number" min="0" step="0.01" value="0" oninput="lolitaUpdateSaleSummary()">
+                </div>
+            </div>
+
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:10px;flex-wrap:wrap;">
+                <small id="sItemInfo_${index}" style="color:var(--muted);">Selecciona un producto para ver stock y costo.</small>
+                <button type="button" class="icon-btn del" title="Quitar producto" onclick="lolitaRemoveSaleItemRow(${index})">🗑️</button>
+            </div>
+        </div>
+    `;
+}
+
+function lolitaAddEnhancedSaleItemRow(){
+    const container = $("#saleItemsContainer");
+
+    if(!container){
+        return;
+    }
+
+    const index = lolitaSaleItemCounter++;
+    container.insertAdjacentHTML("beforeend", lolitaEnhancedSaleItemRowHtml(index));
+    lolitaUpdateSaleSummary();
+}
+
+function lolitaRemoveSaleItemRow(index){
+    const rows = $$(".sale-item-row");
+
+    if(rows.length <= 1){
+        toast("La venta necesita al menos un producto");
+        return;
+    }
+
+    const row = document.querySelector(`.sale-item-row[data-row="${index}"]`);
+
+    if(row){
+        row.remove();
+    }
+
+    lolitaUpdateSaleSummary();
+}
+
+function lolitaOnSaleItemProductChange(index){
+    const select = $(`#sItemProduct_${index}`);
+    const product = data.products.find(p => p.id === select.value);
+    const priceInput = $(`#sItemPrice_${index}`);
+    const qtyInput = $(`#sItemQty_${index}`);
+    const info = $(`#sItemInfo_${index}`);
+
+    if(product){
+        lolitaRefreshSaleOfferSelect(index);
+        if(qtyInput && (!Number(qtyInput.value) || Number(qtyInput.value) < 1)){
+            qtyInput.value = 1;
+        }
+        priceInput.value = product.price || product.clientPrice || 0;
+        info.innerHTML =
+            `Stock: <b>${product.stock}</b> · Costo: <b>${money(product.cost)}</b> · Cliente: <b>${money(product.clientPrice || product.price)}</b>`;
+    }
+    else if(info){
+        lolitaRefreshSaleOfferSelect(index);
+        info.textContent = "Selecciona un producto para ver stock y costo.";
+    }
+
+    lolitaUpdateSaleSummary();
+}
+
+function lolitaApplySaleOffer(index){
+    const offerId = $(`#sItemOffer_${index}`)?.value || "";
+    const offer = (data.offers || []).find(o => o.id === offerId);
+    const priceInput = $(`#sItemPrice_${index}`);
+    const qtyInput = $(`#sItemQty_${index}`);
+    const info = $(`#sItemInfo_${index}`);
+
+    if(!offer){
+        lolitaOnSaleItemProductChange(index);
+        return;
+    }
+
+    const bundleQty = lolitaBundleQty(offer.type);
+
+    if(qtyInput){
+        qtyInput.value = bundleQty;
+    }
+
+    if(priceInput){
+        priceInput.value = lolitaSaleOfferUnitPrice(offer).toFixed(2);
+    }
+
+    if(info){
+        info.innerHTML =
+            `Oferta aplicada: <b>${offerTypeLabel(offer.type)}</b> · paquete: <b>${bundleQty}</b> · total oferta: <b>${money(offer.offerPrice)}</b> · disponibles: <b>${offer.qtyAvailable}</b>`;
+    }
+
+    lolitaUpdateSaleSummary();
+}
+
+function lolitaCollectSaleItemInputs(){
+    return [...$$(".sale-item-row")]
+        .map(row => {
+            const index = row.dataset.row;
+            return {
+                productId:$(`#sItemProduct_${index}`)?.value || "",
+                offerId:$(`#sItemOffer_${index}`)?.value || "",
+                qty:Number($(`#sItemQty_${index}`)?.value),
+                price:Number($(`#sItemPrice_${index}`)?.value)
+            };
+        })
+        .filter(item => item.productId);
+}
+
+function lolitaSaleDraftFromModal(){
+    const clientId = $("#sClient").value;
+    const client = data.clients.find(c => c.id === clientId);
+    const date = $("#sDate").value;
+    const rawItems = lolitaCollectSaleItemInputs();
+
+    if(!date){
+        return { error:"Selecciona una fecha" };
+    }
+
+    if(!rawItems.length){
+        return { error:"Agrega al menos un producto a la venta" };
+    }
+
+    const qtyByProduct = {};
+    const qtyByOffer = {};
+
+    for(const item of rawItems){
+        const product = data.products.find(p => p.id === item.productId);
+
+        if(!product){
+            return { error:"Selecciona un producto válido en cada fila" };
+        }
+
+        if(!item.qty || item.qty <= 0){
+            return { error:`La cantidad de "${product.name}" debe ser mayor a 0` };
+        }
+
+        if(item.price < 0){
+            return { error:`El precio de "${product.name}" no puede ser negativo` };
+        }
+
+        if(item.offerId){
+            const offer =
+                lolitaActiveOffersForProduct(item.productId)
+                    .find(o => o.id === item.offerId);
+
+            if(!offer){
+                return { error:`La oferta de "${product.name}" ya no está activa` };
+            }
+
+            if(item.qty > Number(offer.qtyAvailable || 0)){
+                return { error:`La oferta de "${product.name}" no tiene suficientes unidades disponibles` };
+            }
+
+            qtyByOffer[item.offerId] =
+                (qtyByOffer[item.offerId] || 0) + item.qty;
+        }
+
+        qtyByProduct[item.productId] =
+            (qtyByProduct[item.productId] || 0) + item.qty;
+    }
+
+    for(const productId in qtyByProduct){
+        const product = data.products.find(p => p.id === productId);
+
+        if(qtyByProduct[productId] > product.stock){
+            return { error:`No hay stock suficiente de "${product.name}"` };
+        }
+    }
+
+    for(const offerId in qtyByOffer){
+        const offer = (data.offers || []).find(o => o.id === offerId);
+
+        if(qtyByOffer[offerId] > Number(offer?.qtyAvailable || 0)){
+            return { error:`La oferta "${offerTypeLabel(offer.type)}" no tiene suficientes unidades disponibles` };
+        }
+    }
+
+    const items =
+        rawItems.map(item => {
+            const product = data.products.find(p => p.id === item.productId);
+            const offer = (data.offers || []).find(o => o.id === item.offerId);
+            const subtotal = item.qty * item.price;
+            const itemProfit = (item.price - product.cost) * item.qty;
+
+            return {
+                productId:item.productId,
+                productName:product.name,
+                offerId:item.offerId,
+                offerName:offer ? offerTypeLabel(offer.type) : "",
+                qty:item.qty,
+                price:item.price,
+                cost:product.cost,
+                subtotal,
+                profit:itemProfit
+            };
+        });
+
+    const total = items.reduce((sum,item) => sum + item.subtotal, 0);
+    const profit = items.reduce((sum,item) => sum + item.profit, 0);
+    const totalQty = items.reduce((sum,item) => sum + item.qty, 0);
+
+    return {
+        sale:{
+            clientId:clientId || null,
+            clientName:client ? client.name : "Público general",
+            items,
+            productName:items.length === 1 ? items[0].productName : `${items.length} productos`,
+            qty:totalQty,
+            total,
+            profit,
+            date
+        }
+    };
+}
+
+function lolitaUpdateSaleSummary(){
+    const summary = $("#saleLiveSummary");
+    const warnings = $("#saleWarnings");
+
+    if(!summary){
+        return;
+    }
+
+    const result = lolitaSaleDraftFromModal();
+
+    if(result.error){
+        summary.innerHTML = `
+            <div class="stat"><small>Total</small><strong>$0.00</strong></div>
+            <div class="stat"><small>Ganancia estimada</small><strong class="green">$0.00</strong></div>
+            <div class="stat"><small>Unidades</small><strong>0</strong></div>
+            <div class="stat"><small>Margen</small><strong>0.0%</strong></div>
+        `;
+
+        if(warnings){
+            warnings.innerHTML = `<div class="note" style="margin-top:10px;">${esc(result.error)}</div>`;
+        }
+
+        return;
+    }
+
+    const sale = result.sale;
+    const margin = sale.total ? (sale.profit / sale.total) * 100 : 0;
+
+    summary.innerHTML = `
+        <div class="stat"><small>Total</small><strong>${money(sale.total)}</strong></div>
+        <div class="stat"><small>Ganancia estimada</small><strong class="green">${money(sale.profit)}</strong></div>
+        <div class="stat"><small>Unidades</small><strong>${sale.qty}</strong></div>
+        <div class="stat"><small>Margen</small><strong>${margin.toFixed(1)}%</strong></div>
+    `;
+
+    if(warnings){
+        warnings.innerHTML = "";
+    }
+}
+
+async function lolitaSubmitEnhancedSale(){
+    const result = lolitaSaleDraftFromModal();
+
+    if(result.error){
+        toast(result.error);
+        return;
+    }
+
+    closeModal();
+
+    const created = await createSaleRemote(result.sale);
+
+    if(!created){
+        await loadAllFromCloud();
+        renderCurrentView();
+        return;
+    }
+
+    data.sales.push(created);
+
+    result.sale.items.forEach(item => {
+        const product = data.products.find(p => p.id === item.productId);
+
+        if(product){
+            product.stock -= item.qty;
+        }
+    });
+
+    for(const item of result.sale.items){
+        if(!item.offerId){
+            continue;
+        }
+
+        const offer = data.offers.find(o => o.id === item.offerId);
+
+        if(offer){
+            offer.qtyAvailable =
+                Math.max(0, Number(offer.qtyAvailable || 0) - item.qty);
+
+            await updateOfferRemote(offer.id, offer);
+        }
+    }
+
+    saveLocalCache();
+    renderSales();
+    renderProducts();
+    renderDashboard();
+    toast("Venta registrada");
+}
+
+function lolitaFilteredSales(){
+    const query =
+        ($("#saleSearch")?.value || "").toLowerCase();
+
+    const from =
+        $("#saleFrom")?.value || "";
+
+    const to =
+        $("#saleTo")?.value || "";
+
+    return [...data.sales]
+        .filter(sale => {
+            const matchesText =
+                !query ||
+                [
+                    sale.clientName,
+                    sale.productName,
+                    saleItemsLabel(sale),
+                    sale.date,
+                    sale.total,
+                    sale.profit
+                ]
+                    .join(" ")
+                    .toLowerCase()
+                    .includes(query);
+
+            const matchesFrom =
+                !from || sale.date >= from;
+
+            const matchesTo =
+                !to || sale.date <= to;
+
+            return matchesText && matchesFrom && matchesTo;
+        })
+        .sort((a,b) => String(b.date || "").localeCompare(String(a.date || "")));
+}
+
+function lolitaSaleFilters(){
+    const search = $("#saleSearch");
+    const from = $("#saleFrom");
+    const to = $("#saleTo");
+    const clear = $("#saleClearFilters");
+
+    [search, from, to].forEach(input => {
+        if(input){
+            input.oninput = lolitaRenderSalesTable;
+            input.onchange = lolitaRenderSalesTable;
+        }
+    });
+
+    if(clear){
+        clear.onclick = () => {
+            if(search) search.value = "";
+            if(from) from.value = "";
+            if(to) to.value = "";
+            lolitaRenderSalesTable();
+        };
+    }
+}
+
+function lolitaRenderSalesTable(){
+    const target = $("#salesTable");
+
+    if(!target){
+        return;
+    }
+
+    const sales = lolitaFilteredSales();
+    const total = sales.reduce((sum,sale) => sum + sale.total, 0);
+    const profit = sales.reduce((sum,sale) => sum + sale.profit, 0);
+    const units = sales.reduce((sum,sale) => sum + sale.qty, 0);
+    const avgTicket = sales.length ? total / sales.length : 0;
+
+    target.innerHTML = `
+        <div class="filters">
+            <input class="search" id="saleSearch" placeholder="Buscar por cliente o producto..." value="${esc($("#saleSearch")?.value || "")}">
+            <input type="date" id="saleFrom" aria-label="Desde" value="${esc($("#saleFrom")?.value || "")}">
+            <input type="date" id="saleTo" aria-label="Hasta" value="${esc($("#saleTo")?.value || "")}">
+            <button class="secondary" type="button" id="saleClearFilters">Limpiar filtros</button>
+        </div>
+
+        <div class="stats" style="margin-bottom:16px;">
+            <div class="stat"><small>Ventas filtradas</small><strong>${sales.length}</strong></div>
+            <div class="stat"><small>Total vendido</small><strong>${money(total)}</strong></div>
+            <div class="stat"><small>Ganancia</small><strong class="green">${money(profit)}</strong></div>
+            <div class="stat"><small>Productos vendidos</small><strong>${units}</strong></div>
+            <div class="stat"><small>Ticket promedio</small><strong>${money(avgTicket)}</strong></div>
+        </div>
+
+        ${
+            sales.length
+                ? `
+                    <div class="base-table-card">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Fecha</th>
+                                    <th>Venta</th>
+                                    <th>Cliente</th>
+                                    <th>Unidades</th>
+                                    <th>Total</th>
+                                    <th>Ganancia</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${sales.map(sale => {
+                                    const margin =
+                                        sale.total ? (sale.profit / sale.total) * 100 : 0;
+
+                                    return `
+                                        <tr>
+                                            <td>${fmtDate(sale.date)}</td>
+                                            <td style="white-space:normal;min-width:260px;">
+                                                <b>${saleItemsLabel(sale)}</b>
+                                                <br>
+                                                <small style="color:var(--muted);">Margen ${margin.toFixed(1)}%</small>
+                                            </td>
+                                            <td>${esc(sale.clientName)}</td>
+                                            <td>${sale.qty}</td>
+                                            <td>${money(sale.total)}</td>
+                                            <td class="green">${money(sale.profit)}</td>
+                                            <td class="actions">
+                                                <button class="icon-btn del" title="Eliminar" onclick="deleteSale('${sale.id}')">🗑️</button>
+                                            </td>
+                                        </tr>
+                                    `;
+                                }).join("")}
+                            </tbody>
+                        </table>
+                    </div>
+                `
+                : `<div class="empty">No hay ventas con esos filtros.</div>`
+        }
+    `;
+
+    lolitaSaleFilters();
+}
+
+function lolitaRenderSalesSection(){
+    const section = $("#sales");
+
+    if(!section){
+        return;
+    }
+
+    const total = data.sales.reduce((sum,sale) => sum + sale.total, 0);
+    const profit = data.sales.reduce((sum,sale) => sum + sale.profit, 0);
+    const units = data.sales.reduce((sum,sale) => sum + sale.qty, 0);
+    const avgTicket = data.sales.length ? total / data.sales.length : 0;
+    const lastSale =
+        [...data.sales].sort((a,b) => String(b.date || "").localeCompare(String(a.date || "")))[0];
+
+    section.innerHTML = `
+        <div class="base-command-grid">
+            <section class="base-hero-panel">
+                <div>
+                    <div class="base-eyebrow">Ventas</div>
+                    <h1>Registra ventas con totales, stock y ganancia bajo control.</h1>
+                    <p>
+                        Revisa ventas por fecha, cliente o producto, valida tus márgenes y
+                        mantén cada salida de inventario bien documentada.
+                    </p>
+                </div>
+                <div class="base-quick-actions">
+                    <button class="primary" id="addSale" type="button">+ Registrar venta</button>
+                    <button class="secondary" onclick="showView('clients')" type="button">Clientes</button>
+                    <button class="secondary" onclick="showView('products')" type="button">Productos</button>
+                </div>
+            </section>
+
+            <aside class="base-side-summary">
+                <div class="stat"><small>Total vendido</small><strong>${money(total)}</strong></div>
+                <div class="stat"><small>Ganancia</small><strong class="green">${money(profit)}</strong></div>
+                <div class="stat"><small>Ticket promedio</small><strong>${money(avgTicket)}</strong></div>
+            </aside>
+        </div>
+
+        <div class="card">
+            <div class="card-head">
+                <div>
+                    <h3>Historial de ventas</h3>
+                    <p class="note" style="margin-top:8px;">
+                        ${lastSale ? `Última venta: <b>${esc(saleItemsLabel(lastSale))}</b> · ${fmtDate(lastSale.date)}` : "Todavía no hay ventas registradas."}
+                    </p>
+                </div>
+            </div>
+            <div id="salesTable"></div>
+        </div>
+    `;
+
+    const saleButton = $("#addSale");
+
+    if(saleButton){
+        saleButton.onclick = lolitaOpenSaleModal;
+    }
+
+    lolitaRenderSalesTable();
+}
+
+function lolitaReceiptFilters(){
+    const search = $("#receiptSearch");
+    const from = $("#receiptFrom");
+    const to = $("#receiptTo");
+    const clear = $("#receiptClearFilters");
+
+    [search, from, to].forEach(input => {
+        if(input){
+            input.oninput = lolitaRenderReceiptsPanel;
+            input.onchange = lolitaRenderReceiptsPanel;
+        }
+    });
+
+    if(clear){
+        clear.onclick = () => {
+            if(search) search.value = "";
+            if(from) from.value = "";
+            if(to) to.value = "";
+            lolitaRenderReceiptsPanel();
+        };
+    }
+}
+
+if(typeof renderDashboard === "function"){
+    renderDashboard = lolitaRenderDashboardShell;
+}
+
+if(typeof renderProducts === "function"){
+    renderProducts = lolitaRenderProductCatalog;
+}
+
+if(typeof renderReceipts === "function"){
+    renderReceipts = lolitaRenderInventorySection;
+}
+
+if(typeof renderSales === "function"){
+    renderSales = lolitaRenderSalesSection;
+}
+
+if(typeof renderOffers === "function"){
+    renderOffers = function(){
+        const query =
+            ($("#offerSearch")?.value || "").toLowerCase();
+
+        const offers =
+            data.offers.filter(
+                offer =>
+                    String(offer.productName || "")
+                        .toLowerCase()
+                        .includes(query) ||
+                    String(offerTypeLabel(offer.type) || "")
+                        .toLowerCase()
+                        .includes(query)
+            );
+
+        const grid = $("#offerGrid");
+
+        if(!grid){
+            return;
+        }
+
+        grid.className = "lolita-offer-grid";
+        grid.innerHTML =
+            offers.length
+                ? offers.map(lolitaOfferCard).join("")
+                : `
+                    <div class="empty" style="grid-column:1/-1">
+                        No hay ofertas registradas.
+                        <br>
+                        Crea una oferta con plantillas como 2x1, 3x2, 4x3, liquidación o precio VIP.
+                    </div>
+                `;
+    };
+}
+
+if(typeof renderCurrentView === "function"){
+const lolitaOriginalRenderCurrentView = renderCurrentView;
+renderCurrentView = function(){
+    lolitaOriginalRenderCurrentView();
+    applyLolitaBranding();
+    installLolitaBulkButton();
+};
+}
+
+applyLolitaBranding();
+lolitaEnhanceLogin();
+installLolitaBulkButton();
+/* ===== END BASE DE LOLITA UPGRADE ===== */
+
 /* =========================================================
    REPORTES
 ========================================================= */
@@ -7523,6 +10178,256 @@ function renderReport(){
         `;
 
 }
+
+function lolitaSaleItemsForStats(sale){
+    if(Array.isArray(sale.items) && sale.items.length){
+        return sale.items.map(item => ({
+            productName:item.productName || sale.productName || "Producto",
+            qty:Number(item.qty) || 0,
+            total:Number(item.subtotal) || ((Number(item.price) || 0) * (Number(item.qty) || 0)),
+            profit:Number(item.profit) || 0,
+            cost:(Number(item.cost) || 0) * (Number(item.qty) || 0),
+            offerName:item.offerName || ""
+        }));
+    }
+
+    const qty = Number(sale.qty) || 0;
+    const total = Number(sale.total) || 0;
+    const profit = Number(sale.profit) || 0;
+
+    return [{
+        productName:sale.productName || "Producto",
+        qty,
+        total,
+        profit,
+        cost:Number(sale.cost || 0) * qty,
+        offerName:""
+    }];
+}
+
+function lolitaReportRange(){
+    let from = $("#fromDate").value;
+    let to = $("#toDate").value;
+
+    if(!from || !to){
+        to = today();
+        from = dateISO(new Date(Date.now() - 6 * 86400000));
+        $("#fromDate").value = from;
+        $("#toDate").value = to;
+    }
+
+    if(from > to){
+        [from, to] = [to, from];
+    }
+
+    return { from, to };
+}
+
+function lolitaBuildStatsExport(){
+    const { from, to } = lolitaReportRange();
+    const sales =
+        data.sales.filter(sale => sale.date >= from && sale.date <= to);
+    const receipts =
+        data.receipts.filter(receipt => receipt.date >= from && receipt.date <= to);
+    const saleItems =
+        sales.flatMap(sale =>
+            lolitaSaleItemsForStats(sale).map(item => ({
+                ...item,
+                date:sale.date,
+                clientName:sale.clientName || "Público general"
+            }))
+        );
+
+    const daily = [];
+    const topProducts = {};
+
+    for(
+        let date = new Date(from + "T12:00:00");
+        dateISO(date) <= to;
+        date.setDate(date.getDate() + 1)
+    ){
+        const day = dateISO(date);
+        const dayItems = saleItems.filter(item => item.date === day);
+        const dayReceipts = receipts.filter(receipt => receipt.date === day);
+
+        daily.push({
+            date:day,
+            units:dayItems.reduce((sum,item) => sum + item.qty, 0),
+            revenue:dayItems.reduce((sum,item) => sum + item.total, 0),
+            spending:dayReceipts.reduce((sum,receipt) => sum + Number(receipt.totalCost || 0), 0),
+            profit:dayItems.reduce((sum,item) => sum + item.profit, 0)
+        });
+    }
+
+    saleItems.forEach(item => {
+        topProducts[item.productName] =
+            (topProducts[item.productName] || 0) + item.qty;
+    });
+
+    return {
+        type:"BASE_DE_LOLITA_STATS",
+        version:1,
+        exportedAt:new Date().toISOString(),
+        period:{ from, to },
+        totals:{
+            revenue:saleItems.reduce((sum,item) => sum + item.total, 0),
+            spending:receipts.reduce((sum,receipt) => sum + Number(receipt.totalCost || 0), 0),
+            costSales:saleItems.reduce((sum,item) => sum + item.cost, 0),
+            profit:saleItems.reduce((sum,item) => sum + item.profit, 0),
+            units:saleItems.reduce((sum,item) => sum + item.qty, 0),
+            salesCount:sales.length,
+            receiptsCount:receipts.length
+        },
+        topProducts:Object.entries(topProducts)
+            .map(([name,qty]) => ({ name, qty }))
+            .sort((a,b) => b.qty - a.qty)
+            .slice(0,10),
+        daily,
+        saleItems,
+        receipts:receipts.map(receipt => ({
+            date:receipt.date,
+            productName:receipt.productName,
+            qty:receipt.qty,
+            totalCost:receipt.totalCost
+        }))
+    };
+}
+
+function lolitaDownloadJson(filename, payload){
+    const blob =
+        new Blob(
+            [JSON.stringify(payload, null, 2)],
+            { type:"application/json;charset=utf-8" }
+        );
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+
+    link.href = url;
+    link.download = filename;
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    URL.revokeObjectURL(url);
+}
+
+function lolitaExportStatistics(){
+    const stats = lolitaBuildStatsExport();
+    const filename =
+        `base-de-lolita-estadisticas-${stats.period.from}-a-${stats.period.to}.json`;
+
+    lolitaDownloadJson(filename, stats);
+    toast("Estadísticas exportadas");
+}
+
+function lolitaRenderImportedStatistics(stats){
+    const totals = stats.totals || {};
+    const period = stats.period || {};
+    const daily = Array.isArray(stats.daily) ? stats.daily : [];
+    const topProducts = Array.isArray(stats.topProducts) ? stats.topProducts : [];
+
+    $("#reportOutput").innerHTML = `
+        <div class="note" style="margin-bottom:12px;">
+            Archivo importado · ${fmtDate(period.from)} al ${fmtDate(period.to)}
+        </div>
+
+        <div class="report-cards">
+            <div class="report-card"><small>Ventas</small><strong>${money(totals.revenue || 0)}</strong></div>
+            <div class="report-card"><small>Gasto en entradas</small><strong>${money(totals.spending || 0)}</strong></div>
+            <div class="report-card"><small>Costo de lo vendido</small><strong>${money(totals.costSales || 0)}</strong></div>
+            <div class="report-card"><small>Ganancia</small><strong class="green">${money(totals.profit || 0)}</strong></div>
+        </div>
+
+        <div class="grid2">
+            <div>
+                <h3>Día por día</h3>
+                <div class="table-wrap">
+                    <table class="calendar-table">
+                        <thead>
+                            <tr><th>Día</th><th>Unidades</th><th>Ventas</th><th>Gasto</th><th>Ganancia</th></tr>
+                        </thead>
+                        <tbody>
+                            ${daily.map(row => `
+                                <tr>
+                                    <td><b>${fmtDate(row.date)}</b></td>
+                                    <td>${row.units || 0}</td>
+                                    <td>${money(row.revenue || 0)}</td>
+                                    <td>${money(row.spending || 0)}</td>
+                                    <td class="green"><b>${money(row.profit || 0)}</b></td>
+                                </tr>
+                            `).join("")}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div>
+                <h3 style="margin-bottom:10px;">🏆 Más vendidos</h3>
+                ${
+                    topProducts.length
+                        ? topProducts.slice(0,5).map((item,index) => `
+                            <div class="receipt-item">
+                                <div>
+                                    <b>${index + 1}. ${esc(item.name)}</b>
+                                    <small>${item.qty} unidades vendidas</small>
+                                </div>
+                            </div>
+                        `).join("")
+                        : `<div class="empty">El archivo no tiene productos vendidos.</div>`
+                }
+                <div class="note" style="margin-top:12px;">
+                    Este reporte importado es solo para revisión; no modifica tus ventas, inventario ni ofertas actuales.
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+function lolitaImportStatisticsFile(file){
+    if(!file){
+        return;
+    }
+
+    const reader = new FileReader();
+
+    reader.onload = () => {
+        try{
+            const stats = JSON.parse(reader.result);
+
+            if(stats.type !== "BASE_DE_LOLITA_STATS"){
+                toast("Ese archivo no parece ser de estadísticas BASE DE LOLITA");
+                return;
+            }
+
+            if(stats.period?.from){
+                $("#fromDate").value = stats.period.from;
+            }
+
+            if(stats.period?.to){
+                $("#toDate").value = stats.period.to;
+            }
+
+            lolitaRenderImportedStatistics(stats);
+            toast("Estadísticas importadas");
+        }
+        catch(err){
+            console.error(err);
+            toast("No se pudo importar el archivo");
+        }
+    };
+
+    reader.readAsText(file);
+}
+
+$("#exportStats").onclick =
+    lolitaExportStatistics;
+
+$("#importStats").onclick =
+    () => $("#importStatsFile").click();
+
+$("#importStatsFile").onchange =
+    event => {
+        lolitaImportStatisticsFile(event.target.files?.[0]);
+        event.target.value = "";
+    };
 
 
 /* =========================================================
