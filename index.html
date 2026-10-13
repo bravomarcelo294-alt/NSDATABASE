@@ -1918,6 +1918,41 @@ body.dark .base-hero-panel{
     font-size:14px;
 }
 
+.lolita-alert-list{
+    display:grid;
+    gap:10px;
+}
+
+.lolita-alert{
+    display:flex;
+    justify-content:space-between;
+    gap:12px;
+    align-items:flex-start;
+    padding:12px 13px;
+    border:1px solid var(--line);
+    border-radius:13px;
+    background:var(--card2);
+}
+
+.lolita-alert b{
+    display:block;
+    margin-bottom:3px;
+}
+
+.lolita-alert small{
+    color:var(--muted);
+}
+
+.lolita-breakdown{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:10px;
+}
+
+.lolita-breakdown .stat{
+    min-height:86px;
+}
+
 .bulk-lines{
     width:100%;
     min-height:170px;
@@ -2233,6 +2268,601 @@ body.dark .migrate-btn{
     background:#392e1c;
     color:#f0d38a;
     border-color:#5a4526;
+}
+
+/* =========================================================
+   BASE DE LOLITA · UI PREMIUM PASS
+========================================================= */
+
+:root{
+    --accent:#c8842f;
+    --accent-soft:#fff5e7;
+    --focus-ring:0 0 0 3px rgba(22,132,91,.16);
+}
+
+body{
+    color:var(--text);
+    background:linear-gradient(180deg,#f8fbf7 0%,#eef5f0 52%,#f7faf8 100%);
+}
+
+body.dark{
+    background:linear-gradient(180deg,#0d1511 0%,#111d17 52%,#0e1713 100%);
+}
+
+button,
+input,
+select,
+textarea{
+    font:inherit;
+}
+
+button{
+    transition:transform .16s ease, box-shadow .16s ease, border-color .16s ease, background .16s ease, filter .16s ease;
+}
+
+button:hover{
+    transform:translateY(-1px);
+}
+
+button:active{
+    transform:translateY(0);
+}
+
+button:focus-visible,
+input:focus,
+select:focus,
+textarea:focus{
+    outline:none;
+    border-color:var(--green);
+    box-shadow:var(--focus-ring);
+}
+
+.layout{
+    background:transparent;
+}
+
+.sidebar{
+    width:280px;
+    padding:18px 14px;
+    background:linear-gradient(180deg,#0c3524 0%,#0f442f 100%);
+}
+
+.side-brand{
+    border-radius:8px;
+    background:rgba(255,255,255,.10);
+    border:1px solid rgba(255,255,255,.12);
+    box-shadow:none;
+}
+
+.side-icon{
+    width:42px;
+    height:42px;
+    border-radius:8px;
+    display:grid;
+    place-items:center;
+    background:#ffffff;
+    color:var(--green2);
+}
+
+.nav{
+    gap:6px;
+}
+
+.nav button{
+    border-radius:8px;
+    min-height:42px;
+    padding:10px 12px;
+    position:relative;
+}
+
+.nav button.active{
+    background:#ffffff;
+    color:#0d3d2b;
+    box-shadow:0 10px 22px rgba(0,0,0,.14);
+}
+
+.nav button.active:before{
+    content:"";
+    position:absolute;
+    left:7px;
+    top:10px;
+    bottom:10px;
+    width:4px;
+    border-radius:999px;
+    background:var(--accent);
+}
+
+.main{
+    background:transparent;
+}
+
+.topbar{
+    position:sticky;
+    top:0;
+    z-index:20;
+    min-height:72px;
+    background:rgba(248,251,247,.86);
+    backdrop-filter:blur(16px);
+}
+
+body.dark .topbar{
+    background:rgba(14,21,18,.86);
+}
+
+.topbar h2{
+    font-size:20px;
+    font-weight:900;
+}
+
+.content{
+    padding:22px;
+}
+
+.card,
+.base-product-card,
+.lolita-offer-card,
+.base-table-card,
+.report-card,
+.stat,
+.modal-box,
+.login-card{
+    border-radius:8px;
+}
+
+.card,
+.base-product-card,
+.lolita-offer-card,
+.base-table-card{
+    border:1px solid rgba(20,82,57,.12);
+    box-shadow:0 12px 30px rgba(16,59,42,.08);
+}
+
+body.dark .card,
+body.dark .base-product-card,
+body.dark .lolita-offer-card,
+body.dark .base-table-card{
+    border-color:rgba(255,255,255,.08);
+    box-shadow:0 16px 34px rgba(0,0,0,.28);
+}
+
+.card{
+    padding:18px;
+}
+
+.card-head{
+    align-items:center;
+    gap:14px;
+    padding-bottom:12px;
+    border-bottom:1px solid var(--line);
+}
+
+.card-head h3{
+    font-size:18px;
+    line-height:1.2;
+}
+
+.toolbar,
+.filters,
+.base-quick-actions,
+.modal-actions{
+    gap:8px;
+}
+
+.primary,
+.secondary,
+.icon-btn,
+.theme-button,
+.logout{
+    border-radius:8px;
+    min-height:40px;
+}
+
+.primary{
+    background:linear-gradient(180deg,var(--green2),var(--green));
+    box-shadow:0 10px 20px rgba(22,132,91,.22);
+}
+
+.secondary{
+    background:var(--card);
+    border-color:rgba(20,82,57,.14);
+}
+
+.icon-btn{
+    width:40px;
+    height:40px;
+}
+
+.search,
+.field input,
+.field select,
+.field textarea,
+.bulk-lines{
+    border-radius:8px;
+    min-height:40px;
+    border-color:rgba(20,82,57,.16);
+}
+
+.field label{
+    font-size:12px;
+    font-weight:900;
+    color:var(--muted);
+}
+
+.note{
+    border-radius:8px;
+    line-height:1.45;
+}
+
+.stats,
+.report-cards,
+.stat-mini-grid,
+.lolita-breakdown{
+    gap:10px;
+}
+
+.stat,
+.report-card,
+.base-price-cell,
+.lolita-mini,
+.pricebox{
+    border-radius:8px;
+    border:1px solid rgba(20,82,57,.12);
+}
+
+.stat{
+    min-height:92px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+}
+
+.stat small,
+.report-card small,
+.base-price-cell small,
+.lolita-mini small{
+    letter-spacing:.04em;
+}
+
+.stat strong{
+    line-height:1.05;
+}
+
+.base-command-grid{
+    grid-template-columns:minmax(0,1.35fr) minmax(280px,.65fr);
+    gap:16px;
+}
+
+.base-hero-panel{
+    min-height:172px;
+    border-radius:8px;
+    padding:22px;
+    background:linear-gradient(135deg,rgba(22,132,91,.12),rgba(255,255,255,.92));
+}
+
+body.dark .base-hero-panel{
+    background:linear-gradient(135deg,rgba(22,132,91,.18),rgba(24,33,29,.94));
+}
+
+.hero:after,
+.base-hero-panel:after{
+    display:none;
+}
+
+.base-hero-panel h1{
+    font-size:clamp(24px,3vw,34px);
+    line-height:1.05;
+}
+
+.base-hero-panel p{
+    font-size:14px;
+}
+
+.base-eyebrow,
+.lolita-brand-kicker{
+    border-radius:8px;
+    background:var(--accent-soft);
+    color:#8a541d;
+}
+
+body.dark .base-eyebrow,
+body.dark .lolita-brand-kicker{
+    background:rgba(200,132,47,.16);
+    color:#f0bd7a;
+}
+
+.product-grid,
+.lolita-offer-grid{
+    gap:14px;
+}
+
+.product-top,
+.lolita-offer-top,
+.recent-item,
+.receipt-item,
+.lolita-alert{
+    border-radius:8px;
+}
+
+.base-price-row,
+.lolita-mini-grid,
+.lolita-price-hero{
+    gap:8px;
+}
+
+.base-profit-line{
+    border-top:1px solid var(--line);
+    padding-top:12px;
+}
+
+.badge{
+    border-radius:999px;
+    white-space:nowrap;
+}
+
+.table-wrap,
+.base-table-card{
+    overflow:auto;
+}
+
+.table,
+.calendar-table{
+    min-width:760px;
+}
+
+.table th,
+.calendar-table th{
+    background:var(--card2);
+    color:var(--muted);
+    font-weight:900;
+    letter-spacing:.04em;
+}
+
+.table td,
+.calendar-table td{
+    vertical-align:middle;
+}
+
+.table tbody tr:hover,
+.calendar-table tbody tr:hover{
+    background:rgba(22,132,91,.045);
+}
+
+.modal{
+    padding:18px;
+    backdrop-filter:blur(10px);
+}
+
+.modal-box{
+    width:min(900px,100%);
+    max-height:88vh;
+    overflow:auto;
+    border:1px solid var(--line);
+    box-shadow:0 24px 70px rgba(0,0,0,.24);
+}
+
+.modal-box h3{
+    padding-bottom:12px;
+    border-bottom:1px solid var(--line);
+}
+
+.modal-box > .modal-actions{
+    position:sticky;
+    bottom:-20px;
+    background:var(--card);
+    padding-top:12px;
+    border-top:1px solid var(--line);
+}
+
+.login-card{
+    box-shadow:0 28px 80px rgba(0,0,0,.28);
+}
+
+.login-form-panel .brand-mark{
+    border-radius:8px;
+}
+
+@media(max-width:1100px){
+    .base-command-grid{
+        grid-template-columns:1fr;
+    }
+
+    .base-side-summary{
+        grid-template-columns:repeat(3,1fr);
+    }
+}
+
+@media(max-width:760px){
+    .content{
+        padding:14px;
+    }
+
+    .card{
+        padding:14px;
+    }
+
+    .card-head,
+    .base-section-title{
+        align-items:stretch;
+        flex-direction:column;
+    }
+
+    .toolbar,
+    .filters,
+    .base-quick-actions{
+        width:100%;
+    }
+
+    .toolbar > *,
+    .filters > *,
+    .base-quick-actions > *,
+    .modal-box > .modal-actions button{
+        flex:1 1 160px;
+    }
+
+    .search,
+    .filters input,
+    .filters button{
+        min-width:0;
+        width:100%;
+    }
+
+    .base-side-summary{
+        grid-template-columns:1fr;
+    }
+
+    .base-hero-panel h1{
+        font-size:25px;
+    }
+
+    .base-price-row,
+    .lolita-price-hero,
+    .lolita-mini-grid{
+        grid-template-columns:1fr;
+    }
+}
+
+/* =========================================================
+   BASE DE LOLITA · LOGO AND OVERLAP FIX
+========================================================= */
+
+.side-brand{
+    min-height:82px;
+    padding:14px;
+    align-items:center;
+}
+
+.side-icon,
+.brand-mark{
+    position:relative;
+    overflow:hidden;
+    isolation:isolate;
+    border-radius:14px;
+    background:
+        radial-gradient(circle at 30% 24%, rgba(255,255,255,.95), rgba(255,255,255,.72) 28%, transparent 29%),
+        linear-gradient(145deg,#ffffff 0%,#e9f8f1 100%);
+    color:#0d6e4c;
+    box-shadow:
+        inset 0 0 0 1px rgba(255,255,255,.85),
+        0 12px 24px rgba(0,0,0,.14);
+}
+
+.side-icon:before,
+.brand-mark:before{
+    content:"";
+    position:absolute;
+    right:-8px;
+    bottom:-9px;
+    width:28px;
+    height:28px;
+    border-radius:50%;
+    background:rgba(200,132,47,.24);
+    z-index:-1;
+}
+
+.side-icon:after,
+.brand-mark:after{
+    content:"";
+    position:absolute;
+    right:9px;
+    bottom:8px;
+    width:13px;
+    height:18px;
+    border-radius:999px 999px 999px 0;
+    background:#16845b;
+    transform:rotate(38deg);
+    opacity:.92;
+    z-index:-1;
+}
+
+.side-brand strong{
+    line-height:1.1;
+    letter-spacing:0;
+}
+
+.side-brand small{
+    opacity:.82;
+}
+
+.nav button{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.nav button.active{
+    padding-left:18px;
+}
+
+.topbar{
+    overflow:hidden;
+}
+
+.topbar h2{
+    min-width:0;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+}
+
+@media(max-width:1080px){
+    .layout{
+        display:block;
+    }
+
+    .sidebar{
+        position:fixed;
+        inset:0 auto 0 0;
+        width:min(320px,calc(100vw - 24px));
+        max-width:none;
+        left:calc(-1 * min(320px,calc(100vw - 24px)));
+        height:100vh;
+        z-index:120;
+        transition:left .22s ease;
+        box-shadow:24px 0 60px rgba(0,0,0,.28);
+    }
+
+    .sidebar.open{
+        left:0;
+    }
+
+    .main{
+        width:100%;
+        min-width:0;
+    }
+
+    .mobile-menu{
+        display:block;
+    }
+
+    .topbar{
+        padding:0 16px;
+        gap:12px;
+    }
+
+    .topbar .toolbar{
+        margin-left:auto;
+        flex:0 0 auto;
+    }
+}
+
+@media(max-width:520px){
+    .topbar{
+        min-height:66px;
+    }
+
+    .topbar h2{
+        font-size:18px;
+        max-width:42vw;
+    }
+
+    .user{
+        display:none;
+    }
+
+    .theme-button{
+        width:40px;
+        padding:0;
+    }
 }
 
 </style>
@@ -5847,7 +6477,7 @@ function receiptForm(){
                     type="number"
                     min="0"
                     step="0.01"
-                    value="${firstProduct ? firstProduct.cost : 0}"
+                    value="${firstProduct ? (firstProduct.consultantPrice || firstProduct.cost) : 0}"
                 >
             </div>
 
@@ -5858,8 +6488,30 @@ function receiptForm(){
 
         </div>
 
+        <div id="receiptDiscountPreview" class="note" style="margin-top:12px;">
+            Captura cantidad y costo para ver si aplica el 20% por compra a partir de ${money(LOLITA_RECEIPT_DISCOUNT_THRESHOLD)}.
+        </div>
+
     `;
 
+}
+
+function lolitaUpdateSingleReceiptPreview(){
+    const preview = $("#receiptDiscountPreview");
+
+    if(!preview){
+        return;
+    }
+
+    const qty = Number($("#rQty")?.value) || 0;
+    const unitCost = Number($("#rCost")?.value) || 0;
+    const totalBeforeDiscount = qty * unitCost;
+    const summary = lolitaReceiptDiscountSummary(totalBeforeDiscount);
+
+    preview.innerHTML =
+        summary.pct
+            ? `Base: <b>${money(totalBeforeDiscount)}</b> · Descuento ${summary.pct}%: <b>${money(summary.discount)}</b> · Costo real: <b>${money(summary.realTotal)}</b>`
+            : `Base: <b>${money(totalBeforeDiscount)}</b> · Sin descuento porque no llega a ${money(LOLITA_RECEIPT_DISCOUNT_THRESHOLD)}.`;
 }
 
 
@@ -5975,7 +6627,17 @@ $("#receiveProduct").onclick =
 
 async function deleteReceipt(id){
 
-    if(!confirm("¿Eliminar este registro? (el stock no se ajustará automáticamente)")){
+    const receipt =
+        data.receipts.find(
+            r => r.id === id
+        );
+
+    if(!receipt){
+        toast("No encontré ese registro");
+        return;
+    }
+
+    if(!confirm("¿Eliminar este registro? El stock recibido se descontará automáticamente.")){
         return;
     }
 
@@ -5986,6 +6648,8 @@ async function deleteReceipt(id){
         return;
     }
 
+    await lolitaRestoreDeletedReceiptStock(receipt);
+
     data.receipts =
         data.receipts.filter(
             r => r.id !== id
@@ -5993,7 +6657,32 @@ async function deleteReceipt(id){
 
     saveLocalCache();
     renderReceipts();
-    toast("Registro eliminado");
+    renderProducts();
+    renderDashboard();
+    toast("Registro eliminado y stock ajustado");
+
+}
+
+async function lolitaRestoreDeletedReceiptStock(receipt){
+
+    const product =
+        data.products.find(
+            p =>
+                p.id === receipt.productId ||
+                p.name === receipt.productName
+        );
+
+    if(!product){
+        return;
+    }
+
+    product.stock =
+        Math.max(
+            0,
+            Number(product.stock || 0) - Number(receipt.qty || 0)
+        );
+
+    await updateProductRemote(product.id, product);
 
 }
 
@@ -6784,7 +7473,17 @@ $("#addSale").onclick =
 
 async function deleteSale(id){
 
-    if(!confirm("¿Eliminar esta venta? (el stock no se ajustará automáticamente)")){
+    const sale =
+        data.sales.find(
+            s => s.id === id
+        );
+
+    if(!sale){
+        toast("No encontré esa venta");
+        return;
+    }
+
+    if(!confirm("¿Eliminar esta venta? El stock se devolverá automáticamente.")){
         return;
     }
 
@@ -6795,6 +7494,8 @@ async function deleteSale(id){
         return;
     }
 
+    await lolitaRestoreSaleStock(sale);
+
     data.sales =
         data.sales.filter(
             s => s.id !== id
@@ -6802,8 +7503,58 @@ async function deleteSale(id){
 
     saveLocalCache();
     renderSales();
+    renderProducts();
     renderDashboard();
-    toast("Venta eliminada");
+    toast("Venta eliminada y stock restaurado");
+
+}
+
+async function lolitaRestoreSaleStock(sale){
+
+    const items =
+        Array.isArray(sale.items) && sale.items.length
+            ? sale.items
+            : [{
+                productId:sale.productId || "",
+                productName:sale.productName,
+                offerId:sale.offerId || "",
+                qty:sale.qty
+            }];
+
+    for(const item of items){
+        const qty =
+            Number(item.qty) || 0;
+
+        if(qty <= 0){
+            continue;
+        }
+
+        const product =
+            data.products.find(
+                p =>
+                    p.id === item.productId ||
+                    p.name === item.productName
+            );
+
+        if(product){
+            product.stock =
+                Number(product.stock || 0) + qty;
+
+            await updateProductRemote(product.id, product);
+        }
+
+        if(item.offerId){
+            const offer =
+                data.offers.find(o => o.id === item.offerId);
+
+            if(offer){
+                offer.qtyAvailable =
+                    Number(offer.qtyAvailable || 0) + qty;
+
+                await updateOfferRemote(offer.id, offer);
+            }
+        }
+    }
 
 }
 
@@ -7678,6 +8429,32 @@ var LOLITA_CATALOG = (typeof NSP_CATALOG !== "undefined" ? NSP_CATALOG : []).map
         consultor:Number(row[7]) || 0
     })
 );
+const LOLITA_RECEIPT_DISCOUNT_THRESHOLD = 30000;
+const LOLITA_RECEIPT_DISCOUNT_PCT = 20;
+
+function lolitaReceiptDiscountPct(totalBeforeDiscount){
+    return Number(totalBeforeDiscount) >= LOLITA_RECEIPT_DISCOUNT_THRESHOLD
+        ? LOLITA_RECEIPT_DISCOUNT_PCT
+        : 0;
+}
+
+function lolitaDiscountedReceiptUnitCost(unitCost, totalBeforeDiscount){
+    const pct = lolitaReceiptDiscountPct(totalBeforeDiscount);
+
+    return Number(unitCost || 0) * (1 - (pct / 100));
+}
+
+function lolitaReceiptDiscountSummary(totalBeforeDiscount){
+    const pct = lolitaReceiptDiscountPct(totalBeforeDiscount);
+    const discount = Number(totalBeforeDiscount || 0) * (pct / 100);
+    const realTotal = Number(totalBeforeDiscount || 0) - discount;
+
+    return {
+        pct,
+        discount,
+        realTotal
+    };
+}
 
 function lolitaNormalizeCode(value){
     return String(value || "").trim().toUpperCase();
@@ -7870,17 +8647,21 @@ function lolitaBulkTotals(){
     }
 
     let units = 0;
-    let total = 0;
+    let totalBeforeDiscount = 0;
 
     document.querySelectorAll(".bulk-row").forEach(row => {
         const qty = Number(row.querySelector(".bulk-qty").value) || 0;
         const cost = Number(row.querySelector(".bulk-cost").value) || 0;
         units += qty;
-        total += qty * cost;
+        totalBeforeDiscount += qty * cost;
     });
 
+    const summary = lolitaReceiptDiscountSummary(totalBeforeDiscount);
+
     box.innerHTML =
-        `<b>${units}</b> unidades · Inversión registrada: <b>${money(total)}</b>`;
+        summary.pct
+            ? `<b>${units}</b> unidades · Base: <b>${money(totalBeforeDiscount)}</b> · Descuento ${summary.pct}%: <b>${money(summary.discount)}</b> · Costo real: <b>${money(summary.realTotal)}</b>`
+            : `<b>${units}</b> unidades · Base: <b>${money(totalBeforeDiscount)}</b> · Sin descuento porque no llega a ${money(LOLITA_RECEIPT_DISCOUNT_THRESHOLD)}`;
 }
 
 async function lolitaPersistBulkProductCosts(updates){
@@ -7928,7 +8709,7 @@ function lolitaBindBulkRow(row){
             data.products.find(p => p.id === productSelect.value);
 
         if(product){
-            costInput.value = product.cost || product.consultantPrice || 0;
+            costInput.value = product.consultantPrice || product.cost || 0;
         }
 
         lolitaBulkTotals();
@@ -7967,7 +8748,7 @@ function lolitaBulkFromText(){
                 return {
                     productId:product.id,
                     qty:item.qty,
-                    unitCost:product.cost || product.consultantPrice || 0,
+                    unitCost:product.consultantPrice || product.cost || 0,
                     note:item.note
                 };
             })
@@ -8044,14 +8825,28 @@ function lolitaBulkReceiptModal(){
 
             let saved = 0;
             const costUpdates = [];
+            const totalBeforeDiscount =
+                rows.reduce(
+                    (sum,row) =>
+                        sum + (row.qty * row.unitCost),
+                    0
+                );
+            const discountSummary =
+                lolitaReceiptDiscountSummary(totalBeforeDiscount);
 
             for(const row of rows){
+                const realUnitCost =
+                    lolitaDiscountedReceiptUnitCost(
+                        row.unitCost,
+                        totalBeforeDiscount
+                    );
+
                 const receipt = {
                     productId:row.product.id,
                     productName:row.product.name,
                     qty:row.qty,
-                    unitCost:row.unitCost,
-                    totalCost:row.qty * row.unitCost,
+                    unitCost:realUnitCost,
+                    totalCost:row.qty * realUnitCost,
                     date,
                     note:row.note
                 };
@@ -8063,7 +8858,7 @@ function lolitaBulkReceiptModal(){
                     row.product.stock += row.qty;
                     costUpdates.push({
                         product:row.product,
-                        unitCost:row.unitCost
+                        unitCost:realUnitCost
                     });
                     saved++;
                 }
@@ -8075,7 +8870,11 @@ function lolitaBulkReceiptModal(){
             renderReceipts();
             renderProducts();
             renderDashboard();
-            toast(`Llegada masiva registrada: ${saved} producto(s)`);
+            toast(
+                discountSummary.pct
+                    ? `Llegada registrada con ${discountSummary.pct}% de descuento: ${saved} producto(s)`
+                    : `Llegada masiva registrada: ${saved} producto(s)`
+            );
         }
     );
 
@@ -8097,6 +8896,14 @@ function lolitaSingleReceiptModal(){
             const qty = Number($("#rQty").value);
             const unitCost = Number($("#rCost").value);
             const date = $("#rDate").value;
+            const totalBeforeDiscount = qty * unitCost;
+            const realUnitCost =
+                lolitaDiscountedReceiptUnitCost(
+                    unitCost,
+                    totalBeforeDiscount
+                );
+            const discountSummary =
+                lolitaReceiptDiscountSummary(totalBeforeDiscount);
 
             if(!product){
                 toast("Selecciona un producto");
@@ -8125,8 +8932,8 @@ function lolitaSingleReceiptModal(){
                     productId,
                     productName:product.name,
                     qty,
-                    unitCost,
-                    totalCost:qty * unitCost,
+                    unitCost:realUnitCost,
+                    totalCost:qty * realUnitCost,
                     date
                 });
 
@@ -8136,13 +8943,17 @@ function lolitaSingleReceiptModal(){
 
             data.receipts.push(created);
             product.stock += qty;
-            await lolitaPersistBulkProductCosts([{ product, unitCost }]);
+            await lolitaPersistBulkProductCosts([{ product, unitCost:realUnitCost }]);
 
             saveLocalCache();
             renderReceipts();
             renderProducts();
             renderDashboard();
-            toast("Llegada registrada");
+            toast(
+                discountSummary.pct
+                    ? `Llegada registrada con ${discountSummary.pct}% de descuento`
+                    : "Llegada registrada"
+            );
         }
     );
 
@@ -8154,10 +8965,22 @@ function lolitaSingleReceiptModal(){
                 data.products.find(p => p.id === productSelect.value);
 
             if(product){
-                $("#rCost").value = product.cost;
+                $("#rCost").value = product.consultantPrice || product.cost;
             }
+
+            lolitaUpdateSingleReceiptPreview();
         });
     }
+
+    ["rQty","rCost"].forEach(id => {
+        const input = $(`#${id}`);
+
+        if(input){
+            input.addEventListener("input", lolitaUpdateSingleReceiptPreview);
+        }
+    });
+
+    lolitaUpdateSingleReceiptPreview();
 }
 
 function installLolitaBulkButton(){
@@ -8537,6 +9360,138 @@ function lolitaStockBadge(product){
     return `<span class="badge ${cls}">${label} · ${product.stock} ud.</span>`;
 }
 
+function lolitaSaleItemRows(sale){
+    if(Array.isArray(sale.items) && sale.items.length){
+        return sale.items;
+    }
+
+    return [{
+        productId:sale.productId || "",
+        productName:sale.productName,
+        qty:sale.qty,
+        price:sale.total && sale.qty ? sale.total / sale.qty : 0,
+        subtotal:sale.total,
+        profit:sale.profit,
+        cost:sale.cost || 0
+    }];
+}
+
+function lolitaProfitBreakdownPanel(){
+    const items = data.sales.flatMap(lolitaSaleItemRows);
+    const revenue =
+        data.sales.reduce((sum,sale) => sum + Number(sale.total || 0), 0);
+    const realCost =
+        items.reduce(
+            (sum,item) =>
+                sum + ((Number(item.cost) || 0) * (Number(item.qty) || 0)),
+            0
+        );
+    const profit =
+        data.sales.reduce((sum,sale) => sum + Number(sale.profit || 0), 0);
+    const units =
+        items.reduce((sum,item) => sum + Number(item.qty || 0), 0);
+    const margin = revenue ? (profit / revenue) * 100 : 0;
+
+    return `
+        <div class="card">
+            <div class="card-head">
+                <h3>Ganancia real explicada</h3>
+                <button class="secondary" onclick="showView('reports')">Ver reporte</button>
+            </div>
+            <div class="lolita-breakdown">
+                <div class="stat"><small>Ventas cobradas</small><strong>${money(revenue)}</strong></div>
+                <div class="stat"><small>Costo real descontado</small><strong>${money(realCost)}</strong></div>
+                <div class="stat"><small>Ganancia real</small><strong class="green">${money(profit)}</strong></div>
+                <div class="stat"><small>Margen promedio</small><strong>${margin.toFixed(1)}%</strong></div>
+                <div class="stat"><small>Unidades vendidas</small><strong>${units}</strong></div>
+            </div>
+            <div class="note" style="margin-top:12px;margin-bottom:0;">
+                Cuando una llegada alcanza ${money(LOLITA_RECEIPT_DISCOUNT_THRESHOLD)}, el sistema baja el costo real 20% y usa ese costo para calcular ganancia.
+            </div>
+        </div>
+    `;
+}
+
+function lolitaSmartAlerts(){
+    const alerts = [];
+    const lowStock =
+        data.products
+            .filter(product => product.stock <= product.minStock)
+            .slice(0,4);
+    const noCost =
+        data.products
+            .filter(product => Number(product.cost || 0) <= 0)
+            .slice(0,3);
+    const endingOffers =
+        data.offers
+            .filter(offer => computeOfferStatus(offer) === "activa" && daysUntil(offer.endDate) <= 2)
+            .slice(0,3);
+    const weakSales =
+        data.sales
+            .filter(sale => sale.total && ((sale.profit / sale.total) * 100) < 15)
+            .slice(-3);
+
+    lowStock.forEach(product => {
+        alerts.push({
+            title:`Stock bajo: ${product.name}`,
+            body:`Quedan ${product.stock} unidades. Mínimo configurado: ${product.minStock}.`,
+            action:"Productos",
+            view:"products"
+        });
+    });
+
+    noCost.forEach(product => {
+        alerts.push({
+            title:`Falta costo real: ${product.name}`,
+            body:"Sin costo real la ganancia puede salir incorrecta.",
+            action:"Editar",
+            view:"products"
+        });
+    });
+
+    endingOffers.forEach(offer => {
+        alerts.push({
+            title:`Oferta por terminar: ${offer.productName}`,
+            body:`Termina el ${fmtDate(offer.endDate)}.`,
+            action:"Ofertas",
+            view:"offers"
+        });
+    });
+
+    weakSales.forEach(sale => {
+        alerts.push({
+            title:`Margen bajo: ${saleItemsLabel(sale)}`,
+            body:`Ganancia ${money(sale.profit)} sobre venta ${money(sale.total)}.`,
+            action:"Ventas",
+            view:"sales"
+        });
+    });
+
+    return `
+        <div class="card">
+            <div class="card-head">
+                <h3>Alertas inteligentes</h3>
+                <button class="secondary" onclick="renderDashboard()">Actualizar</button>
+            </div>
+            <div class="lolita-alert-list">
+                ${
+                    alerts.length
+                        ? alerts.slice(0,8).map(alert => `
+                            <div class="lolita-alert">
+                                <div>
+                                    <b>${esc(alert.title)}</b>
+                                    <small>${esc(alert.body)}</small>
+                                </div>
+                                <button class="secondary" onclick="showView('${alert.view}')">${alert.action}</button>
+                            </div>
+                        `).join("")
+                        : `<div class="empty">Todo se ve bien por ahora.</div>`
+                }
+            </div>
+        </div>
+    `;
+}
+
 function lolitaRenderDashboardShell(){
     const root = $("#dashboard");
 
@@ -8616,6 +9571,9 @@ function lolitaRenderDashboardShell(){
             <div class="stat"><small>Ahorro activo</small><strong>${money(offerTotals.savings)}</strong></div>
             <div class="stat"><small>Ganancia estimada en ofertas</small><strong class="green">${money(offerTotals.immediate + offerTotals.bonus)}</strong></div>
         </div>
+
+        ${lolitaProfitBreakdownPanel()}
+        ${lolitaSmartAlerts()}
 
         <div class="grid2">
             <div class="card">
@@ -8753,6 +9711,7 @@ function lolitaRenderProductCatalog(){
                             <span class="stock">Ganancia configurada: <span class="green">${money(margin)}</span></span>
                             <div class="actions">
                                 <button class="icon-btn" title="Editar" onclick="editProduct('${product.id}')">✏️</button>
+                                <button class="icon-btn" title="Historial" onclick="lolitaShowProductHistory('${product.id}')">📜</button>
                                 <button class="icon-btn del" title="Eliminar" onclick="deleteProduct('${product.id}')">🗑️</button>
                             </div>
                         </div>
@@ -8764,6 +9723,81 @@ function lolitaRenderProductCatalog(){
                     No hay productos con ese filtro.
                 </div>
             `;
+}
+
+function lolitaShowProductHistory(productId){
+    const product =
+        data.products.find(p => p.id === productId);
+
+    if(!product){
+        return;
+    }
+
+    const receipts =
+        data.receipts
+            .filter(receipt => receipt.productId === productId || receipt.productName === product.name)
+            .sort((a,b) => String(b.date || "").localeCompare(String(a.date || "")));
+    const sales =
+        data.sales
+            .flatMap(sale =>
+                lolitaSaleItemRows(sale)
+                    .filter(item => item.productId === productId || item.productName === product.name)
+                    .map(item => ({ ...item, date:sale.date, clientName:sale.clientName }))
+            )
+            .sort((a,b) => String(b.date || "").localeCompare(String(a.date || "")));
+    const receivedUnits =
+        receipts.reduce((sum,receipt) => sum + Number(receipt.qty || 0), 0);
+    const soldUnits =
+        sales.reduce((sum,item) => sum + Number(item.qty || 0), 0);
+    const profit =
+        sales.reduce((sum,item) => sum + Number(item.profit || 0), 0);
+
+    openModal(
+        `📜 Historial · ${product.name}`,
+        `
+            <div class="stats">
+                <div class="stat"><small>Stock actual</small><strong>${product.stock}</strong></div>
+                <div class="stat"><small>Recibidas</small><strong>${receivedUnits}</strong></div>
+                <div class="stat"><small>Vendidas</small><strong>${soldUnits}</strong></div>
+                <div class="stat"><small>Ganancia</small><strong class="green">${money(profit)}</strong></div>
+            </div>
+            <div class="grid2" style="margin-top:14px;">
+                <div>
+                    <h3>Últimas llegadas</h3>
+                    ${
+                        receipts.length
+                            ? receipts.slice(0,8).map(receipt => `
+                                <div class="receipt-item">
+                                    <div>
+                                        <b>${fmtDate(receipt.date)}</b>
+                                        <small>${receipt.qty} ud. · costo ${money(receipt.unitCost)}</small>
+                                    </div>
+                                    <b>${money(receipt.totalCost)}</b>
+                                </div>
+                            `).join("")
+                            : `<div class="empty">Sin llegadas.</div>`
+                    }
+                </div>
+                <div>
+                    <h3>Últimas ventas</h3>
+                    ${
+                        sales.length
+                            ? sales.slice(0,8).map(item => `
+                                <div class="receipt-item">
+                                    <div>
+                                        <b>${fmtDate(item.date)}</b>
+                                        <small>${esc(item.clientName || "Público general")} · ${item.qty} ud.</small>
+                                    </div>
+                                    <b class="green">${money(item.profit)}</b>
+                                </div>
+                            `).join("")
+                            : `<div class="empty">Sin ventas.</div>`
+                    }
+                </div>
+            </div>
+        `,
+        closeModal
+    );
 }
 
 function lolitaRenderReceiptsPanel(){
@@ -9509,6 +10543,7 @@ function lolitaRenderSalesTable(){
                                             <td>${money(sale.total)}</td>
                                             <td class="green">${money(sale.profit)}</td>
                                             <td class="actions">
+                                                <button class="icon-btn" title="Ticket / PDF" onclick="lolitaPrintSaleTicket('${sale.id}')">🧾</button>
                                                 <button class="icon-btn del" title="Eliminar" onclick="deleteSale('${sale.id}')">🗑️</button>
                                             </td>
                                         </tr>
@@ -9523,6 +10558,75 @@ function lolitaRenderSalesTable(){
     `;
 
     lolitaSaleFilters();
+}
+
+function lolitaPrintSaleTicket(id){
+    const sale =
+        data.sales.find(item => item.id === id);
+
+    if(!sale){
+        toast("No encontré esa venta");
+        return;
+    }
+
+    const items = lolitaSaleItemRows(sale);
+    const rows =
+        items.map(item => `
+            <tr>
+                <td>${esc(item.productName)}</td>
+                <td>${Number(item.qty || 0)}</td>
+                <td>${money(item.price || 0)}</td>
+                <td>${money(item.subtotal || ((item.price || 0) * (item.qty || 0)))}</td>
+            </tr>
+        `).join("");
+    const margin =
+        sale.total ? (sale.profit / sale.total) * 100 : 0;
+    const ticket = `
+        <!doctype html>
+        <html lang="es">
+        <head>
+            <meta charset="utf-8">
+            <title>Ticket BASE DE LOLITA</title>
+            <style>
+                body{font-family:Arial,sans-serif;margin:24px;color:#1d2b24;}
+                h1{margin:0 0 4px;font-size:22px;color:#087b68;}
+                table{width:100%;border-collapse:collapse;margin-top:16px;}
+                th,td{padding:9px;border-bottom:1px solid #dce8e3;text-align:left;font-size:13px;}
+                th{text-transform:uppercase;font-size:11px;color:#667a70;}
+                .total{margin-top:18px;padding:14px;background:#eef8f3;border-radius:10px;}
+                .green{color:#087b68;font-weight:700;}
+                @media print{button{display:none;}}
+            </style>
+        </head>
+        <body>
+            <h1>BASE DE LOLITA</h1>
+            <div>Ticket de venta · ${fmtDate(sale.date)}</div>
+            <div>Cliente: <b>${esc(sale.clientName || "Público general")}</b></div>
+            <table>
+                <thead>
+                    <tr><th>Producto</th><th>Cant.</th><th>Precio</th><th>Subtotal</th></tr>
+                </thead>
+                <tbody>${rows}</tbody>
+            </table>
+            <div class="total">
+                <div>Total: <b>${money(sale.total)}</b></div>
+                <div>Ganancia estimada: <b class="green">${money(sale.profit)}</b></div>
+                <div>Margen: <b>${margin.toFixed(1)}%</b></div>
+            </div>
+            <button onclick="window.print()">Imprimir / guardar PDF</button>
+        </body>
+        </html>
+    `;
+    const win = window.open("", "_blank");
+
+    if(!win){
+        toast("El navegador bloqueó la ventana del ticket");
+        return;
+    }
+
+    win.document.write(ticket);
+    win.document.close();
+    win.focus();
 }
 
 function lolitaRenderSalesSection(){
@@ -9774,11 +10878,13 @@ function renderReport(){
         );
 
     const costSales =
-        sales.reduce(
-            (sum,sale) =>
-                sum + (sale.cost * sale.qty),
-            0
-        );
+        sales
+            .flatMap(lolitaSaleItemsForStats)
+            .reduce(
+                (sum,item) =>
+                    sum + item.cost,
+                0
+            );
 
     const profit =
         sales.reduce(
@@ -9810,22 +10916,24 @@ function renderReport(){
     const byProduct = {};
 
 
-    sales.forEach(
-        sale => {
+    sales
+        .flatMap(lolitaSaleItemsForStats)
+        .forEach(
+            item => {
 
-            byProduct[
-                sale.productName
-            ] =
-                (
-                    byProduct[
-                        sale.productName
-                    ] ||
-                    0
-                ) +
-                sale.qty;
+                byProduct[
+                    item.productName
+                ] =
+                    (
+                        byProduct[
+                            item.productName
+                        ] ||
+                        0
+                    ) +
+                    item.qty;
 
-        }
-    );
+            }
+        );
 
 
     const top =
