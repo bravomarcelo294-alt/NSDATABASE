@@ -2913,6 +2913,206 @@ button:disabled{opacity:.55;cursor:not-allowed;transform:none;}
 }
 @media(max-width:400px){.topbar .sync-status{display:none;}}
 
+/* ===== BASE DE LOLITA V2 DESIGN ===== */
+:root{--bg:#f4f6f7;--card:#fff;--card2:#f7f9fa;--text:#23342d;--muted:#64746c;--line:#dfe6e2;--green:#177455;--green2:#105e43;--soft:#eaf4ee;--sidebar:#113b2d;--input-border:#cbd6cf;--shadow:0 4px 16px rgba(23,47,36,.05);}
+body{background:var(--bg);line-height:1.5;}
+body.dark{--bg:#141a18;--card:#1c2420;--card2:#222d27;--text:#eef3ef;--muted:#acbbb2;--line:#35433b;--green:#5bcea1;--green2:#88deba;--soft:#233c30;--sidebar:#10271e;--input:#19211d;--input-border:#475b4d;background:var(--bg);color-scheme:dark;}
+body *,body *:before,body *:after{letter-spacing:0;}
+button,input,select,textarea{font:inherit;}
+button{cursor:pointer;touch-action:manipulation;}
+button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid #4b9dcb;outline-offset:3px;}
+button:disabled{cursor:not-allowed;}
+.layout{display:grid;grid-template-columns:246px minmax(0,1fr);min-height:100dvh;}
+.sidebar{position:sticky;top:0;left:auto;width:auto;max-width:none;height:100dvh;min-width:0;padding:28px 16px 18px;background:var(--sidebar);border:0;box-shadow:none;display:flex;flex-direction:column;overflow-y:auto;z-index:45;}
+.side-brand{background:none;border:0;border-radius:0;box-shadow:none;padding:0 10px 28px;margin:0;gap:12px;align-items:center;}
+.side-brand strong{font-size:15px;font-weight:750;line-height:1.4;white-space:normal;}
+.side-brand small{font-size:11px;color:#bdd2c5;margin-top:2px;}
+.side-icon,.brand-mark{position:relative;isolation:isolate;display:grid;place-items:center;flex:0 0 46px;width:46px;height:46px;border-radius:8px;background:#f3f9f3;color:#174c36;box-shadow:none;font-family:Georgia,serif;font-size:24px;font-weight:700;border:1px solid #c7dacc;overflow:visible;}
+.side-icon:before,.brand-mark:before,.side-icon:after,.brand-mark:after{display:none;}
+.v2-brand-sprout{position:absolute;right:-5px;top:-7px;border-radius:50%;background:#cce4ad;display:grid;place-items:center;width:20px;height:20px;border:2px solid var(--sidebar);}
+.v2-brand-sprout svg{width:12px;height:12px;}
+.v2-nav-caption{padding:0 13px 12px;color:#a6c1b1;font-size:10px;font-weight:700;text-transform:uppercase;}
+.nav{display:grid;gap:5px;}
+.nav button{width:100%;min-height:45px;padding:11px 13px;gap:12px;border-radius:7px;border:1px solid transparent;font-size:12px;font-weight:550;color:#c8d9cf;box-shadow:none;line-height:1.4;text-align:left;white-space:normal;}
+.nav button svg{flex:0 0 19px;width:19px;height:19px;opacity:.85;}
+.nav button:hover{background:#204e3a;color:white;transform:none;}
+.nav button.active{padding:11px 13px;color:#fff;background:#285b44;border-color:#47745b;box-shadow:none;}
+.nav button.active:before{display:none;}
+.side-bottom{margin-top:auto;padding-top:30px;display:grid;gap:6px;}
+.side-bottom .logout{display:flex;align-items:center;gap:12px;justify-content:flex-start;width:100%;background:none;border:0;border-radius:6px;color:#c8d9cf;font-size:12px;padding:10px 13px;min-height:42px;}
+.release-button{margin-top:0;}
+.main{min-width:0;width:100%;}
+.topbar{position:sticky;top:0;z-index:35;min-height:76px;height:auto;padding:14px 32px;background:var(--card);backdrop-filter:none;border-bottom:1px solid var(--line);gap:16px;display:flex;justify-content:space-between;overflow:visible;}
+.topbar h2{font-size:16px;font-weight:650;max-width:none;color:var(--muted);}
+.topbar>div{min-width:0;}
+.topbar>div:last-child{gap:10px!important;}
+.topbar .user{max-width:190px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:11px;border-left:1px solid var(--line);padding-left:16px;}
+.topbar .user .dot{display:none;}
+.icon-btn,.theme-button,.mobile-menu{display:inline-flex;align-items:center;justify-content:center;flex:0 0 38px;width:38px;height:38px;min-height:38px;padding:0;border:1px solid var(--line);border-radius:7px;background:var(--card);color:var(--text);box-shadow:none;}
+.theme-button span{display:none;}
+.theme-button svg,.icon-btn svg,.mobile-menu svg{width:18px;height:18px;}
+.mobile-menu{display:none;}
+.sync-status{gap:7px;background:transparent;border:0;padding:6px 0;color:var(--muted);font-size:11px;font-weight:500;max-width:180px;line-height:1.35;}
+.sync-dot{width:6px;height:6px;flex:0 0 6px;}
+.notification-count{right:-5px;top:-5px;border:2px solid var(--card);height:19px;line-height:15px;min-width:19px;font-size:10px;}
+.content{max-width:1560px;padding:30px 32px 48px;margin:auto;width:100%;}
+.view{min-width:0;}
+.card,.base-hero-panel,.base-side-summary,.hero{background:none!important;border:0;border-radius:0;box-shadow:none;}
+.card{padding:22px 0;margin:0 0 20px;border-top:1px solid var(--line);}
+body.dark .card{box-shadow:none;border-radius:0;background:none!important;}
+.card .card{border:0;margin:0;padding:0;}
+.card-head{gap:16px;margin-bottom:18px;align-items:center;flex-wrap:wrap;}
+.card-head h3,.base-section-title h3{font-size:17px;font-weight:650;line-height:1.4;}
+.card-head p{font-size:12px;}
+.grid2{grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:28px;}
+.grid2>*,.card,#reportOutput,.report-cards,.filters,.toolbar{min-width:0;max-width:100%;}
+.base-command-grid{display:grid;grid-template-columns:minmax(0,1fr);gap:22px;margin-bottom:28px;}
+.base-hero-panel{padding:0;min-height:0;overflow:visible;display:flex;flex-direction:row;align-items:center;justify-content:space-between;gap:24px;}
+.base-hero-panel:after,.hero:after{display:none;}
+.base-hero-panel h1,.hero h1{font-size:26px;line-height:1.25;max-width:none;font-weight:700;}
+.base-hero-panel p,.hero p{display:none;}
+.base-eyebrow,.lolita-brand-kicker{display:block;border:0;border-radius:0;padding:0;background:none;color:var(--muted);font-size:10px;text-transform:uppercase;font-weight:600;margin:0 0 6px;}
+body.dark .base-eyebrow,body.dark .lolita-brand-kicker{background:none;color:var(--muted);}
+.base-quick-actions{margin:0;gap:8px;flex:0 1 auto;justify-content:flex-end;}
+.base-side-summary{grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;display:grid;}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:17px 18px;box-shadow:none;min-height:96px;min-width:0;}
+.stat small{display:block;font-size:11px;font-weight:550;color:var(--muted);text-transform:none;line-height:1.5;margin-bottom:8px;}
+.stat strong{display:block;font-size:25px;font-weight:650;line-height:1.2;font-variant-numeric:tabular-nums;overflow-wrap:anywhere;}
+.base-side-summary .stat{border-top:3px solid #4b7bb6;min-height:108px;}
+.base-side-summary .stat:nth-child(2){border-top-color:#32976b;}
+.base-side-summary .stat:nth-child(3){border-top-color:#a982b5;}
+.stats{grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:12px;margin-bottom:24px;}
+.stats .stat strong{font-size:23px;}
+.lolita-breakdown{gap:12px;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));}
+.lolita-breakdown .stat{background:transparent;border:0;border-left:2px solid var(--line);border-radius:0;min-height:0;padding:0 14px;}
+.lolita-breakdown .stat strong{font-size:21px;}
+.green{color:var(--green2);}
+.primary,.secondary,.migrate-btn,.offer-template{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:40px;height:auto;border-radius:7px;padding:9px 14px;font-size:12px;font-weight:600;box-shadow:none;white-space:normal;line-height:1.45;}
+.primary{background:#177455;color:white;border:1px solid #177455;}
+.primary:hover{background:#105e43;border-color:#105e43;transform:none;box-shadow:0 2px 5px #17372615;}
+.secondary{background:var(--card);border:1px solid var(--input-border);color:var(--text);}
+.secondary:hover{background:var(--soft);border-color:var(--green);transform:none;}
+button .v2-icon{flex:0 0 17px;width:17px;height:17px;}
+.icon-btn.del{color:#ba4656;background:var(--card);border-color:var(--line);}
+.icon-btn.del:hover{background:#fae9eb;}
+.toolbar,.filters{gap:10px;flex-wrap:wrap;align-items:center;}
+.search,.field input,.field select,.filters input,.filters select,textarea{min-height:42px;border:1px solid var(--input-border);border-radius:7px;box-shadow:none;background:var(--input);color:var(--text);padding:10px 12px;font-size:13px;min-width:0;max-width:100%;}
+.field{min-width:0;margin-bottom:16px;}
+.field label{font-size:11px;font-weight:600;margin-bottom:7px;color:var(--muted);display:block;}
+.field input,.field select{width:100%;}
+.form-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;}
+.form-grid.three{grid-template-columns:repeat(3,minmax(0,1fr));}
+.base-table-card,.table-wrap{background:var(--card);border:1px solid var(--line);border-radius:8px;box-shadow:none;overflow:auto;max-width:100%;}
+.product-grid{grid-template-columns:repeat(auto-fill,minmax(min(100%,285px),1fr));gap:16px;}
+.base-product-card{border-radius:8px;box-shadow:none;padding:18px;gap:16px;min-width:0;}
+.base-product-card h4{font-size:16px;font-weight:650;line-height:1.4;}
+.product-top{align-items:flex-start;gap:10px;}
+.product-top>div{min-width:0;}
+.product-top .badge{flex:0 0 auto;align-self:flex-start;max-width:120px;height:auto;padding:4px 7px;line-height:1.5;}
+.base-product-code{font-size:11px;font-weight:500;}
+.base-price-row{grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;}
+.base-price-cell{background:none;border:0;border-radius:0;padding:0;min-width:0;}
+.base-price-cell small{font-size:9px;font-weight:550;color:var(--muted);}
+.base-price-cell b{font-size:13px;font-weight:600;font-variant-numeric:tabular-nums;overflow-wrap:anywhere;}
+.base-profit-line{font-size:11px;padding-top:12px;}
+.base-profit-line .stock{font-weight:500;}
+.report-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:12px;margin-bottom:24px;}
+.report-card{border:1px solid var(--line);border-radius:8px;background:var(--card);padding:17px;box-shadow:none;min-width:0;}
+.report-card small{font-size:11px;font-weight:550;color:var(--muted);}
+.report-card strong{font-size:24px;font-weight:650;overflow-wrap:anywhere;font-variant-numeric:tabular-nums;}
+.table{border-collapse:collapse;width:100%;font-size:12px;}
+.table th{position:sticky;top:0;background:var(--card2);color:var(--muted);font-size:10px;font-weight:650;padding:13px 15px;border-bottom:1px solid var(--line);z-index:1;}
+.table td{padding:15px;border-bottom:1px solid var(--line);font-variant-numeric:tabular-nums;line-height:1.5;}
+.table tbody tr:last-child td{border-bottom:0;}
+.table tbody tr:hover{background:var(--soft);}
+.table .actions{white-space:nowrap;}
+.table .actions button{width:32px;height:32px;min-height:32px;flex-basis:32px;display:inline-flex;margin:0 2px;}
+.table td b{font-weight:600;}
+.badge,.stock-badge{font-size:10px;font-weight:600;border-radius:5px;padding:4px 7px;white-space:normal;}
+.recent,.receipt-list,.lolita-alert-list{gap:0;}
+.recent-item,.receipt-item,.lolita-alert{border:0;border-bottom:1px solid var(--line);border-radius:0;box-shadow:none;background:none;padding:14px 0;gap:14px;min-width:0;}
+.recent-item>div,.receipt-item>div,.lolita-alert>div{min-width:0;}
+.recent-item b,.receipt-item b,.lolita-alert b{font-size:12px;font-weight:600;overflow-wrap:anywhere;}
+.recent-item small,.receipt-item small,.lolita-alert small{font-size:11px;line-height:1.5;display:block;margin-top:3px;}
+.recent-item>strong,.receipt-item>strong{font-size:13px;white-space:nowrap;font-variant-numeric:tabular-nums;}
+.lolita-alert{border-left:2px solid #d8b95e;padding-left:12px;}
+.lolita-alert .secondary{min-height:30px;padding:5px 9px;font-size:10px;flex-shrink:0;}
+.note{font-size:12px;color:var(--muted);line-height:1.6;background:none;border:0;border-radius:0;padding:0;}
+.empty{padding:38px 18px;background:var(--card2);border:1px dashed var(--input-border);border-radius:8px;font-size:12px;}
+.campaign-grid,.lolita-offer-grid{grid-template-columns:repeat(auto-fill,minmax(min(100%,270px),1fr));gap:18px;align-items:stretch;}
+.campaign-card,.lolita-offer-card{border-radius:8px;box-shadow:none;border:1px solid var(--line);background:var(--card);}
+.campaign-art{height:290px;aspect-ratio:auto;object-fit:contain;background:#f0f2f2;}
+.campaign-body{padding:16px;gap:10px;}
+.campaign-body h4,.lolita-offer-top h4{font-size:16px;font-weight:650;}
+.campaign-price{font-size:24px;}
+.lolita-price-main,.lolita-price-soft,.lolita-mini{border-radius:7px;background:var(--card2);border:0;}
+.lolita-price-soft{background:none;}
+.lolita-price-main{background:var(--soft);color:var(--green2);}
+.lolita-price-main strong{font-size:25px;}
+.lolita-offer-card .lolita-mini{padding:8px 0;border-top:1px solid var(--line);border-radius:0;background:none;}
+.offer-template{border-radius:7px;}
+.modal{padding:28px;background:rgba(13,31,23,.5);backdrop-filter:blur(3px);z-index:150;}
+.modal-box{width:min(800px,100%);max-height:calc(100dvh - 56px);border:1px solid var(--line);border-radius:8px;box-shadow:0 24px 80px #06170d40;padding:24px;overflow:auto;overscroll-behavior:contain;}
+.modal-box>h3{font-size:18px;font-weight:650;margin:0 0 24px;padding:0 40px 18px 0;border-bottom:1px solid var(--line);line-height:1.4;}
+.modal-box>.modal-actions{position:sticky;bottom:-24px;background:var(--card);border-top:1px solid var(--line);padding:16px 0;margin-top:24px;z-index:4;}
+.modal-box:has(.v2-sale-workspace){width:min(1150px,100%);}
+.v2-sale-workspace{display:grid;grid-template-columns:minmax(0,1fr) 260px;gap:28px;align-items:start;}
+.v2-sale-main{min-width:0;}
+.v2-sale-summary{position:sticky;top:0;border-left:1px solid var(--line);padding-left:24px;min-width:0;}
+.v2-sale-summary h4{font-size:13px;font-weight:650;margin:0 0 16px;}
+.v2-sale-summary .stats{display:block;margin:0!important;}
+.v2-sale-summary .stat{border:0;border-radius:0;background:none;min-height:0;padding:12px 0;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:10px;}
+.v2-sale-summary .stat:first-child{display:block;background:var(--soft);padding:18px;border-radius:7px;margin-bottom:12px;border:0;}
+.v2-sale-summary .stat:first-child strong{font-size:30px;color:var(--green2);}
+.v2-sale-summary .stat strong{font-size:16px;}
+.v2-sale-summary .stat small{font-size:11px;margin:0;}
+.v2-sale-summary .stat:first-child small{margin-bottom:8px;}
+.v2-sale-summary #saleWarnings .note{padding:12px 0;color:#b34849;font-size:11px;}
+.sale-item-row.base-table-card{border:0;border-top:1px solid var(--line);border-radius:0;background:none;padding:18px 0!important;margin:0!important;overflow:visible;}
+.sale-item-row .form-grid.three{grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);}
+.sale-item-row .field label{font-size:10px;}
+.base-section-title{margin:18px 0 12px;}
+.base-section-title small{font-size:11px;}
+#login{min-height:100dvh;background:var(--bg);padding:28px;}
+.login-card{display:block;width:min(420px,100%);border:1px solid var(--line);border-radius:8px;padding:34px;background:var(--card);box-shadow:var(--shadow);}
+.login-card:before,.login-panel{display:none!important;}
+.login-form-panel{padding:0;background:none;min-width:0;}
+.login-form-panel .brand-mark{margin:0 0 24px;width:54px;height:54px;font-size:28px;}
+.login-form-panel h1{font-size:23px;text-align:left;color:var(--text);line-height:1.3;margin-bottom:4px;}
+.login-form-panel>p{font-size:12px;text-align:left;color:var(--muted);margin-bottom:28px;}
+.login-form-panel .primary{width:100%;min-height:44px;border-radius:7px;}
+.login-error{font-size:12px;line-height:1.5;margin-top:14px;}
+.v2-password-wrap{position:relative;}
+.v2-password-wrap input{padding-right:48px;}
+.v2-password-toggle{position:absolute;right:4px;top:4px;width:34px;height:34px;display:grid;place-items:center;border:0;border-radius:5px;background:none;color:var(--muted);}
+.v2-password-toggle svg{width:18px;height:18px;}
+.v2-modal-close{position:absolute;right:20px;top:18px;z-index:5;}
+.modal-box{position:relative;}
+.toast{border-radius:7px;font-size:12px;max-width:min(420px,calc(100vw - 32px));line-height:1.6;z-index:220;}
+.v2-nav-backdrop,.v2-close-nav,.v2-mobile-total{display:none;}
+.v2-negative{color:#b64454!important;}
+@media(max-width:760px){.card-head{flex-direction:column;align-items:stretch;}.card-head h3{align-self:flex-start;}.report-cards{grid-template-columns:repeat(2,minmax(0,1fr));}.grid2{grid-template-columns:minmax(0,1fr);}}
+body.dark .v2-negative{color:#f28e9d!important;}
+body:has(#modal.open){overflow:hidden;}
+@media(min-width:1101px){.layout .sidebar{position:sticky;left:auto;width:auto;} .base-command-grid{grid-template-columns:1fr;} .stats{grid-template-columns:repeat(auto-fit,minmax(145px,1fr));}}
+@media(max-width:1100px){
+ .layout{display:block;}.sidebar{position:fixed!important;inset:0 auto 0 0;left:-280px!important;width:260px!important;max-width:calc(100vw - 40px);height:100dvh;transition:left .2s ease;z-index:130;padding-top:28px;}.sidebar.open{left:0!important;box-shadow:10px 0 40px #05150e30;}
+ .mobile-menu{display:inline-flex;}.topbar{padding:12px 22px;}.content{padding:24px 22px 40px;}.v2-close-nav{display:flex;position:absolute;right:8px;top:5px;width:24px;height:24px;min-height:24px;background:none;color:#d1e0d6;border:0;}.v2-close-nav svg{width:15px;height:15px;}
+ .layout:has(.sidebar.open)>.v2-nav-backdrop{display:block;position:fixed;inset:0;z-index:120;border:0;border-radius:0;background:#0b201854;padding:0;width:100%;height:100dvh;}.topbar .user{display:none;}
+}
+@media(max-width:760px){
+ .topbar{min-height:65px;padding:12px 16px;gap:8px;}.topbar h2{font-size:13px;max-width:160px;white-space:normal;line-height:1.3;}.topbar>div:last-child{gap:7px!important;flex:0 0 auto;}.topbar .sync-status{display:none;}.icon-btn,.theme-button,.mobile-menu{width:36px;flex-basis:36px;height:36px;min-height:36px;}.content{padding:22px 16px 36px;}
+ .base-hero-panel{align-items:flex-start;flex-direction:column;gap:16px;}.base-hero-panel h1{font-size:23px;}.base-quick-actions{justify-content:flex-start;width:100%;gap:7px;}.base-quick-actions .secondary{padding:8px 10px;font-size:11px;}.base-side-summary{gap:8px;}.base-side-summary .stat{padding:14px 12px;min-height:97px;}.base-side-summary .stat strong{font-size:20px;}.base-side-summary .stat small{font-size:10px;}.stats{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;}.stat{padding:15px;}.stat strong{font-size:22px;}.grid2{grid-template-columns:1fr;gap:0;}
+ .toolbar{width:100%;}.search{flex:1 1 180px;min-width:0;}.filters input{flex:1 1 130px;}.card-head{gap:12px;}.card-head h3{font-size:16px;}.table th,.table td{padding:12px;}.table th{white-space:nowrap;}
+ .modal{padding:12px;}.modal-box{max-height:calc(100dvh - 24px);padding:18px;}.modal-box>.modal-actions{bottom:-18px;gap:8px;padding:14px 0;}.modal-box>.modal-actions button{min-height:42px;}.modal-box>h3{font-size:17px;margin-bottom:18px;}.v2-sale-workspace{grid-template-columns:1fr;gap:24px;}.v2-sale-summary{position:static;padding:20px 0 0;border-left:0;border-top:1px solid var(--line);}.v2-sale-summary .stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;}.v2-sale-summary .stat:first-child{grid-column:1/-1;display:flex;align-items:center;justify-content:space-between;margin-bottom:0;}.v2-sale-summary .stat{display:block;}.v2-sale-summary .stat strong{font-size:17px;margin-top:5px;}.v2-sale-summary .stat:first-child small{margin:0;}.v2-sale-summary .stat:first-child strong{font-size:27px;}
+ .form-grid.three,.form-grid{grid-template-columns:repeat(2,minmax(0,1fr));}.bulk-row.form-grid.three{grid-template-columns:minmax(0,1fr) minmax(0,1fr);}.bulk-row>.field:first-child{grid-column:1/-1;}.lolita-mini-grid{grid-template-columns:repeat(3,minmax(0,1fr));}.lolita-mini b{font-size:12px;}.campaign-art{height:280px;}
+ .sale-item-row .form-grid.three{grid-template-columns:repeat(2,minmax(0,1fr));}.sale-item-row .field:nth-child(-n+2){grid-column:1/-1;}
+ .modal-box:has(.v2-sale-workspace)>.modal-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;}.modal-box:has(.v2-sale-workspace)>.modal-actions button{width:100%;}
+ .v2-mobile-total{display:flex;grid-column:1/-1;justify-content:space-between;align-items:center;font-size:12px;color:var(--muted);}.v2-mobile-total strong{color:var(--green2);font-size:21px;font-variant-numeric:tabular-nums;}
+}
+@media(max-width:420px){.topbar h2{max-width:130px;font-size:12px;}.topbar>div{gap:7px!important;}.base-side-summary{grid-template-columns:1fr;}.base-side-summary .stat{display:flex;justify-content:space-between;align-items:center;min-height:65px;padding:12px 14px;border-top:1px solid var(--line);border-left:3px solid #4b7bb6;}.base-side-summary .stat:nth-child(2){border-left-color:#32976b;}.base-side-summary .stat:nth-child(3){border-left-color:#a982b5;}.base-side-summary .stat small{margin:0;}.form-grid:not(.three){grid-template-columns:1fr;}.login-card{padding:26px;}.topbar .migrate-btn{max-width:50px;padding:8px;font-size:10px;}.v2-sale-summary .stat small{font-size:10px;}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important;scroll-behavior:auto!important;}}
+/* ===== END BASE DE LOLITA V2 DESIGN ===== */
 </style>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -3047,7 +3247,7 @@ button:disabled{opacity:.55;cursor:not-allowed;transform:none;}
                     class="active"
                     data-view="dashboard"
                 >
-                    🏠 Dashboard
+                    Inicio
                 </button>
 
                 <button data-view="products">
@@ -3086,7 +3286,7 @@ button:disabled{opacity:.55;cursor:not-allowed;transform:none;}
                     Cerrar sesión
                 </button>
 
-                <button class="logout release-button" type="button" onclick="lolitaShowReleases()">Novedades · v1.2.0</button>
+                <button class="logout release-button" type="button" onclick="lolitaShowReleases()">Novedades · v2.0.0</button>
 
             </div>
 
@@ -3118,7 +3318,7 @@ button:disabled{opacity:.55;cursor:not-allowed;transform:none;}
                     </button>
 
                     <h2 id="pageTitle">
-                        Dashboard
+                        Inicio
                     </h2>
 
                 </div>
@@ -3140,10 +3340,10 @@ button:disabled{opacity:.55;cursor:not-allowed;transform:none;}
                         ☁️ Migrar datos a la nube
                     </button>
 
-                    <div class="sync-status" id="syncStatus" title="Estado de sincronización">
+                    <button type="button" class="sync-status" id="syncStatus" title="Estado de sincronización" onclick="lolitaShowSyncDetails()">
                         <span class="sync-dot" id="syncDot"></span>
                         <span id="syncText">Conectando...</span>
-                    </div>
+                    </button>
 
                     <button class="icon-btn notification-bell" id="notificationBell" type="button" title="Notificaciones" aria-label="Notificaciones" onclick="lolitaShowNotifications()">
                         <span aria-hidden="true">&#128276;</span><span id="notificationCount" class="notification-count" hidden>0</span>
@@ -3446,16 +3646,7 @@ button:disabled{opacity:.55;cursor:not-allowed;transform:none;}
 
                         </div>
 
-                        <div class="note">
-                            El botón <b>Importar catálogo BASE</b> carga
-                            o actualiza los precios (Cliente, Cliente
-                            Premium y Consultor) de la Lista de precios
-                            Consultor México vigente desde el 1 de
-                            abril de 2026. No toca tu stock ni tu costo
-                            real ya guardado en productos que ya
-                            existan; solo actualiza nombres, contenido,
-                            puntos y precios de catálogo.
-                        </div>
+                        <div class="note">Cat&#225;logo M&#233;xico &#183; Abril 2026</div>
 
                         <div
                             id="productGrid"
@@ -3631,20 +3822,6 @@ button:disabled{opacity:.55;cursor:not-allowed;transform:none;}
                                 </button>
 
                             </div>
-
-                        </div>
-
-                        <div class="note">
-
-                            Cada oferta calcula tu ganancia inmediata
-                            (precio de venta menos tu costo real de
-                            adquisición, ya con el descuento escalonado
-                            aplicado) y tu bono estimado por compras a
-                            tu nombre de forma separada, para que sepas
-                            exactamente de dónde viene tu ganancia. El
-                            bono no depende del precio al que vendas,
-                            por eso aparece igual en los tres escenarios
-                            de precio.
 
                         </div>
 
@@ -3896,6 +4073,7 @@ const OFFLINE_QUEUE_KEY =
     "ns_offline_queue";
 
 let currentUser = null;
+let lolitaAuthEpoch = 0;
 
 let realtimeChannel = null;
 
@@ -4023,12 +4201,16 @@ let data = {
      b) la migración de datos antiguos guardados aquí.
 ========================================================= */
 
+function lolitaAccountKey(key, userId = currentUser?.id){
+    return `${key}:${userId || "anonymous"}`;
+}
+
 function loadLocalCache(){
 
     try{
 
         const saved =
-            localStorage.getItem(DATA_KEY);
+            currentUser && localStorage.getItem(lolitaAccountKey(DATA_KEY));
 
         if(!saved){
             return null;
@@ -4068,11 +4250,13 @@ function loadLocalCache(){
 
 function saveLocalCache(){
 
+    if(!currentUser) return;
+
     try{
 
         localStorage.setItem(
-            DATA_KEY,
-            JSON.stringify(data)
+            lolitaAccountKey(DATA_KEY),
+            JSON.stringify({...data, ownerId:currentUser.id})
         );
 
     }
@@ -4107,6 +4291,17 @@ function setSyncStatus(state, text){
 
     label.textContent = text;
 
+    const queue = loadOfflineQueue();
+    const pending = currentUser ? queue.filter(op => op.userId === currentUser.id).length : 0;
+    const unowned = queue.some(op => !op.userId);
+    if(state === "ok" && pending) label.textContent = `${pending} pendientes`;
+    if(state === "ok" && unowned) label.textContent = "Pendientes por revisar";
+    const status = $("#syncStatus");
+    if(status){
+        if(state === "ok" && !pending) status.dataset.lastSync = new Date().toISOString();
+        status.title = `${label.textContent}${status.dataset.lastSync ? " | Ultima sincronizacion: " + new Date(status.dataset.lastSync).toLocaleString("es-MX") : ""}`;
+    }
+
 }
 
 
@@ -4124,7 +4319,16 @@ function loadOfflineQueue(){
         const raw =
             localStorage.getItem(OFFLINE_QUEUE_KEY);
 
-        return raw ? JSON.parse(raw) : [];
+        const parsed = raw ? JSON.parse(raw) : [];
+        if(!Array.isArray(parsed)) return [];
+        let changed = false;
+        const queue = parsed.filter(op => op && typeof op === "object").map(op => {
+            if(!op.opId){ op.opId = uid(); changed = true; }
+            if(!op.userId && op.row?.user_id){ op.userId = op.row.user_id; changed = true; }
+            return op;
+        });
+        if(changed) saveOfflineQueue(queue);
+        return queue;
 
     }
     catch{
@@ -4151,14 +4355,30 @@ function queueOffline(op){
     const queue =
         loadOfflineQueue();
 
-    queue.push(op);
+    const userId = op.userId || op.row?.user_id || currentUser?.id;
+    if(!userId) throw new Error("Inicia sesion antes de guardar cambios");
+    queue.push({...op, userId, opId:uid()});
 
     saveOfflineQueue(queue);
 
 }
 
 
-async function flushOfflineQueue(){
+let lolitaQueueFlight = null;
+
+function flushOfflineQueue(){
+    if(lolitaQueueFlight) return lolitaQueueFlight;
+    const run = () => lolitaFlushOwnedQueue();
+    const flight = navigator.locks
+        ? navigator.locks.request("lolita-offline-queue",run) : run();
+    lolitaQueueFlight = Promise.resolve(flight).finally(() => { lolitaQueueFlight = null; });
+    return lolitaQueueFlight;
+}
+
+async function lolitaFlushOwnedQueue(){
+
+    const userId = currentUser?.id;
+    if(!userId || !navigator.onLine) return false;
 
     let queue =
         loadOfflineQueue();
@@ -4169,58 +4389,189 @@ async function flushOfflineQueue(){
 
     setSyncStatus("syncing","Sincronizando pendientes...");
 
-    const remaining = [];
+    const completed = new Set();
+    let failed = false;
 
+    const blockedProducts = new Set();
+    const reviewEntries = queue.filter(op => op.userId === userId && (op.review || op.action === "rpc"));
+    for(const entry of reviewEntries){
+        for(const id of lolitaQueueProductIds(entry)) blockedProducts.add(id);
+    }
     for(const op of queue){
+
+        if(currentUser?.id !== userId) break;
+        if(op.userId !== userId) continue;
+        if(op.review || op.action === "rpc"){
+            op.review = true;
+            failed = true;
+            continue;
+        }
+        if(lolitaQueueProductIds(op).some(id => blockedProducts.has(id))){ failed = true; continue; }
 
         try{
 
+            let result;
+            if(!["products","clients","sales","receipts","offers"].includes(op.table)) throw new Error("Tabla pendiente desconocida");
+
             if(op.action === "insert"){
-                await supabaseClient.from(op.table).insert(op.row);
+                if(op.row?.user_id !== userId || !op.row.id) throw new Error("Propietario de cambio no valido");
+                result = await supabaseClient.from(op.table).upsert(op.row,{onConflict:"id",ignoreDuplicates:true});
             }
             else if(op.action === "update"){
-                await supabaseClient.from(op.table).update(op.patch).eq("id", op.id);
+                const patch = {...op.patch};
+                delete patch.user_id;
+                delete patch.id;
+                result = await supabaseClient.from(op.table).update(patch).eq("id", op.id).eq("user_id",userId);
             }
             else if(op.action === "delete"){
-                await supabaseClient.from(op.table).delete().eq("id", op.id);
+                result = await supabaseClient.from(op.table).delete().eq("id", op.id).eq("user_id",userId);
             }
-            else if(op.action === "rpc"){
-                await supabaseClient.rpc(op.fn, op.args);
-            }
+            else throw new Error("Operacion pendiente desconocida");
+            if(result.error) throw result.error;
+            completed.add(op.opId);
 
         }
         catch(err){
 
             console.error("No se pudo reenviar operación pendiente", err);
-            remaining.push(op);
+            failed = true;
+            break;
 
         }
 
     }
 
-    saveOfflineQueue(remaining);
+    const remaining = loadOfflineQueue().filter(op => !completed.has(op.opId));
+    const reviewIds = new Set(queue.filter(op => op.review).map(op => op.opId));
+    saveOfflineQueue(remaining.map(op => reviewIds.has(op.opId) ? {...op,review:true} : op));
+    if(currentUser?.id !== userId) return false;
 
-    if(remaining.length){
-        toast("⚠️ Algunas operaciones no se pudieron sincronizar todavía");
+    if(failed || remaining.some(op => op.userId === userId)){
+        setSyncStatus("offline",reviewEntries.length ? "Ajustes de stock por revisar" : "Cambios pendientes; se reintentaran");
     }
     else{
-        toast("✓ Datos sincronizados");
+        setSyncStatus("ok","Datos sincronizados");
     }
 
+    return !failed;
+}
+
+function lolitaQueueProductIds(op){
+    return [op.args?.p_product_id,op.row?.product_id,
+        op.table === "products" ? op.id || op.row?.id : null,
+        ...(Array.isArray(op.row?.items) ? op.row.items.map(item => item.productId) : [])].filter(Boolean);
+}
+
+function lolitaArchiveReviewedAdjustment(opId){
+    const queue = loadOfflineQueue();
+    const index = queue.findIndex(op => op.opId === opId && op.userId === currentUser?.id && op.action === "rpc");
+    if(index < 0) return false;
+    const op = queue[index];
+    const next = queue[index+1];
+    const selected = op.groupId
+        ? queue.filter(item => item.userId === op.userId && item.groupId === op.groupId)
+        : [op,...(next?.userId === op.userId && next.action === "insert" && next.table === "receipts" &&
+            next.row?.product_id === op.args?.p_product_id ? [next] : [])];
+    const archiveKey = lolitaAccountKey(OFFLINE_QUEUE_KEY + ":reviewed");
+    const archive = JSON.parse(localStorage.getItem(archiveKey) || "[]");
+    // Archive first; if storage is full, no pending operation is removed.
+    localStorage.setItem(archiveKey,JSON.stringify([...archive,{reviewedAt:new Date().toISOString(),operations:selected}]));
+    const ids = new Set(selected.map(item => item.opId));
+    saveOfflineQueue(queue.filter(item => !ids.has(item.opId)));
+    return true;
 }
 
 
-window.addEventListener("online", async () => {
+let lolitaSyncFlight = null;
+let lolitaSyncTimer = null;
 
-    setSyncStatus("syncing","Sincronizando...");
+function lolitaSyncNow(){
+    if(!currentUser || !navigator.onLine) return Promise.resolve(false);
+    if(lolitaSyncFlight) return lolitaSyncFlight;
+    const userId = currentUser.id;
+    lolitaSyncFlight = (async () => {
+        try{
+            await flushOfflineQueue();
+            if(currentUser?.id !== userId) return false;
+            const loaded = await loadAllFromCloud();
+            if(currentUser?.id !== userId) return false;
+            if(loaded){
+                await checkAndOfferMigration();
+                lolitaScanSaleNotices();
+                lolitaCheckMonthClose();
+                renderCurrentView();
+            }
+            return loaded;
+        } catch(error){
+            console.error("Sincronizacion pendiente",error);
+            setSyncStatus("offline","No se pudo sincronizar; reintentando");
+            return false;
+        } finally { lolitaSyncFlight = null; }
+    })();
+    return lolitaSyncFlight;
+}
 
-    await flushOfflineQueue();
-    await loadAllFromCloud();
+function lolitaStartAutoSync(){
+    clearInterval(lolitaSyncTimer);
+    lolitaSyncTimer = setInterval(() => {
+        if(document.visibilityState === "visible") lolitaSyncNow();
+    },30000);
+}
 
-    renderCurrentView();
+function lolitaShowSyncDetails(){
+    const queue = loadOfflineQueue();
+    const own = queue.filter(op => op.userId === currentUser?.id);
+    const review = own.filter(op => op.action === "rpc");
+    const unowned = queue.filter(op => !op.userId);
+    const last = $("#syncStatus")?.dataset.lastSync;
+    const source = lolitaMigrationSource();
+    const migrationPending = source && localStorage.getItem(lolitaAccountKey(MIGRATED_KEY)) !== "1";
+    openModal("Sincronizacion",`
+        <dl class="note">
+            <dt>Estado</dt><dd>${esc($("#syncText")?.textContent || "Pendiente")}</dd>
+            <dt>Ultima sincronizacion correcta</dt><dd>${last ? esc(new Date(last).toLocaleString("es-MX")) : "Todavia no disponible"}</dd>
+            <dt>Cambios pendientes de esta cuenta</dt><dd>${own.length}</dd>
+            <dt>Requieren revision de stock</dt><dd>${own.filter(op => op.review || op.action === "rpc").length}</dd>
+            <dt>Pendientes antiguos sin cuenta</dt><dd>${unowned.length}</dd>
+            <dt>Migracion</dt><dd>${migrationPending ? "Pendiente; respaldo conservado" : "Sin datos pendientes"}</dd>
+        </dl>
+        ${own.some(op => op.review || op.action === "rpc") ? '<p class="note">Hay ajustes de stock cuyo resultado anterior no se pudo confirmar. No se repetiran automaticamente para evitar duplicar existencias.</p>' : ""}
+        ${review.map((op,index) => `<div class="note"><b>Producto ${esc(op.args?.p_product_id || "sin identificar")}</b> · Cambio: ${esc(op.args?.p_delta ?? "pendiente")}<br><button type="button" id="reviewAdjustment${index}">Resolver ajuste revisado</button></div>`).join("")}
+        ${unowned.length ? '<button type="button" id="claimLegacyQueue">Asociar pendientes antiguos a esta cuenta</button>' : ""}
+    `,async () => { await lolitaSyncNow(); });
+    $("#modalSave").textContent = "Sincronizar ahora";
+    const ownerId = currentUser?.id;
+    review.forEach((op,index) => {
+        $("#reviewAdjustment" + index).onclick = () => openModal("Confirmar revision de stock",
+            '<p class="note">Continua solo si ya comprobaste en la nube las existencias y la recepcion de este ajuste, y corregiste cualquier diferencia. El ajuste y su recepcion pendiente se archivaran localmente y no se enviaran de nuevo. Los demas cambios seguiran pendientes de sincronizacion.</p>',
+            async () => {
+                if(currentUser?.id !== ownerId) return;
+                try{
+                    lolitaArchiveReviewedAdjustment(op.opId);
+                    await lolitaSyncNow();
+                } catch(error){
+                    toast("No se pudo archivar la revision; los cambios siguen pendientes.");
+                }
+            });
+    });
+    const claim = $("#claimLegacyQueue");
+    if(claim) claim.onclick = () => openModal("Confirmar cuenta de pendientes",
+        '<p class="note">Confirma que los cambios antiguos de este dispositivo pertenecen a la cuenta abierta. Los ajustes de stock ambiguos seguiran pendientes de revision.</p>',
+        async () => {
+            const userId = currentUser?.id;
+            if(!userId) return;
+            saveOfflineQueue(loadOfflineQueue().map(op => op.userId ? op : {
+                ...op,userId,
+                ...(op.action === "insert" ? {row:{...op.row,user_id:userId}} : {})
+            }));
+            await lolitaSyncNow();
+        });
+}
 
-    setSyncStatus("ok","✓ Datos sincronizados");
-
+window.addEventListener("online", () => lolitaSyncNow());
+window.addEventListener("focus", () => lolitaSyncNow());
+document.addEventListener("visibilitychange", () => {
+    if(document.visibilityState === "visible") lolitaSyncNow();
 });
 
 
@@ -4390,16 +4741,20 @@ function offerToRow(o){
 
 async function loadAllFromCloud(){
 
+    const userId = currentUser?.id;
+    const epoch = lolitaAuthEpoch;
+    if(!userId) return false;
+
     setSyncStatus("syncing","Sincronizando...");
 
     try{
 
         const [p,c,s,r,o] = await Promise.all([
-            supabaseClient.from("products").select("*").order("created_at",{ascending:true}),
-            supabaseClient.from("clients").select("*").order("created_at",{ascending:true}),
-            supabaseClient.from("sales").select("*").order("created_at",{ascending:true}),
-            supabaseClient.from("receipts").select("*").order("created_at",{ascending:true}),
-            supabaseClient.from("offers").select("*").order("created_at",{ascending:true})
+            lolitaFetchRows("products",userId),
+            lolitaFetchRows("clients",userId),
+            lolitaFetchRows("sales",userId),
+            lolitaFetchRows("receipts",userId),
+            lolitaFetchRows("offers",userId)
         ]);
 
         const firstError =
@@ -4408,6 +4763,8 @@ async function loadAllFromCloud(){
         if(firstError){
             throw firstError;
         }
+
+        if(currentUser?.id !== userId || lolitaAuthEpoch !== epoch) return false;
 
         data = {
             products:p.data.map(rowToProduct),
@@ -4424,6 +4781,8 @@ async function loadAllFromCloud(){
     }
     catch(err){
 
+        if(currentUser?.id !== userId || lolitaAuthEpoch !== epoch) return false;
+
         console.error("No se pudo cargar desde Supabase", err);
 
         setSyncStatus("offline","Sin conexión");
@@ -4439,12 +4798,25 @@ async function loadAllFromCloud(){
 
 }
 
+async function lolitaFetchRows(table,userId){
+    const rows = [];
+    for(let offset=0; ; offset+=500){
+        if(currentUser?.id !== userId) return {data:[],error:new Error("Sesion cambiada")};
+        const result = await supabaseClient.from(table).select("*").eq("user_id",userId)
+            .order("created_at",{ascending:true}).order("id",{ascending:true}).range(offset,offset+499);
+        if(result.error) return result;
+        rows.push(...result.data);
+        if(result.data.length < 500) return {data:rows,error:null};
+    }
+}
+
 
 /* =========================================================
    CRUD REMOTO — PRODUCTOS
 ========================================================= */
 
 async function createProductRemote(product){
+    const originUserId = currentUser?.id;
 
     const row = { ...product, id:uid() };
     const dbRow = productToRow(row);
@@ -4457,18 +4829,21 @@ async function createProductRemote(product){
     if(error){
         console.error(error);
         setSyncStatus("offline","⚠️ No se pudo sincronizar. Reintentando...");
-        queueOffline({ action:"insert", table:"products", row:dbRow });
+        queueOffline({userId:originUserId, action:"insert", table:"products", row:dbRow });
         toast("⚠️ No se pudo sincronizar. Se reintentará cuando vuelva la conexión.");
+        if(currentUser?.id !== originUserId) return Promise.reject(new Error("La sesion cambio durante la operacion"));
         return row;
     }
 
     setSyncStatus("ok","✓ Datos sincronizados");
 
+    if(currentUser?.id !== originUserId) return Promise.reject(new Error("La sesion cambio durante la operacion"));
     return rowToProduct(inserted);
 
 }
 
 async function updateProductRemote(id, patch){
+    const originUserId = currentUser?.id;
 
     const dbPatch = productToRow({ id, ...patch });
     delete dbPatch.id;
@@ -4482,17 +4857,20 @@ async function updateProductRemote(id, patch){
     if(error){
         console.error(error);
         setSyncStatus("offline","⚠️ No se pudo sincronizar. Reintentando...");
-        queueOffline({ action:"update", table:"products", id, patch:dbPatch });
+        queueOffline({userId:originUserId, action:"update", table:"products", id, patch:dbPatch });
         toast("⚠️ No se pudo sincronizar. Se reintentará cuando vuelva la conexión.");
+        if(currentUser?.id !== originUserId) return Promise.reject(new Error("La sesion cambio durante la operacion"));
         return false;
     }
 
     setSyncStatus("ok","✓ Datos sincronizados");
+    if(currentUser?.id !== originUserId) return Promise.reject(new Error("La sesion cambio durante la operacion"));
     return true;
 
 }
 
 async function deleteProductRemote(id){
+    const originUserId = currentUser?.id;
 
     setSyncStatus("syncing","Sincronizando...");
 
@@ -4502,12 +4880,14 @@ async function deleteProductRemote(id){
     if(error){
         console.error(error);
         setSyncStatus("offline","⚠️ No se pudo sincronizar. Reintentando...");
-        queueOffline({ action:"delete", table:"products", id });
+        queueOffline({userId:originUserId, action:"delete", table:"products", id });
         toast("⚠️ No se pudo sincronizar. Se reintentará cuando vuelva la conexión.");
+        if(currentUser?.id !== originUserId) return Promise.reject(new Error("La sesion cambio durante la operacion"));
         return false;
     }
 
     setSyncStatus("ok","✓ Datos sincronizados");
+    if(currentUser?.id !== originUserId) return Promise.reject(new Error("La sesion cambio durante la operacion"));
     return true;
 
 }
@@ -4518,6 +4898,7 @@ async function deleteProductRemote(id){
 ========================================================= */
 
 async function createClientRemote(client){
+    const originUserId = currentUser?.id;
 
     const row = { ...client, id:uid() };
     const dbRow = clientToRow(row);
@@ -4530,17 +4911,20 @@ async function createClientRemote(client){
     if(error){
         console.error(error);
         setSyncStatus("offline","⚠️ No se pudo sincronizar. Reintentando...");
-        queueOffline({ action:"insert", table:"clients", row:dbRow });
+        queueOffline({userId:originUserId, action:"insert", table:"clients", row:dbRow });
         toast("⚠️ No se pudo sincronizar. Se reintentará cuando vuelva la conexión.");
+        if(currentUser?.id !== originUserId) return Promise.reject(new Error("La sesion cambio durante la operacion"));
         return { ...row, created:new Date().toISOString() };
     }
 
     setSyncStatus("ok","✓ Datos sincronizados");
+    if(currentUser?.id !== originUserId) return Promise.reject(new Error("La sesion cambio durante la operacion"));
     return rowToClient(inserted);
 
 }
 
 async function updateClientRemote(id, patch){
+    const originUserId = currentUser?.id;
 
     const dbPatch = clientToRow({ id, ...patch });
     delete dbPatch.id;
@@ -4554,17 +4938,20 @@ async function updateClientRemote(id, patch){
     if(error){
         console.error(error);
         setSyncStatus("offline","⚠️ No se pudo sincronizar. Reintentando...");
-        queueOffline({ action:"update", table:"clients", id, patch:dbPatch });
+        queueOffline({userId:originUserId, action:"update", table:"clients", id, patch:dbPatch });
         toast("⚠️ No se pudo sincronizar. Se reintentará cuando vuelva la conexión.");
+        if(currentUser?.id !== originUserId) return Promise.reject(new Error("La sesion cambio durante la operacion"));
         return false;
     }
 
     setSyncStatus("ok","✓ Datos sincronizados");
+    if(currentUser?.id !== originUserId) return Promise.reject(new Error("La sesion cambio durante la operacion"));
     return true;
 
 }
 
 async function deleteClientRemote(id){
+    const originUserId = currentUser?.id;
 
     setSyncStatus("syncing","Sincronizando...");
 
@@ -4574,12 +4961,14 @@ async function deleteClientRemote(id){
     if(error){
         console.error(error);
         setSyncStatus("offline","⚠️ No se pudo sincronizar. Reintentando...");
-        queueOffline({ action:"delete", table:"clients", id });
+        queueOffline({userId:originUserId, action:"delete", table:"clients", id });
         toast("⚠️ No se pudo sincronizar. Se reintentará cuando vuelva la conexión.");
+        if(currentUser?.id !== originUserId) return Promise.reject(new Error("La sesion cambio durante la operacion"));
         return false;
     }
 
     setSyncStatus("ok","✓ Datos sincronizados");
+    if(currentUser?.id !== originUserId) return Promise.reject(new Error("La sesion cambio durante la operacion"));
     return true;
 
 }
@@ -4590,6 +4979,7 @@ async function deleteClientRemote(id){
 ========================================================= */
 
 async function createReceiptRemote(receipt){
+    const originUserId = currentUser?.id;
 
     const row = { ...receipt, id:uid() };
     const dbRow = receiptToRow(row);
@@ -4616,6 +5006,7 @@ async function createReceiptRemote(receipt){
         }
 
         setSyncStatus("ok","✓ Datos sincronizados");
+        if(currentUser?.id !== originUserId) return Promise.reject(new Error("La sesion cambio durante la operacion"));
         return rowToReceipt(inserted);
 
     }
@@ -4625,14 +5016,16 @@ async function createReceiptRemote(receipt){
         setSyncStatus("offline","⚠️ No se pudo sincronizar. Reintentando...");
         toast("⚠️ No se pudo sincronizar. Se reintentará cuando vuelva la conexión.");
 
-        queueOffline({
+        queueOffline({userId:originUserId,
             action:"rpc",
+            groupId:row.id,
             fn:"adjust_stock",
             args:{ p_product_id:receipt.productId, p_delta:receipt.qty }
         });
 
-        queueOffline({ action:"insert", table:"receipts", row:dbRow });
+        queueOffline({userId:originUserId, groupId:row.id, action:"insert", table:"receipts", row:dbRow });
 
+        if(currentUser?.id !== originUserId) return Promise.reject(new Error("La sesion cambio durante la operacion"));
         return { ...row, created:new Date().toISOString() };
 
     }
@@ -4640,6 +5033,7 @@ async function createReceiptRemote(receipt){
 }
 
 async function deleteReceiptRemote(id){
+    const originUserId = currentUser?.id;
 
     setSyncStatus("syncing","Sincronizando...");
 
@@ -4649,12 +5043,14 @@ async function deleteReceiptRemote(id){
     if(error){
         console.error(error);
         setSyncStatus("offline","⚠️ No se pudo sincronizar. Reintentando...");
-        queueOffline({ action:"delete", table:"receipts", id });
+        queueOffline({userId:originUserId, action:"delete", table:"receipts", id });
         toast("⚠️ No se pudo sincronizar. Se reintentará cuando vuelva la conexión.");
+        if(currentUser?.id !== originUserId) return Promise.reject(new Error("La sesion cambio durante la operacion"));
         return false;
     }
 
     setSyncStatus("ok","✓ Datos sincronizados");
+    if(currentUser?.id !== originUserId) return Promise.reject(new Error("La sesion cambio durante la operacion"));
     return true;
 
 }
@@ -4670,6 +5066,7 @@ async function deleteReceiptRemote(id){
 ========================================================= */
 
 async function createSaleRemote(sale){
+    const originUserId = currentUser?.id;
 
     setSyncStatus("syncing","Sincronizando...");
 
@@ -4700,6 +5097,7 @@ async function createSaleRemote(sale){
 
         const created = { ...sale, id:newId, created:new Date().toISOString() };
         if(confirmedId) lolitaNotifySale(created);
+        if(currentUser?.id !== originUserId) return Promise.reject(new Error("La sesion cambio durante la operacion"));
         return created;
 
     }
@@ -4713,12 +5111,14 @@ catch(err){
         `❌ Error: ${err.message || "Error desconocido"}`
     );
 
+    if(currentUser?.id !== originUserId) return Promise.reject(new Error("La sesion cambio durante la operacion"));
     return null;
 }
 
 }
 
 async function deleteSaleRemote(id){
+    const originUserId = currentUser?.id;
 
     setSyncStatus("syncing","Sincronizando...");
 
@@ -4728,12 +5128,14 @@ async function deleteSaleRemote(id){
     if(error){
         console.error(error);
         setSyncStatus("offline","⚠️ No se pudo sincronizar. Reintentando...");
-        queueOffline({ action:"delete", table:"sales", id });
+        queueOffline({userId:originUserId, action:"delete", table:"sales", id });
         toast("⚠️ No se pudo sincronizar. Se reintentará cuando vuelva la conexión.");
+        if(currentUser?.id !== originUserId) return Promise.reject(new Error("La sesion cambio durante la operacion"));
         return false;
     }
 
     setSyncStatus("ok","✓ Datos sincronizados");
+    if(currentUser?.id !== originUserId) return Promise.reject(new Error("La sesion cambio durante la operacion"));
     return true;
 
 }
@@ -4744,6 +5146,7 @@ async function deleteSaleRemote(id){
 ========================================================= */
 
 async function createOfferRemote(offer){
+    const originUserId = currentUser?.id;
 
     const row = { ...offer, id:uid() };
     const dbRow = offerToRow(row);
@@ -4756,17 +5159,20 @@ async function createOfferRemote(offer){
     if(error){
         console.error(error);
         setSyncStatus("offline","⚠️ No se pudo sincronizar. Reintentando...");
-        queueOffline({ action:"insert", table:"offers", row:dbRow });
+        queueOffline({userId:originUserId, action:"insert", table:"offers", row:dbRow });
         toast("⚠️ No se pudo sincronizar. Se reintentará cuando vuelva la conexión.");
+        if(currentUser?.id !== originUserId) return Promise.reject(new Error("La sesion cambio durante la operacion"));
         return { ...row, created:new Date().toISOString() };
     }
 
     setSyncStatus("ok","✓ Datos sincronizados");
+    if(currentUser?.id !== originUserId) return Promise.reject(new Error("La sesion cambio durante la operacion"));
     return rowToOffer(inserted);
 
 }
 
 async function updateOfferRemote(id, patch){
+    const originUserId = currentUser?.id;
 
     const dbPatch = offerToRow({ id, ...patch });
     delete dbPatch.id;
@@ -4780,17 +5186,20 @@ async function updateOfferRemote(id, patch){
     if(error){
         console.error(error);
         setSyncStatus("offline","⚠️ No se pudo sincronizar. Reintentando...");
-        queueOffline({ action:"update", table:"offers", id, patch:dbPatch });
+        queueOffline({userId:originUserId, action:"update", table:"offers", id, patch:dbPatch });
         toast("⚠️ No se pudo sincronizar. Se reintentará cuando vuelva la conexión.");
+        if(currentUser?.id !== originUserId) return Promise.reject(new Error("La sesion cambio durante la operacion"));
         return false;
     }
 
     setSyncStatus("ok","✓ Datos sincronizados");
+    if(currentUser?.id !== originUserId) return Promise.reject(new Error("La sesion cambio durante la operacion"));
     return true;
 
 }
 
 async function deleteOfferRemote(id){
+    const originUserId = currentUser?.id;
 
     setSyncStatus("syncing","Sincronizando...");
 
@@ -4800,12 +5209,14 @@ async function deleteOfferRemote(id){
     if(error){
         console.error(error);
         setSyncStatus("offline","⚠️ No se pudo sincronizar. Reintentando...");
-        queueOffline({ action:"delete", table:"offers", id });
+        queueOffline({userId:originUserId, action:"delete", table:"offers", id });
         toast("⚠️ No se pudo sincronizar. Se reintentará cuando vuelva la conexión.");
+        if(currentUser?.id !== originUserId) return Promise.reject(new Error("La sesion cambio durante la operacion"));
         return false;
     }
 
     setSyncStatus("ok","✓ Datos sincronizados");
+    if(currentUser?.id !== originUserId) return Promise.reject(new Error("La sesion cambio durante la operacion"));
     return true;
 
 }
@@ -4848,21 +5259,32 @@ function subscribeRealtime(){
             { event:"*", schema:"public", table:"offers", filter:`user_id=eq.${currentUser.id}` },
             () => refreshTableAndRender("offers")
         )
-        .subscribe();
+        .subscribe(status => {
+            if(status === "CHANNEL_ERROR" || status === "TIMED_OUT"){
+                setSyncStatus("offline","Conexion en vivo pendiente; sincronizacion automatica activa");
+            }
+            if(status === "SUBSCRIBED") lolitaSyncNow();
+        });
 
 }
 
 
 async function refreshTableAndRender(table){
 
+    const userId = currentUser?.id;
+    const epoch = lolitaAuthEpoch;
+    if(!userId) return;
+
     try{
 
         const { data:rows, error } =
-            await supabaseClient.from(table).select("*").order("created_at",{ascending:true});
+            await lolitaFetchRows(table,userId);
 
         if(error){
             throw error;
         }
+
+        if(currentUser?.id !== userId || lolitaAuthEpoch !== epoch) return;
 
         const mappers = {
             products:rowToProduct,
@@ -4883,6 +5305,8 @@ async function refreshTableAndRender(table){
 
     }
     catch(err){
+
+        if(currentUser?.id !== userId || lolitaAuthEpoch !== epoch) return;
 
         console.error("No se pudo refrescar", table, err);
         setSyncStatus("offline","Sin conexión");
@@ -4929,12 +5353,14 @@ function renderCurrentView(){
 
 async function checkAndOfferMigration(){
 
-    if(localStorage.getItem(MIGRATED_KEY) === "1"){
+    if(!currentUser) return;
+    if(localStorage.getItem(lolitaAccountKey(MIGRATED_KEY)) === "1"){
         $("#migrateBtn").classList.add("hidden");
         return;
     }
 
-    const old = loadLocalCache();
+    const source = lolitaMigrationSource();
+    const old = source?.data;
 
     const hasData =
         old && (
@@ -4955,8 +5381,44 @@ async function checkAndOfferMigration(){
     $("#migrateBtn").onclick =
         () => openMigrationModal(old);
 
+    if(source.trusted && navigator.onLine) await runMigration(old);
+
 }
 
+function lolitaPrepareMigration(){
+    // Capture legacy storage before the first cloud load writes its cache.
+    const source = lolitaMigrationSource();
+    if(source?.trusted){
+        const key = lolitaAccountKey(DATA_KEY + ":migration");
+        try{
+            if(!localStorage.getItem(key)) localStorage.setItem(key,JSON.stringify(source.data));
+        } catch(error){
+            console.error("No se pudo conservar el respaldo antiguo",error);
+        }
+    }
+}
+
+function lolitaMigrationSource(){
+    if(!currentUser) return null;
+    try{
+        const saved = localStorage.getItem(lolitaAccountKey(DATA_KEY + ":migration"));
+        const legacy = saved || localStorage.getItem(DATA_KEY);
+        if(!legacy) return null;
+        const parsed = JSON.parse(legacy);
+        const owner = parsed.ownerId || localStorage.getItem(DATA_KEY + ":legacy-owner");
+        if(!saved && owner && owner !== currentUser.id) return null;
+        const normalized = {};
+        for(const table of ["products","clients","sales","receipts","offers"]){
+            normalized[table] = Array.isArray(parsed[table]) ? parsed[table] : [];
+        }
+        return {data:normalized,trusted:!!saved || owner === currentUser.id};
+    } catch(error){
+        console.error("No se pudo leer el respaldo de migracion",error);
+        return null;
+    }
+}
+
+let lolitaMigrationFlight = null;
 
 function openMigrationModal(old){
 
@@ -4990,114 +5452,80 @@ function openMigrationModal(old){
 
 
 async function runMigration(old){
-
-    closeModal();
-    setSyncStatus("syncing","Migrando datos...");
-
-    let migrated = 0;
-    let skipped = 0;
-
+    if(lolitaMigrationFlight) return lolitaMigrationFlight;
+    const userId = currentUser?.id;
+    if(!userId || !navigator.onLine) return false;
+    const snapshotKey = lolitaAccountKey(DATA_KEY + ":migration",userId);
+    // Retain the original snapshot, including when only some writes succeed.
     try{
-
-        for(const product of old.products){
-
-            const exists =
-                data.products.some(p => p.name === product.name && p.cesna === product.cesna);
-
-            if(exists){ skipped++; continue; }
-
-            const dbRow = productToRow(product);
-
-            const { error } =
-                await supabaseClient.from("products").insert(dbRow);
-
-            if(!error){ migrated++; } else { console.error(error); }
-
+        localStorage.setItem(snapshotKey,JSON.stringify(old));
+        if(!localStorage.getItem(DATA_KEY + ":legacy-owner")){
+            localStorage.setItem(DATA_KEY + ":legacy-owner",userId);
         }
-
-        for(const client of old.clients){
-
-            const exists =
-                data.clients.some(c => c.name === client.name && c.phone === client.phone);
-
-            if(exists){ skipped++; continue; }
-
-            const { error } =
-                await supabaseClient.from("clients").insert(clientToRow(client));
-
-            if(!error){ migrated++; } else { console.error(error); }
-
-        }
-
-        for(const receipt of old.receipts){
-
-            const exists =
-                data.receipts.some(r => r.id === receipt.id);
-
-            if(exists){ skipped++; continue; }
-
-            const { error } =
-                await supabaseClient.from("receipts").insert(receiptToRow(receipt));
-
-            if(!error){ migrated++; } else { console.error(error); }
-
-        }
-
-        for(const offer of old.offers){
-
-            const exists =
-                data.offers.some(o => o.id === offer.id);
-
-            if(exists){ skipped++; continue; }
-
-            const { error } =
-                await supabaseClient.from("offers").insert(offerToRow(offer));
-
-            if(!error){ migrated++; } else { console.error(error); }
-
-        }
-
-        for(const sale of old.sales){
-
-            const exists =
-                data.sales.some(s => s.id === sale.id);
-
-            if(exists){ skipped++; continue; }
-
-            const { error } =
-                await supabaseClient.from("sales").insert({
-                    id:sale.id,
-                    user_id:currentUser.id,
-                    client_id:sale.clientId || null,
-                    client_name:sale.clientName,
-                    items:sale.items || [],
-                    product_name:sale.productName,
-                    qty:sale.qty,
-                    total:sale.total,
-                    profit:sale.profit,
-                    date:sale.date
-                });
-
-            if(!error){ migrated++; } else { console.error(error); }
-
-        }
-
-        localStorage.setItem(MIGRATED_KEY, "1");
-        $("#migrateBtn").classList.add("hidden");
-
-        await loadAllFromCloud();
-        renderCurrentView();
-
-        toast(`☁️ Migración completa: ${migrated} registros subidos, ${skipped} ya existían`);
-
+    } catch(error){
+        console.error("No se puede conservar el respaldo de migracion",error);
+        toast("No se inicio la migracion: libera espacio para conservar el respaldo local.");
+        return false;
     }
-    catch(err){
-
-        console.error("Error durante la migración", err);
-        toast("⚠️ La migración se detuvo por un error. Tus datos locales siguen intactos.");
-
-    }
-
+    closeModal();
+    lolitaMigrationFlight = (async () => {
+        try{
+            setSyncStatus("syncing","Migrando datos...");
+            const productIds = new Map();
+            const clientIds = new Map();
+            for(const product of old.products){
+                const match = data.products.find(p => p.id === product.id ||
+                    (p.name === product.name && p.cesna === product.cesna));
+                productIds.set(product.id,match?.id || product.id);
+            }
+            for(const client of old.clients){
+                const match = data.clients.find(c => c.id === client.id ||
+                    (c.name === client.name && c.phone === client.phone));
+                clientIds.set(client.id,match?.id || client.id);
+            }
+            const remapProduct = id => productIds.get(id) || id;
+            const remapItems = items => (items || []).map(item => ({...item,productId:remapProduct(item.productId)}));
+            const mappers = {
+                products:productToRow,
+                clients:clientToRow,
+                receipts:r => receiptToRow({...r,productId:remapProduct(r.productId)}),
+                offers:o => offerToRow({...o,productId:remapProduct(o.productId)}),
+                sales:s => ({
+                    id:s.id,user_id:userId,client_id:clientIds.get(s.clientId) || s.clientId || null,
+                    client_name:s.clientName,items:remapItems(s.items),product_name:s.productName,
+                    qty:s.qty,total:s.total,profit:s.profit,date:s.date
+                })
+            };
+            for(const table of ["products","clients","receipts","offers","sales"]){
+                for(const record of old[table]){
+                    if(currentUser?.id !== userId) return false;
+                    if(data[table].some(row => row.id === record.id)) continue;
+                    if(table === "products" && productIds.get(record.id) !== record.id) continue;
+                    if(table === "clients" && clientIds.get(record.id) !== record.id) continue;
+                    if(!record.id) throw new Error("Un registro antiguo no tiene identificador; requiere revision");
+                    const row = mappers[table](record);
+                    const {error} = await supabaseClient.from(table).upsert(row,{onConflict:"id",ignoreDuplicates:true});
+                    if(error) throw error;
+                }
+            }
+            if(currentUser?.id !== userId) return false;
+            localStorage.setItem(lolitaAccountKey(MIGRATED_KEY,userId),"1");
+            $("#migrateBtn").classList.add("hidden");
+            await loadAllFromCloud();
+            if(currentUser?.id !== userId) return false;
+            renderCurrentView();
+            toast("Migracion completa. Respaldo local conservado.");
+            return true;
+        } catch(error){
+            console.error("Migracion pendiente",error);
+            if(currentUser?.id === userId){
+                setSyncStatus("offline","Migracion pendiente; se reintentara");
+                $("#migrateBtn").classList.remove("hidden");
+            }
+            return false;
+        } finally { lolitaMigrationFlight = null; }
+    })();
+    return lolitaMigrationFlight;
 }
 
 
@@ -5229,7 +5657,7 @@ function showView(id){
     const titles = {
 
         dashboard:
-            "Dashboard",
+            "Inicio",
 
         products:
             "Productos",
@@ -5254,7 +5682,7 @@ function showView(id){
 
     $("#pageTitle").textContent =
         titles[id] ||
-        "Dashboard";
+        "Inicio";
 
 
     $("#sidebar")
@@ -8628,7 +9056,7 @@ function lolitaEnhanceLogin(){
         <section class="login-panel">
             <div>
                 <div class="base-eyebrow">BASE DE LOLITA</div>
-                <h2>Tu negocio, claro desde el primer clic.</h2>
+                <h2>BASE DE LOLITA</h2>
                 <p>
                     Entra a tu panel para controlar inventario, productos recibidos,
                     ventas, ofertas y ganancias con una vista más limpia.
@@ -8655,7 +9083,7 @@ function lolitaEnhanceLogin(){
         <section class="login-form-panel">
             <div class="brand-mark">BL</div>
             <h1>BASE DE LOLITA</h1>
-            <p>Inicia sesión para continuar</p>
+            <p>Acceso a administraci&#243;n</p>
         </section>
     `;
 
@@ -8725,6 +9153,7 @@ function lolitaBulkTotals(){
 }
 
 async function lolitaPersistBulkProductCosts(updates){
+    const originUserId = currentUser?.id;
     const cleanUpdates =
         updates.filter(
             update =>
@@ -8735,6 +9164,7 @@ async function lolitaPersistBulkProductCosts(updates){
         );
 
     for(const update of cleanUpdates){
+        if(currentUser?.id !== originUserId) throw new Error("La sesion cambio durante la operacion");
         update.product.cost = update.unitCost;
 
         try{
@@ -8751,6 +9181,7 @@ async function lolitaPersistBulkProductCosts(updates){
         catch(err){
             console.error(err);
             queueOffline({
+                userId:originUserId,
                 action:"update",
                 table:"products",
                 id:update.product.id,
@@ -8832,10 +9263,6 @@ function lolitaBulkReceiptModal(){
     openModal(
         "🚚 Registrar llegada masiva",
         `
-        <div class="note">
-            Registra muchos productos al mismo tiempo. Puedes agregarlos con el botón o pegar líneas como:
-            <b>MX10410, 6, Compra inicial</b>
-        </div>
         <div class="form-grid">
             <div class="field">
                 <label>Fecha para esta llegada</label>
@@ -9765,14 +10192,14 @@ function lolitaRenderDashboardShell(){
             <section class="base-hero-panel">
                 <div>
                     <div class="base-eyebrow">BASE DE LOLITA</div>
-                    <h1>Control profesional para ventas, inventario y ofertas.</h1>
+                    <h1>Resumen del negocio</h1>
                     <p>
                         Una vista limpia para saber qué tienes, qué vendiste, cuánto invertiste
                         y dónde están tus oportunidades de ganancia.
                     </p>
                 </div>
                 <div class="base-quick-actions">
-                    <button class="primary" onclick="showView('sales')">+ Registrar venta</button>
+                    <button class="primary" onclick="lolitaOpenSaleModal()">+ Registrar venta</button>
                     <button class="secondary" onclick="showView('inventory')">+ Registrar llegada</button>
                     <button class="secondary" onclick="showView('offers')">Crear oferta</button>
                     <button class="secondary" onclick="showView('products')">Ver productos</button>
@@ -10068,7 +10495,6 @@ function lolitaRenderReceiptsPanel(){
         <div class="base-section-title">
             <div>
                 <h3>Historial de llegadas</h3>
-                <small>Busca por producto o filtra por fechas para revisar compras y reposiciones.</small>
             </div>
         </div>
         <div class="filters">
@@ -10142,7 +10568,7 @@ function lolitaRenderInventorySection(){
             <section class="base-hero-panel">
                 <div>
                     <div class="base-eyebrow">Productos recibidos</div>
-                    <h1>Registra entradas de mercancía sin perder control.</h1>
+                    <h1>Productos recibidos</h1>
                     <p>
                         Captura una llegada individual o muchas al mismo tiempo, revisa inversión,
                         unidades recibidas y mantén tu stock actualizado.
@@ -10204,6 +10630,7 @@ function lolitaEnhancedSaleForm(){
     lolitaSaleItemCounter = 0;
 
     return `
+        <div class="v2-sale-workspace"><div class="v2-sale-main">
         <div class="form-grid">
             <div class="field">
                 <label>Cliente</label>
@@ -10222,7 +10649,7 @@ function lolitaEnhancedSaleForm(){
         <div class="base-section-title" style="margin:12px 0 8px;">
             <div>
                 <h3 style="font-size:16px;">Productos de la venta</h3>
-                <small>Agrega uno o varios productos. El total, stock y ganancia se calculan en vivo.</small>
+                
             </div>
         </div>
 
@@ -10232,6 +10659,7 @@ function lolitaEnhancedSaleForm(){
             <button type="button" class="secondary" onclick="lolitaAddEnhancedSaleItemRow()">+ Agregar producto</button>
         </div>
 
+        </div><aside class="v2-sale-summary"><h4>Resumen de venta</h4>
         <div id="saleLiveSummary" class="stats" style="margin-top:14px;">
             <div class="stat"><small>Total</small><strong>$0.00</strong></div>
             <div class="stat"><small>Ganancia estimada</small><strong class="green">$0.00</strong></div>
@@ -10239,7 +10667,8 @@ function lolitaEnhancedSaleForm(){
             <div class="stat"><small>Margen</small><strong>0.0%</strong></div>
         </div>
 
-        <div id="saleWarnings"></div>
+        <div id="saleWarnings" role="status" aria-live="polite"></div>
+        </aside></div>
     `;
 }
 
@@ -10870,7 +11299,7 @@ function lolitaRenderSalesSection(){
             <section class="base-hero-panel">
                 <div>
                     <div class="base-eyebrow">Ventas</div>
-                    <h1>Registra ventas con totales, stock y ganancia bajo control.</h1>
+                    <h1>Ventas</h1>
                     <p>
                         Revisa ventas por fecha, cliente o producto, valida tus márgenes y
                         mantén cada salida de inventario bien documentada.
@@ -11001,8 +11430,20 @@ applyLolitaBranding();
 lolitaEnhanceLogin();
 installLolitaBulkButton();
 /* ===== RELEASES AND NOTIFICATIONS ===== */
-var LOLITA_APP_VERSION = "1.2.0";
+var LOLITA_APP_VERSION = "2.0.0";
 var LOLITA_RELEASES = [
+    {version:"2.0.0",date:"2026-10-15",title:"Una nueva imagen para BASE DE LOLITA",changes:[
+        "Identidad visual, logotipo BL e iconos consistentes en toda la app.",
+        "Inicio compacto, tablas mas claras y formularios con estilos unificados.",
+        "Registro de venta con productos y resumen separados.",
+        "Navegacion movil, contraste, foco de teclado y modo oscuro renovados."
+    ]},
+    {version:"1.2.1",date:"2026-10-15",title:"Sincronizacion y migracion automaticas",changes:[
+        "Sincronizacion al iniciar sesion, reconectar y volver a la app; comprobacion cada 30 segundos en primer plano.",
+        "Cache y cambios pendientes separados por cuenta, con reintentos sin repetir inserciones.",
+        "Migracion automatica de datos identificados, respaldo conservado y confirmacion para datos sin cuenta.",
+        "Detalle de sincronizacion con ultima conexion correcta, pendientes y ajustes de stock por revisar."
+    ]},
     {version:"1.2.0",date:"2026-10-14",title:"Notificaciones en el teléfono",changes:[
         "Activación de notificaciones push desde la campana.",
         "Instalación como app en la pantalla de inicio del iPhone.",
@@ -12268,6 +12709,8 @@ async function onAuthReady(session){
     }
 
     currentUser = session.user;
+    const epoch = ++lolitaAuthEpoch;
+    lolitaPrepareMigration();
 
     $("#login").style.display = "none";
     $("#app").style.display = "block";
@@ -12277,25 +12720,37 @@ async function onAuthReady(session){
         emailLabel.textContent = currentUser.email || "Cuenta";
     }
 
-    subscribeRealtime();
-
     const cloudLoaded = await loadAllFromCloud();
+    if(lolitaAuthEpoch !== epoch) return;
     lolitaStartNotifications(cloudLoaded);
 
     showView("dashboard");
 
     lolitaPreparePush();
 
-    await checkAndOfferMigration();
+    if(cloudLoaded) await checkAndOfferMigration();
 
     if(navigator.onLine){
         await flushOfflineQueue();
+        if(lolitaAuthEpoch !== epoch) return;
+        await loadAllFromCloud();
+        if(lolitaAuthEpoch !== epoch) return;
+        renderCurrentView();
     }
+
+    subscribeRealtime();
+    lolitaStartAutoSync();
 
 }
 
 
 function onSignedOut(){
+
+    ++lolitaAuthEpoch;
+    clearInterval(lolitaSyncTimer);
+    lolitaSyncTimer = null;
+    const status = $("#syncStatus");
+    if(status) delete status.dataset.lastSync;
 
     lolitaStopNotifications();
     lolitaClearPushDevice().catch(error => console.warn("No se pudo desconectar el receptor push",error));
@@ -12370,5 +12825,222 @@ else{
 
 </script>
 
+<script>
+/* ===== BASE DE LOLITA V2 UI ===== */
+/* Icon geometry from Lucide.
+ISC License
+
+Copyright (c) 2026 Lucide Icons and Contributors
+
+Permission to use, copy, modify, and/or distribute this software for any
+purpose with or without fee is hereby granted, provided that the above
+copyright notice and this permission notice appear in all copies.
+
+THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
+WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
+MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
+ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
+WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
+ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
+OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+
+---
+
+The following Lucide icons are derived from the Feather project:
+
+airplay, alert-circle, alert-octagon, alert-triangle, aperture, arrow-down-circle, arrow-down-left, arrow-down-right, arrow-down, arrow-left-circle, arrow-left, arrow-right-circle, arrow-right, arrow-up-circle, arrow-up-left, arrow-up-right, arrow-up, at-sign, calendar, cast, check, chevron-down, chevron-left, chevron-right, chevron-up, chevrons-down, chevrons-left, chevrons-right, chevrons-up, circle, clipboard, clock, code, columns, command, compass, corner-down-left, corner-down-right, corner-left-down, corner-left-up, corner-right-down, corner-right-up, corner-up-left, corner-up-right, crosshair, database, divide-circle, divide-square, dollar-sign, download, external-link, feather, frown, hash, headphones, help-circle, info, italic, key, layout, life-buoy, link-2, link, loader, lock, log-in, log-out, maximize, meh, minimize, minimize-2, minus-circle, minus-square, minus, monitor, moon, more-horizontal, more-vertical, move, music, navigation-2, navigation, octagon, pause-circle, percent, plus-circle, plus-square, plus, power, radio, rss, search, server, share, shopping-bag, sidebar, smartphone, smile, square, table-2, tablet, target, terminal, trash-2, trash, triangle, tv, type, upload, x-circle, x-octagon, x-square, x, zoom-in, zoom-out
+
+The MIT License (MIT) (for the icons listed above)
+
+Copyright (c) 2013-present Cole Bemis
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+*/
+var LOLITA_V2_ICONS = {"LayoutDashboard":[["rect",{"width":"7","height":"9","x":"3","y":"3","rx":"1"}],["rect",{"width":"7","height":"5","x":"14","y":"3","rx":"1"}],["rect",{"width":"7","height":"9","x":"14","y":"12","rx":"1"}],["rect",{"width":"7","height":"5","x":"3","y":"16","rx":"1"}]],"Package":[["path",{"d":"M11 21.73a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73z"}],["path",{"d":"M12 22V12"}],["polyline",{"points":"3.29 7 12 12 20.71 7"}],["path",{"d":"m7.5 4.27 9 5.15"}]],"Truck":[["path",{"d":"M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"}],["path",{"d":"M15 18H9"}],["path",{"d":"M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14"}],["circle",{"cx":"17","cy":"18","r":"2"}],["circle",{"cx":"7","cy":"18","r":"2"}]],"Users":[["path",{"d":"M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"}],["path",{"d":"M16 3.128a4 4 0 0 1 0 7.744"}],["path",{"d":"M22 21v-2a4 4 0 0 0-3-3.87"}],["circle",{"cx":"9","cy":"7","r":"4"}]],"Receipt":[["path",{"d":"M12 17V7"}],["path",{"d":"M16 8h-6a2 2 0 0 0 0 4h4a2 2 0 0 1 0 4H8"}],["path",{"d":"M4 3a1 1 0 0 1 1-1 1.3 1.3 0 0 1 .7.2l.933.6a1.3 1.3 0 0 0 1.4 0l.934-.6a1.3 1.3 0 0 1 1.4 0l.933.6a1.3 1.3 0 0 0 1.4 0l.933-.6a1.3 1.3 0 0 1 1.4 0l.934.6a1.3 1.3 0 0 0 1.4 0l.933-.6A1.3 1.3 0 0 1 19 2a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1 1.3 1.3 0 0 1-.7-.2l-.933-.6a1.3 1.3 0 0 0-1.4 0l-.934.6a1.3 1.3 0 0 1-1.4 0l-.933-.6a1.3 1.3 0 0 0-1.4 0l-.933.6a1.3 1.3 0 0 1-1.4 0l-.934-.6a1.3 1.3 0 0 0-1.4 0l-.933.6a1.3 1.3 0 0 1-.7.2 1 1 0 0 1-1-1z"}]],"Tags":[["path",{"d":"M13.172 2a2 2 0 0 1 1.414.586l6.71 6.71a2.4 2.4 0 0 1 0 3.408l-4.592 4.592a2.4 2.4 0 0 1-3.408 0l-6.71-6.71A2 2 0 0 1 6 9.172V3a1 1 0 0 1 1-1z"}],["path",{"d":"M2 7v6.172a2 2 0 0 0 .586 1.414l6.71 6.71a2.4 2.4 0 0 0 3.191.193"}],["circle",{"cx":"10.5","cy":"6.5","r":".5","fill":"currentColor"}]],"CalendarDays":[["path",{"d":"M8 2v4"}],["path",{"d":"M16 2v4"}],["rect",{"width":"18","height":"18","x":"3","y":"4","rx":"2"}],["path",{"d":"M3 10h18"}],["path",{"d":"M8 14h.01"}],["path",{"d":"M12 14h.01"}],["path",{"d":"M16 14h.01"}],["path",{"d":"M8 18h.01"}],["path",{"d":"M12 18h.01"}],["path",{"d":"M16 18h.01"}]],"Sprout":[["path",{"d":"M14 9.536V7a4 4 0 0 1 4-4h1.5a.5.5 0 0 1 .5.5V5a4 4 0 0 1-4 4 4 4 0 0 0-4 4c0 2 1 3 1 5a5 5 0 0 1-1 3"}],["path",{"d":"M4 9a5 5 0 0 1 8 4 5 5 0 0 1-8-4"}],["path",{"d":"M5 21h14"}]],"Menu":[["path",{"d":"M4 5h16"}],["path",{"d":"M4 12h16"}],["path",{"d":"M4 19h16"}]],"X":[["path",{"d":"M18 6 6 18"}],["path",{"d":"m6 6 12 12"}]],"Trash2":[["path",{"d":"M10 11v6"}],["path",{"d":"M14 11v6"}],["path",{"d":"M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"}],["path",{"d":"M3 6h18"}],["path",{"d":"M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"}]],"Pencil":[["path",{"d":"M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"}],["path",{"d":"m15 5 4 4"}]],"Printer":[["path",{"d":"M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"}],["path",{"d":"M6 9V3a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v6"}],["rect",{"x":"6","y":"14","width":"12","height":"8","rx":"1"}]],"Download":[["path",{"d":"M12 15V3"}],["path",{"d":"M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"}],["path",{"d":"m7 10 5 5 5-5"}]],"Upload":[["path",{"d":"M12 3v12"}],["path",{"d":"m17 8-5-5-5 5"}],["path",{"d":"M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"}]],"RefreshCw":[["path",{"d":"M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"}],["path",{"d":"M21 3v5h-5"}],["path",{"d":"M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"}],["path",{"d":"M8 16H3v5"}]],"FilterX":[["path",{"d":"M12.531 3H3a1 1 0 0 0-.742 1.67l7.225 7.989A2 2 0 0 1 10 14v6a1 1 0 0 0 .553.895l2 1A1 1 0 0 0 14 21v-7a2 2 0 0 1 .517-1.341l.427-.473"}],["path",{"d":"m16.5 3.5 5 5"}],["path",{"d":"m21.5 3.5-5 5"}]],"LogOut":[["path",{"d":"m16 17 5-5-5-5"}],["path",{"d":"M21 12H9"}],["path",{"d":"M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"}]],"Sparkles":[["path",{"d":"M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z"}],["path",{"d":"M20 2v4"}],["path",{"d":"M22 4h-4"}],["circle",{"cx":"4","cy":"20","r":"2"}]],"Plus":[["path",{"d":"M5 12h14"}],["path",{"d":"M12 5v14"}]],"Check":[["path",{"d":"M20 6 9 17l-5-5"}]],"ChartNoAxesCombined":[["path",{"d":"M12 16v5"}],["path",{"d":"M16 14v7"}],["path",{"d":"M20 10v11"}],["path",{"d":"m22 3-8.646 8.646a.5.5 0 0 1-.708 0L9.354 8.354a.5.5 0 0 0-.707 0L2 15"}],["path",{"d":"M4 18v3"}],["path",{"d":"M8 14v7"}]],"Bell":[["path",{"d":"M10.268 21a2 2 0 0 0 3.464 0"}],["path",{"d":"M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326"}]],"Sun":[["circle",{"cx":"12","cy":"12","r":"4"}],["path",{"d":"M12 2v2"}],["path",{"d":"M12 20v2"}],["path",{"d":"m4.93 4.93 1.41 1.41"}],["path",{"d":"m17.66 17.66 1.41 1.41"}],["path",{"d":"M2 12h2"}],["path",{"d":"M20 12h2"}],["path",{"d":"m6.34 17.66-1.41 1.41"}],["path",{"d":"m19.07 4.93-1.41 1.41"}]],"Moon":[["path",{"d":"M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"}]],"Eye":[["path",{"d":"M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"}],["circle",{"cx":"12","cy":"12","r":"3"}]],"EyeOff":[["path",{"d":"M10.733 5.076a10.744 10.744 0 0 1 11.205 6.575 1 1 0 0 1 0 .696 10.747 10.747 0 0 1-1.444 2.49"}],["path",{"d":"M14.084 14.158a3 3 0 0 1-4.242-4.242"}],["path",{"d":"M17.479 17.499a10.75 10.75 0 0 1-15.417-5.151 1 1 0 0 1 0-.696 10.75 10.75 0 0 1 4.446-5.143"}],["path",{"d":"m2 2 20 20"}]]};
+function lolitaV2Icon(name){
+    const nodes = LOLITA_V2_ICONS[name] || [];
+    return '<svg class="v2-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
+        nodes.map(([tag,attrs]) => '<' + tag + ' ' + Object.entries(attrs).map(([key,value]) => key+'="'+value+'"').join(' ') + '></'+tag+'>').join('') + '</svg>';
+}
+
+function lolitaV2Polish(){
+    const navIcons = {dashboard:'LayoutDashboard',products:'Package',inventory:'Truck',clients:'Users',sales:'Receipt',offers:'Tags',reports:'CalendarDays'};
+    const clean = text => text.replace(/^[\s\p{Extended_Pictographic}\uFE0F\u200D+]+/u,'').trim();
+    const iconButton = (button,icon,label,only = false) => {
+        if(button.querySelector('.v2-icon')) return;
+        button.innerHTML = lolitaV2Icon(icon) + (only ? '' : '<span>'+esc(label)+'</span>');
+        if(only){ button.setAttribute('aria-label',label); button.title = label; }
+    };
+    document.querySelectorAll('#nav button').forEach(button => {
+        const label = button.dataset.view === 'dashboard' ? 'Inicio' : clean(button.textContent);
+        iconButton(button,navIcons[button.dataset.view],label);
+        button.setAttribute('aria-current',button.classList.contains('active') ? 'page' : 'false');
+    });
+    document.querySelectorAll('.brand-mark,.side-icon').forEach(mark => {
+        if(mark.querySelector('.v2-brand-sprout')) return;
+        mark.innerHTML = '<span>BL</span><span class="v2-brand-sprout">'+lolitaV2Icon('Sprout')+'</span>';
+        mark.setAttribute('aria-label','BASE DE LOLITA');
+    });
+    const nav = document.querySelector('#nav');
+    if(nav && !document.querySelector('.v2-nav-caption')){
+        const caption = document.createElement('p');
+        caption.className = 'v2-nav-caption'; caption.textContent = 'Mi negocio';
+        nav.before(caption);
+    }
+    const sidebar = document.querySelector('#sidebar');
+    if(sidebar) sidebar.inert=window.matchMedia('(max-width:1100px)').matches && !sidebar.classList.contains('open');
+    const menu = document.querySelector('#mobileMenu');
+    if(menu){
+        iconButton(menu,'Menu','Abrir navegacion',true);
+        menu.setAttribute('aria-controls','sidebar');
+        menu.setAttribute('aria-expanded',String(sidebar?.classList.contains('open') || false));
+    }
+    if(sidebar && !document.querySelector('.v2-nav-backdrop')){
+        const closeNav = () => {sidebar.classList.remove('open'); menu?.focus();};
+        const backdrop = document.createElement('button');
+        backdrop.type='button'; backdrop.className='v2-nav-backdrop';
+        backdrop.setAttribute('aria-label','Cerrar navegacion'); backdrop.tabIndex=-1;
+        backdrop.onclick = closeNav; sidebar.after(backdrop);
+        const close = document.createElement('button');
+        close.type='button'; close.className='v2-close-nav icon-btn'; close.setAttribute('aria-label','Cerrar navegacion');
+        close.innerHTML=lolitaV2Icon('X'); close.onclick=closeNav; sidebar.prepend(close);
+    }
+    document.querySelectorAll('button').forEach(button => {
+        if(button.closest('#nav') || button.classList.contains('v2-nav-backdrop') || button.id==='notificationBell' || button.id==='themeButton' || button.id==='mobileMenu') return;
+        if(button.querySelector('.v2-icon') || button.children.length) return;
+        const label=clean(button.textContent);
+        const title=button.getAttribute('title') || button.getAttribute('aria-label') || label;
+        let icon='';
+        if(button.classList.contains('del') || /eliminar|quitar/i.test(title)) icon='Trash2';
+        else if(/editar/i.test(title)) icon='Pencil';
+        else if(/historial/i.test(title)) icon='CalendarDays';
+        else if(/ticket|imprimir|pdf/i.test(title)) icon='Printer';
+        else if(/exportar|descargar/i.test(label)) icon='Download';
+        else if(/importar|migrar/i.test(label)) icon='Upload';
+        else if(/actualizar|sincronizar/i.test(label)) icon='RefreshCw';
+        else if(/limpiar filtros/i.test(label)) icon='FilterX';
+        else if(/cerrar sesi/i.test(label)) icon='LogOut';
+        else if(/novedades/i.test(label)) icon='Sparkles';
+        else if(/cancelar|^cerrar$/i.test(label)) icon='X';
+        else if(/registrar|agregar|crear|^nuevo|^nueva/i.test(label) || /^add/.test(button.id)) icon='Plus';
+        else if(/guardar|^entrar$/i.test(label)) icon='Check';
+        else if(/ver reporte/i.test(label)) icon='ChartNoAxesCombined';
+        if(icon) iconButton(button,icon,button.classList.contains('icon-btn') ? title : label,button.classList.contains('icon-btn'));
+    });
+    const bell=document.querySelector('#notificationBell > span[aria-hidden]');
+    if(bell && !bell.querySelector('.v2-icon')) bell.innerHTML=lolitaV2Icon('Bell');
+    const theme=document.querySelector('#themeButton');
+    if(theme){
+        const dark=document.body.classList.contains('dark');
+        iconButton(theme,dark?'Sun':'Moon',dark?'Modo claro':'Modo oscuro',true);
+    }
+    const password=document.querySelector('#loginPass');
+    if(password && !document.querySelector('.v2-password-toggle')){
+        const wrap=document.createElement('div'); wrap.className='v2-password-wrap';
+        password.before(wrap); wrap.append(password);
+        const toggle=document.createElement('button'); toggle.type='button'; toggle.className='v2-password-toggle';
+        const update=()=>{
+            const hidden=password.type==='password';
+            toggle.setAttribute('aria-label',hidden?'Mostrar contrasena':'Ocultar contrasena');
+            toggle.setAttribute('aria-pressed',String(!hidden));
+            toggle.title=hidden?'Mostrar contrasena':'Ocultar contrasena';
+            toggle.innerHTML=lolitaV2Icon(hidden?'Eye':'EyeOff');
+        };
+        toggle.onclick=()=>{password.type=password.type==='password'?'text':'password';update();};
+        update(); wrap.append(toggle);
+    }
+    document.querySelectorAll('.field').forEach(field => {
+        const label=field.querySelector('label'); const input=field.querySelector('input,select,textarea');
+        if(label && input){
+            if(input.id) label.htmlFor=input.id;
+            else if(!input.hasAttribute('aria-label')) input.setAttribute('aria-label',label.textContent.trim());
+        }
+    });
+    document.querySelectorAll('.card-head h3,.view h3').forEach(node => {
+        const value=clean(node.textContent);
+        if(!node.children.length && value!==node.textContent.trim()) node.textContent=value;
+    });
+    document.querySelectorAll('.stat strong,.report-card strong,.campaign-price').forEach(node => {
+        const negative=/^-/.test(node.textContent.trim());
+        if(node.classList.contains('v2-negative')!==negative) node.classList.toggle('v2-negative',negative);
+    });
+    const box=document.querySelector('#modalBox');
+    if(box?.querySelector('.v2-sale-workspace')){
+        const actions=box.querySelector(':scope > .modal-actions');
+        let total=actions?.querySelector('.v2-mobile-total');
+        if(actions && !total){
+            total=document.createElement('div');total.className='v2-mobile-total';
+            total.innerHTML='<span>Total de la venta</span><strong></strong>';actions.prepend(total);
+        }
+        const value=box.querySelector('#saleLiveSummary .stat:first-child strong')?.textContent || '$0.00';
+        if(total && total.querySelector('strong').textContent!==value) total.querySelector('strong').textContent=value;
+    }
+    if(box && box.children.length){
+        box.setAttribute('role','dialog'); box.setAttribute('aria-modal','true');
+        const heading=box.querySelector(':scope > h3');
+        if(heading){
+            heading.id='v2-modal-title'; box.setAttribute('aria-labelledby',heading.id);
+            const title=clean(heading.textContent);
+            if(title!==heading.textContent.trim()) heading.textContent=title;
+        }
+        if(!box.querySelector('.v2-modal-close')){
+            const close=document.createElement('button');close.type='button';close.className='v2-modal-close icon-btn';
+            close.setAttribute('aria-label','Cerrar ventana');close.title='Cerrar ventana';close.innerHTML=lolitaV2Icon('X');
+            close.onclick=closeModal;box.prepend(close);
+        }
+    }
+}
+
+var lolitaV2PendingFrame = false;
+var lolitaV2FocusOrigin = null;
+var lolitaV2ModalWasOpen = false;
+function lolitaV2Schedule(){
+    if(lolitaV2PendingFrame) return;
+    lolitaV2PendingFrame=true;
+    requestAnimationFrame(()=>{
+        lolitaV2PendingFrame=false;
+        lolitaV2Polish();
+        const opened=document.querySelector('#modal')?.classList.contains('open');
+        if(opened && !lolitaV2ModalWasOpen){
+            lolitaV2FocusOrigin=document.activeElement;
+            document.querySelector('#modalBox input,#modalBox select,#modalBox button')?.focus();
+        } else if(!opened && lolitaV2ModalWasOpen && lolitaV2FocusOrigin?.isConnected){
+            lolitaV2FocusOrigin.focus();
+        }
+        lolitaV2ModalWasOpen=!!opened;
+    });
+}
+lolitaV2Polish();
+new MutationObserver(lolitaV2Schedule).observe(document.body,{childList:true,subtree:true,attributes:true,attributeFilter:['class']});
+window.addEventListener('resize',lolitaV2Schedule);
+document.addEventListener('keydown',event=>{
+    const modal=document.querySelector('#modal.open #modalBox');
+    const sidebar=document.querySelector('#sidebar.open');
+    if(event.key==='Escape' && sidebar){sidebar.classList.remove('open');document.querySelector('#mobileMenu')?.focus();}
+    const scope=modal || (sidebar && window.matchMedia('(max-width:1100px)').matches ? sidebar : null);
+    if(event.key!=='Tab' || !scope) return;
+    const focusable=[...scope.querySelectorAll('button:not([disabled]),input:not([disabled]),select:not([disabled]),textarea:not([disabled]),a[href]')].filter(node=>node.getClientRects().length);
+    const first=focusable[0],last=focusable[focusable.length-1];
+    if(event.shiftKey && (document.activeElement===first || !scope.contains(document.activeElement))){event.preventDefault();last?.focus();}
+    else if(!event.shiftKey && (document.activeElement===last || !scope.contains(document.activeElement))){event.preventDefault();first?.focus();}
+});
+/* ===== END BASE DE LOLITA V2 UI ===== */
+</script>
 </body>
 </html>
