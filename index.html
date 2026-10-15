@@ -3,6 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#103b2a">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="apple-touch-icon" href="./icons/apple-touch-icon.png">
 
 <title>BASE DE LOLITA · Administración</title>
 
@@ -2883,6 +2888,31 @@ body.dark .lolita-brand-kicker{
 .campaign-selects{display:grid;gap:12px;margin:16px 0;}
 button:disabled{opacity:.55;cursor:not-allowed;transform:none;}
 
+.release-button{margin-top:8px;font-size:12px;}
+.notification-bell{position:relative;flex:0 0 40px;overflow:visible;}
+.notification-count{position:absolute;right:-5px;top:-5px;min-width:19px;height:19px;padding:0 4px;border-radius:10px;background:#b83042;color:#fff;font-size:11px;line-height:19px;text-align:center;font-weight:800;}
+.notification-count[hidden]{display:none;}
+.notification-list{display:grid;gap:10px;margin-top:16px;}
+.notification-item{padding:14px;border:1px solid var(--line);border-radius:8px;background:var(--card2);min-width:0;}
+.notification-item.is-unread{border-left:4px solid var(--green);}
+.notification-item h4{font-size:15px;line-height:1.4;margin:0 0 5px;overflow-wrap:anywhere;}
+.notification-item p{font-size:13px;line-height:1.55;overflow-wrap:anywhere;}
+.notification-item small{display:block;color:var(--muted);margin:8px 0;}
+.notification-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;}
+.release-entry{padding:16px 0;border-bottom:1px solid var(--line);}
+.release-entry h4{font-size:16px;margin-bottom:6px;}
+.release-entry ul{padding-left:20px;margin-top:10px;line-height:1.65;}
+.release-entry small{color:var(--muted);}
+.topbar{overflow:visible;}
+@media(max-width:760px){
+    .topbar .sync-status{max-width:94px;min-width:0;font-size:10px;padding:6px;}
+    .topbar > div{gap:8px!important;min-width:0;}
+    .topbar > div:last-child{flex:0 1 auto;}
+    .topbar h2{max-width:100px;}
+    .modal-box > .modal-actions button{flex:0 0 auto;min-height:44px;height:auto;white-space:normal;}
+}
+@media(max-width:400px){.topbar .sync-status{display:none;}}
+
 </style>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -3056,6 +3086,8 @@ button:disabled{opacity:.55;cursor:not-allowed;transform:none;}
                     Cerrar sesión
                 </button>
 
+                <button class="logout release-button" type="button" onclick="lolitaShowReleases()">Novedades · v1.2.0</button>
+
             </div>
 
         </aside>
@@ -3112,6 +3144,10 @@ button:disabled{opacity:.55;cursor:not-allowed;transform:none;}
                         <span class="sync-dot" id="syncDot"></span>
                         <span id="syncText">Conectando...</span>
                     </div>
+
+                    <button class="icon-btn notification-bell" id="notificationBell" type="button" title="Notificaciones" aria-label="Notificaciones" onclick="lolitaShowNotifications()">
+                        <span aria-hidden="true">&#128276;</span><span id="notificationCount" class="notification-count" hidden>0</span>
+                    </button>
 
                     <button
                         class="theme-button"
@@ -4384,7 +4420,7 @@ async function loadAllFromCloud(){
         saveLocalCache();
 
         setSyncStatus("ok","✓ Datos sincronizados");
-
+        return true;
     }
     catch(err){
 
@@ -4398,7 +4434,7 @@ async function loadAllFromCloud(){
             data = cached;
             toast("Mostrando datos guardados localmente (sin conexión)");
         }
-
+        return false;
     }
 
 }
@@ -4658,12 +4694,13 @@ async function createSaleRemote(sale){
         setSyncStatus("ok","✓ Datos sincronizados");
 
         /* register_sale regresa el id de la venta creada */
-        const newId =
-            Array.isArray(result) && result[0]
-                ? result[0].id
-                : uid();
+        const record = Array.isArray(result) ? result[0] : result;
+        const confirmedId = typeof record === "string" ? record : record?.id || record?.sale_id;
+        const newId = confirmedId || uid();
 
-        return { ...sale, id:newId, created:new Date().toISOString() };
+        const created = { ...sale, id:newId, created:new Date().toISOString() };
+        if(confirmedId) lolitaNotifySale(created);
+        return created;
 
     }
 catch(err){
@@ -4836,6 +4873,9 @@ async function refreshTableAndRender(table){
         };
 
         data[table] = rows.map(mappers[table]);
+
+        if(table === "sales") lolitaScanSaleNotices();
+        if(table === "receipts") lolitaCheckMonthClose();
 
         saveLocalCache();
         setSyncStatus("ok","✓ Datos sincronizados");
@@ -10960,6 +11000,388 @@ renderCurrentView = function(){
 applyLolitaBranding();
 lolitaEnhanceLogin();
 installLolitaBulkButton();
+/* ===== RELEASES AND NOTIFICATIONS ===== */
+var LOLITA_APP_VERSION = "1.2.0";
+var LOLITA_RELEASES = [
+    {version:"1.2.0",date:"2026-10-14",title:"Notificaciones en el teléfono",changes:[
+        "Activación de notificaciones push desde la campana.",
+        "Instalación como app en la pantalla de inicio del iPhone.",
+        "Envío de avisos de ventas y cierre mensual desde el servidor, una vez configurado."
+    ]},
+    {version:"1.1.0",date:"2026-10-14",title:"Notificaciones y novedades",changes:[
+        "Centro de notificaciones con contador de avisos sin leer.",
+        "Avisos de ventas registradas y recibidas por sincronización.",
+        "Resumen del mes anterior con ventas, ganancia, unidades y gasto en entradas.",
+        "Historial de versiones disponible desde el menú."
+    ]},
+    {version:"1.0.0",date:"2026-10-14",title:"Registro inicial de la aplicación",changes:[
+        "Seis promociones del proveedor con carteles, vigencias y venta por paquetes.",
+        "Ventas, productos recibidos, reportes y tickets para imprimir.",
+        "Control de existencias y aplicación del descuento de compra desde $30,000."
+    ]}
+];
+var lolitaNoticeState = null;
+var lolitaNoticeUser = null;
+var lolitaNoticeTimer = null;
+var lolitaNoticeCloudReady = false;
+
+function lolitaNoticeStorageKey(userId){
+    return "base-lolita:notifications:v1:" + userId;
+}
+
+function lolitaLoadNotices(userId){
+    const empty = {initialized:false,seenSales:[],closedMonths:[],notices:[]};
+    try{
+        const saved = JSON.parse(localStorage.getItem(lolitaNoticeStorageKey(userId)) || "null");
+        if(!saved || typeof saved !== "object") return empty;
+        return {
+            initialized:saved.initialized === true,
+            seenSales:Array.isArray(saved.seenSales) ? saved.seenSales.filter(id => typeof id === "string") : [],
+            closedMonths:Array.isArray(saved.closedMonths) ? saved.closedMonths.filter(month => /^\d{4}-\d{2}$/.test(month)) : [],
+            notices:Array.isArray(saved.notices) ? saved.notices.filter(notice => notice && typeof notice.id === "string" &&
+                typeof notice.title === "string" && typeof notice.body === "string" && ["sale","month"].includes(notice.kind)).slice(0,200) : []
+        };
+    } catch(error){ return empty; }
+}
+
+function lolitaNotificationDay(now = new Date()){
+    const parts = new Intl.DateTimeFormat("en-US",{timeZone:"America/Matamoros",year:"numeric",month:"2-digit",day:"2-digit"}).formatToParts(now);
+    const value = type => parts.find(part => part.type === type).value;
+    return `${value("year")}-${value("month")}-${value("day")}`;
+}
+
+function lolitaPreviousMonth(day){
+    const [year,month] = day.split("-").map(Number);
+    return month === 1 ? `${year-1}-12` : `${year}-${String(month-1).padStart(2,"0")}`;
+}
+
+function lolitaSaleNotice(sale, stamp){
+    return {id:`sale:${sale.id}`,kind:"sale",saleId:sale.id,title:"Venta registrada",read:false,created:stamp,
+        body:`${sale.clientName || "Público general"} · ${sale.productName || "Venta"} · ${money(Number(sale.total) || 0)}`};
+}
+
+function lolitaMergeSaleNotices(state, sales, stamp){
+    const seen = new Set(state.seenSales);
+    for(const sale of sales){
+        if(!sale.id || seen.has(sale.id)) continue;
+        if(state.initialized) state.notices.unshift(lolitaSaleNotice(sale,stamp));
+        seen.add(sale.id);
+    }
+    state.seenSales = [...seen];
+    state.initialized = true;
+    state.notices = state.notices.slice(0,200);
+}
+
+function lolitaMonthlyNotice(sales, receipts, day, stamp){
+    const period = lolitaPreviousMonth(day);
+    const monthSales = sales.filter(sale => String(sale.date || "").slice(0,7) === period);
+    const monthReceipts = receipts.filter(receipt => String(receipt.date || "").slice(0,7) === period);
+    if(!monthSales.length && !monthReceipts.length) return null;
+    const sum = (rows,key) => rows.reduce((total,row) => total + (Number(row[key]) || 0),0);
+    const totals = {revenue:sum(monthSales,"total"),profit:sum(monthSales,"profit"),units:sum(monthSales,"qty"),spending:sum(monthReceipts,"totalCost"),salesCount:monthSales.length};
+    return {id:`month:${period}`,kind:"month",period,title:`Cierre de mes · ${period}`,created:stamp,read:false,totals,
+        body:`${totals.salesCount} ventas · Ingresos ${money(totals.revenue)} · Ganancia ${money(totals.profit)} · ${totals.units} unidades · Gasto en entradas ${money(totals.spending)}`};
+}
+
+function lolitaSaveNotices(){
+    if(!lolitaNoticeUser || !lolitaNoticeState) return;
+    try{
+        localStorage.setItem(lolitaNoticeStorageKey(lolitaNoticeUser),JSON.stringify(lolitaNoticeState));
+    } catch(error){ console.warn("No se pudo guardar el historial de notificaciones",error); }
+    lolitaUpdateNoticeBadge();
+}
+
+function lolitaUpdateNoticeBadge(){
+    const badge = document.querySelector("#notificationCount");
+    const button = document.querySelector("#notificationBell");
+    const count = (lolitaNoticeState?.notices || []).filter(notice => !notice.read).length;
+    if(badge){ badge.textContent = count > 99 ? "99+" : String(count); badge.hidden = !count; }
+    if(button) button.setAttribute("aria-label",count ? `Notificaciones: ${count} sin leer` : "Notificaciones");
+}
+
+function lolitaCheckMonthClose(){
+    if(!lolitaNoticeCloudReady || !lolitaNoticeState || !lolitaNoticeUser || typeof currentUser === "undefined" || currentUser?.id !== lolitaNoticeUser) return;
+    const notice = lolitaMonthlyNotice(data.sales,data.receipts,lolitaNotificationDay(),new Date().toISOString());
+    if(!notice || lolitaNoticeState.closedMonths.includes(notice.period)) return;
+    lolitaNoticeState.notices.unshift(notice);
+    lolitaNoticeState.notices = lolitaNoticeState.notices.slice(0,200);
+    lolitaNoticeState.closedMonths.push(notice.period);
+    lolitaSaveNotices();
+}
+
+function lolitaScanSaleNotices(){
+    if(!lolitaNoticeState || typeof currentUser === "undefined" || currentUser?.id !== lolitaNoticeUser) return;
+    lolitaNoticeCloudReady = true;
+    lolitaMergeSaleNotices(lolitaNoticeState,data.sales,new Date().toISOString());
+    lolitaSaveNotices();
+    lolitaCheckMonthClose();
+}
+
+function lolitaNotifySale(sale){
+    if(!lolitaNoticeState || !sale.id || typeof currentUser === "undefined" || currentUser?.id !== lolitaNoticeUser) return;
+    if(lolitaNoticeState.seenSales.includes(sale.id)) return;
+    lolitaNoticeState.seenSales.push(sale.id);
+    lolitaNoticeState.notices.unshift(lolitaSaleNotice(sale,new Date().toISOString()));
+    lolitaNoticeState.notices = lolitaNoticeState.notices.slice(0,200);
+    lolitaSaveNotices();
+}
+
+function lolitaStartNotifications(cloudLoaded){
+    if(typeof currentUser === "undefined" || !currentUser?.id) return;
+    if(lolitaNoticeTimer) clearInterval(lolitaNoticeTimer);
+    lolitaNoticeUser = currentUser.id;
+    lolitaNoticeState = lolitaLoadNotices(currentUser.id);
+    lolitaNoticeCloudReady = !!cloudLoaded;
+    if(cloudLoaded) lolitaScanSaleNotices();
+    lolitaUpdateNoticeBadge();
+    lolitaNoticeTimer = setInterval(() => {
+        if(document.visibilityState === "visible") lolitaCheckMonthClose();
+    },60000);
+}
+
+function lolitaStopNotifications(){
+    if(lolitaNoticeTimer) clearInterval(lolitaNoticeTimer);
+    lolitaNoticeTimer = null;
+    lolitaNoticeUser = null;
+    lolitaNoticeState = null;
+    lolitaNoticeCloudReady = false;
+    lolitaUpdateNoticeBadge();
+}
+
+function lolitaMarkNoticesRead(id){
+    if(!lolitaNoticeState) return;
+    for(const notice of lolitaNoticeState.notices){
+        if(!id || notice.id === id) notice.read = true;
+    }
+    lolitaSaveNotices();
+}
+
+function lolitaOpenNotice(id){
+    const notice = lolitaNoticeState?.notices.find(item => item.id === id);
+    if(!notice) return;
+    lolitaMarkNoticesRead(id);
+    closeModal();
+    if(notice.kind === "month"){
+        const [year,month] = notice.period.split("-").map(Number);
+        $("#fromDate").value = notice.period + "-01";
+        $("#toDate").value = `${notice.period}-${new Date(year,month,0).getDate()}`;
+        showView("reports");
+    } else {
+        showView("sales");
+        if(!data.sales.some(sale => sale.id === notice.saleId)) toast("Esta venta ya no está en el historial actual.");
+    }
+}
+
+function lolitaShowNotifications(){
+    const notices = lolitaNoticeState?.notices || [];
+    openModal("Notificaciones",`
+        <div class="notification-actions"><button class="secondary" type="button" onclick="lolitaShowReleases()">Novedades · v${LOLITA_APP_VERSION}</button><button class="secondary" type="button" onclick="lolitaShowPushSettings()">Avisos en mi teléfono</button></div>
+        <div class="notification-list">${notices.length ? notices.map((notice,index) => `
+            <article class="notification-item ${notice.read ? "" : "is-unread"}">
+                <h4>${esc(notice.title)}${notice.read ? "" : " · Nueva"}</h4><p>${esc(notice.body)}</p>
+                <small>${esc(new Date(notice.created).toLocaleString("es-MX",{timeZone:"America/Matamoros"}))}</small>
+                <button class="secondary" type="button" data-notice-index="${index}">${notice.kind === "month" ? "Ver reporte del mes" : "Ver ventas"}</button>
+            </article>`).join("") : '<div class="empty">No tienes notificaciones pendientes.</div>'}</div>`,() => {
+                lolitaMarkNoticesRead(); closeModal();
+            });
+    $("#modalSave").textContent = "Marcar todas como leídas";
+    $("#modalBox").querySelector(".modal-actions .secondary").textContent = "Cerrar";
+    $("#modalBox").querySelectorAll("[data-notice-index]").forEach(button => {
+        button.onclick = () => lolitaOpenNotice(notices[Number(button.dataset.noticeIndex)].id);
+    });
+}
+
+function lolitaShowReleases(){
+    openModal(`Novedades · v${LOLITA_APP_VERSION}`,LOLITA_RELEASES.map(release => `
+        <article class="release-entry"><h4>v${release.version} · ${esc(release.title)}</h4>
+            <small>${fmtDate(release.date)}</small><ul>${release.changes.map(change => `<li>${esc(change)}</li>`).join("")}</ul>
+        </article>`).join(""),closeModal);
+    $("#modalSave").textContent = "Entendido";
+    $("#modalBox").querySelector(".modal-actions .secondary").textContent = "Cerrar";
+}
+
+document.addEventListener("visibilitychange",() => {
+    if(document.visibilityState === "visible" && lolitaNoticeUser) refreshTableAndRender("sales");
+});
+if(typeof window.addEventListener === "function") window.addEventListener("storage",event => {
+    if(lolitaNoticeUser && event.key === lolitaNoticeStorageKey(lolitaNoticeUser)){
+        lolitaNoticeState = lolitaLoadNotices(lolitaNoticeUser);
+        lolitaUpdateNoticeBadge();
+    }
+});
+/* ===== PHONE PUSH CLIENT ===== */
+var lolitaPendingPushOpen = null;
+
+function lolitaPushSupport(){
+    if(!window.isSecureContext || location.protocol === "file:") return "Abre la página publicada con HTTPS para activar los avisos.";
+    const ios = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+    if(ios && !(navigator.standalone || window.matchMedia("(display-mode: standalone)").matches)){
+        return "En Safari, toca Compartir y Añadir a pantalla de inicio. Abre BASE DE LOLITA desde ese icono y activa los avisos aquí.";
+    }
+    if(!("serviceWorker" in navigator) || !("PushManager" in window) || !("Notification" in window)){
+        return "Este navegador no admite avisos push. En iPhone necesitas iOS 16.4 o posterior y abrir la app desde la pantalla de inicio.";
+    }
+    if(Notification.permission === "denied") return "Los avisos están bloqueados. Permítelos en los ajustes de notificaciones de esta app en tu teléfono.";
+    return "";
+}
+
+async function lolitaPushCall(action,extra = {}){
+    if(!currentUser || !supabaseClient) throw new Error("Inicia sesión para activar los avisos.");
+    const result = await supabaseClient.functions.invoke("lolita-push",{body:{action,...extra}});
+    if(result.error) throw new Error("No se pudo contactar al servicio de avisos. Revisa la conexión y la configuración del servidor.");
+    if(!result.data?.ok) throw new Error(result.data?.error || "El servidor de avisos todavía no está listo.");
+    return result.data;
+}
+
+function lolitaPushKeyBytes(key){
+    const base64 = key.replace(/-/g,"+").replace(/_/g,"/");
+    return Uint8Array.from(atob(base64 + "=".repeat((4-base64.length%4)%4)),char => char.charCodeAt(0));
+}
+
+async function lolitaPushRegistration(){
+    return navigator.serviceWorker.register(new URL("./sw.js",location.href).href,{scope:"./",updateViaCache:"none"});
+}
+
+function lolitaPushOwner(){
+    try { return localStorage.getItem("base-lolita:push-device-owner"); } catch(error){ return null; }
+}
+
+async function lolitaEnablePush(){
+    const warning = lolitaPushSupport();
+    if(warning){ toast(warning); return; }
+    const button = $("#modalSave");
+    const status = $("#pushDeviceStatus");
+    const testButton = $("#pushTest");
+    const disableButton = $("#pushDisable");
+    const userId = currentUser?.id;
+    if(button.disabled) return;
+    button.disabled = true;
+    try{
+        // iOS requires this request to start directly inside the button gesture.
+        const permission = await Notification.requestPermission();
+        if(permission !== "granted") throw new Error("No se concedió permiso para las notificaciones.");
+        const config = await lolitaPushCall("config");
+        if(currentUser?.id !== userId) throw new Error("La sesión cambió. Inicia sesión e intenta de nuevo.");
+        const registration = await lolitaPushRegistration();
+        await navigator.serviceWorker.ready;
+        let subscription = await registration.pushManager.getSubscription();
+        const expectedKey = lolitaPushKeyBytes(config.publicKey);
+        const existingKey = subscription?.options.applicationServerKey;
+        const keyChanged = existingKey && String(new Uint8Array(existingKey)) !== String(expectedKey);
+        if(subscription && (lolitaPushOwner() !== userId || keyChanged)){
+            await subscription.unsubscribe(); subscription = null;
+        }
+        if(!subscription) subscription = await registration.pushManager.subscribe({userVisibleOnly:true,applicationServerKey:lolitaPushKeyBytes(config.publicKey)});
+        await lolitaPushCall("subscribe",{subscription:subscription.toJSON()});
+        if(currentUser?.id !== userId){ await subscription.unsubscribe(); throw new Error("La sesión cambió. Vuelve a activar los avisos."); }
+        localStorage.setItem("base-lolita:push-device-owner",userId);
+        if(status.isConnected){
+            status.textContent = "Avisos activados en este teléfono: ventas y cierre de mes.";
+            button.textContent = "Activados";
+            testButton.disabled = false;
+            disableButton.disabled = false;
+        }
+        toast("Avisos del teléfono activados");
+    } catch(error){
+        if(status.isConnected){ status.textContent = error.message; button.disabled = false; }
+        else toast(error.message);
+    }
+}
+
+async function lolitaDisablePush(){
+    if(!window.isSecureContext || location.protocol === "file:" || !("serviceWorker" in navigator)) return;
+    const registration = await navigator.serviceWorker.getRegistration(new URL("./sw.js",location.href).href);
+    const subscription = await registration?.pushManager.getSubscription();
+    if(subscription && lolitaPushOwner() === currentUser?.id){
+        await lolitaPushCall("unsubscribe",{endpoint:subscription.endpoint});
+        await subscription.unsubscribe();
+    }
+    localStorage.removeItem("base-lolita:push-device-owner");
+}
+
+async function lolitaClearPushDevice(){
+    if(!window.isSecureContext || location.protocol === "file:" || !("serviceWorker" in navigator)) return;
+    const registration = await navigator.serviceWorker.getRegistration(new URL("./sw.js",location.href).href);
+    const subscription = await registration?.pushManager.getSubscription();
+    if(subscription) await subscription.unsubscribe();
+    localStorage.removeItem("base-lolita:push-device-owner");
+}
+
+async function lolitaShowPushSettings(){
+    const warning = lolitaPushSupport();
+    openModal("Avisos en mi teléfono",`
+        <div class="note" id="pushDeviceStatus" role="status">${esc(warning || "Los avisos de ventas y cierre de mes pueden llegar aunque cierres la app.")}</div>
+        <div class="notification-actions">
+            <button class="secondary" type="button" id="pushTest" disabled>Enviar aviso de prueba</button>
+            <button class="secondary" type="button" id="pushDisable" disabled>Desactivar en este teléfono</button>
+        </div>`,lolitaEnablePush);
+    $("#modalSave").textContent = "Activar notificaciones";
+    $("#modalSave").disabled = !!warning;
+    $("#modalBox").querySelector(".modal-actions .secondary").textContent = "Cerrar";
+    $("#pushDisable").onclick = async () => {
+        try { await lolitaDisablePush(); lolitaShowPushSettings(); } catch(error){ $("#pushDeviceStatus").textContent = error.message; }
+    };
+    $("#pushTest").onclick = async () => {
+        const button = $("#pushTest"); button.disabled = true;
+        try{
+            const registration = await navigator.serviceWorker.getRegistration(new URL("./sw.js",location.href).href);
+            const subscription = await registration?.pushManager.getSubscription();
+            if(!subscription) throw new Error("Activa primero los avisos en este teléfono.");
+            await lolitaPushCall("test",{endpoint:subscription.endpoint});
+            toast("Aviso de prueba enviado al servicio del teléfono");
+        } catch(error){ $("#pushDeviceStatus").textContent = error.message; }
+        finally { if(button.isConnected) button.disabled = false; }
+    };
+    if(warning) return;
+    try{
+        const registration = await navigator.serviceWorker.getRegistration(new URL("./sw.js",location.href).href);
+        const subscription = await registration?.pushManager.getSubscription();
+        if(subscription && lolitaPushOwner() === currentUser?.id){
+            const status = await lolitaPushCall("status",{endpoint:subscription.endpoint});
+            if(!$("#pushDeviceStatus")) return;
+            if(status.active){
+                $("#pushDeviceStatus").textContent = "Avisos activados en este teléfono: ventas y cierre de mes.";
+                $("#modalSave").disabled = true;
+                $("#modalSave").textContent = "Activados";
+                $("#pushTest").disabled = false;
+                $("#pushDisable").disabled = false;
+            }
+        }
+    } catch(error){ if($("#pushDeviceStatus")) $("#pushDeviceStatus").textContent = error.message; }
+}
+
+function lolitaOpenPushTarget(target){
+    if(!currentUser){ lolitaPendingPushOpen = target; return; }
+    if(target.kind === "month" && /^\d{4}-(0[1-9]|1[0-2])$/.test(target.period || "")){
+        const [year,month] = target.period.split("-").map(Number);
+        $("#fromDate").value = target.period + "-01";
+        $("#toDate").value = `${target.period}-${new Date(year,month,0).getDate()}`;
+        showView("reports");
+    } else { showView("sales"); }
+}
+
+function lolitaPreparePush(){
+    if(window.isSecureContext && location.protocol !== "file:" && "serviceWorker" in navigator){
+        lolitaPushRegistration().catch(error => console.warn("No se pudo preparar el receptor push",error));
+    }
+    const url = new URL(location.href);
+    const kind = url.searchParams.get("push");
+    if(lolitaPendingPushOpen || kind){
+        const target = lolitaPendingPushOpen || {kind,period:url.searchParams.get("period")};
+        lolitaPendingPushOpen = null;
+        lolitaOpenPushTarget(target);
+        url.searchParams.delete("push"); url.searchParams.delete("period");
+        history.replaceState(null,"",url);
+    }
+}
+
+if(typeof navigator !== "undefined" && "serviceWorker" in navigator){
+    navigator.serviceWorker.addEventListener("message",event => {
+        if(event.data?.type === "LOLITA_PUSH_OPEN") lolitaOpenPushTarget(event.data);
+    });
+}
+/* ===== END PHONE PUSH CLIENT ===== */
+/* ===== END RELEASES AND NOTIFICATIONS ===== */
 /* ===== END BASE DE LOLITA UPGRADE ===== */
 
 /* =========================================================
@@ -11827,6 +12249,8 @@ $("#loginForm")
 $("#logout").onclick =
     async () => {
 
+        try { if(window.isSecureContext && "serviceWorker" in navigator) await lolitaDisablePush(); }
+        catch(error){ toast("No se pudieron desconectar los avisos del teléfono. Reintenta cerrar sesión con conexión."); return; }
         await supabaseClient.auth.signOut();
         /* la UI se actualiza en onAuthStateChange (evento SIGNED_OUT) */
 
@@ -11855,9 +12279,12 @@ async function onAuthReady(session){
 
     subscribeRealtime();
 
-    await loadAllFromCloud();
+    const cloudLoaded = await loadAllFromCloud();
+    lolitaStartNotifications(cloudLoaded);
 
     showView("dashboard");
+
+    lolitaPreparePush();
 
     await checkAndOfferMigration();
 
@@ -11870,6 +12297,9 @@ async function onAuthReady(session){
 
 function onSignedOut(){
 
+    lolitaStopNotifications();
+    lolitaClearPushDevice().catch(error => console.warn("No se pudo desconectar el receptor push",error));
+    closeModal();
     currentUser = null;
 
     if(realtimeChannel){
