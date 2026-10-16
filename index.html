@@ -3112,6 +3112,22 @@ body:has(#modal.open){overflow:hidden;}
 }
 @media(max-width:420px){.topbar h2{max-width:130px;font-size:12px;}.topbar>div{gap:7px!important;}.base-side-summary{grid-template-columns:1fr;}.base-side-summary .stat{display:flex;justify-content:space-between;align-items:center;min-height:65px;padding:12px 14px;border-top:1px solid var(--line);border-left:3px solid #4b7bb6;}.base-side-summary .stat:nth-child(2){border-left-color:#32976b;}.base-side-summary .stat:nth-child(3){border-left-color:#a982b5;}.base-side-summary .stat small{margin:0;}.form-grid:not(.three){grid-template-columns:1fr;}.login-card{padding:26px;}.topbar .migrate-btn{max-width:50px;padding:8px;font-size:10px;}.v2-sale-summary .stat small{font-size:10px;}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important;scroll-behavior:auto!important;}}
+.lolita-native-select{display:none!important;}
+.lolita-search-select{position:relative;width:100%;min-width:0;}
+.lolita-search-trigger{width:100%;min-width:0;min-height:44px;border:1px solid var(--input-border);border-radius:7px;background:var(--input);color:var(--text);padding:10px 12px;display:flex;align-items:center;justify-content:space-between;gap:12px;text-align:left;font-size:13px;font-weight:400;line-height:1.5;box-shadow:none;}
+.lolita-search-value{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.lolita-search-chevron{flex:0 0 14px;color:var(--muted);font-size:17px;line-height:1;}
+.lolita-search-trigger[aria-expanded="true"]{border-color:var(--green);outline:2px solid var(--soft);}
+.lolita-search-panel{position:fixed;z-index:180;display:flex;flex-direction:column;gap:6px;max-height:330px;padding:8px;border:1px solid var(--input-border);border-radius:8px;background:var(--card);box-shadow:0 12px 32px #071c1630;min-width:0;}
+.lolita-search-panel[hidden]{display:none!important;}
+.lolita-search-panel .lolita-search-input{flex:0 0 42px;margin:0;width:100%;min-height:42px;padding:10px 12px;font-size:14px;}
+.lolita-search-options{overflow-y:auto;overscroll-behavior:contain;min-height:0;max-height:250px;scrollbar-width:thin;}
+.lolita-search-option{min-height:44px;padding:9px 10px;border-radius:5px;cursor:pointer;line-height:1.4;color:var(--text);font-size:13px;overflow-wrap:anywhere;}
+.lolita-search-option>span{display:block;}
+.lolita-search-option small{display:block;color:var(--muted);font-size:11px;margin-top:3px;}
+.lolita-search-option[aria-selected="true"]{font-weight:650;}
+.lolita-search-option.is-highlighted,.lolita-search-option:hover{background:var(--soft);}
+.lolita-search-status{flex:0 0 auto;font-size:11px;color:var(--muted);padding:4px 9px 0;}
 /* ===== END BASE DE LOLITA V2 DESIGN ===== */
 </style>
 
@@ -11433,6 +11449,8 @@ installLolitaBulkButton();
 var LOLITA_APP_VERSION = "2.0.0";
 var LOLITA_RELEASES = [
     {version:"2.0.0",date:"2026-10-15",title:"Una nueva imagen para BASE DE LOLITA",changes:[
+        "Historial por cliente con filtros y vista previa de tickets; descarga de imagen e impresion PDF sin costos internos.",
+        "Buscadores de clientes y productos en ventas, llegadas y ofertas; busqueda por nombre o codigo.",
         "Identidad visual, logotipo BL e iconos consistentes en toda la app.",
         "Inicio compacto, tablas mas claras y formularios con estilos unificados.",
         "Registro de venta con productos y resumen separados.",
@@ -12966,7 +12984,7 @@ function lolitaV2Polish(){
         update(); wrap.append(toggle);
     }
     document.querySelectorAll('.field').forEach(field => {
-        const label=field.querySelector('label'); const input=field.querySelector('input,select,textarea');
+        const label=field.querySelector('label'); const input=field.querySelector('.lolita-search-trigger') || field.querySelector('input,select,textarea');
         if(label && input){
             if(input.id) label.htmlFor=input.id;
             else if(!input.hasAttribute('aria-label')) input.setAttribute('aria-label',label.textContent.trim());
@@ -13041,6 +13059,384 @@ document.addEventListener('keydown',event=>{
     else if(!event.shiftKey && (document.activeElement===last || !scope.contains(document.activeElement))){event.preventDefault();first?.focus();}
 });
 /* ===== END BASE DE LOLITA V2 UI ===== */
+</script>
+<script>
+/* ===== SEARCHABLE SELECTS ===== */
+function lolitaSelectNormalize(value){
+    return String(value ?? '').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim();
+}
+
+function lolitaFilterSelectChoices(choices,query){
+    const parts=lolitaSelectNormalize(query).split(/\s+/).filter(Boolean);
+    return choices.filter(choice => !choice.disabled && parts.every(part =>
+        lolitaSelectNormalize(choice.label+' '+(choice.search || '')).includes(part)));
+}
+
+if(typeof document !== 'undefined') (function(){
+    const selector='#sClient,#rProduct,#oProduct,select[id^="sItemProduct_"],select.bulk-product,select[id^="campaignProduct_"]';
+    const enhanced=new WeakMap();
+    const controllers=new Set();
+    let serial=0,active=null,scheduled=false;
+    function choicesFor(select){
+        const products=typeof data !== 'undefined' ? data.products || [] : [];
+        const clients=typeof data !== 'undefined' ? data.clients || [] : [];
+        const isClient=select.id==='sClient';
+        return [...select.options].map(option => {
+            const record=(isClient ? clients : products).find(item => String(item.id)===option.value);
+            return {value:option.value,label:option.textContent.trim(),disabled:option.disabled,
+                search:isClient ? record?.phone || '' : [record?.name,record?.invoiceCode,record?.cesna].filter(Boolean).join(' '),
+                detail:record && !isClient ? [record.invoiceCode || record.cesna,`Stock: ${Number(record.stock) || 0}`].filter(Boolean).join(' · ') : ''};
+        });
+    }
+    function enhance(select){
+        if(enhanced.has(select)) return;
+        const id='lolita-choice-'+(++serial);
+        const client=select.id==='sClient';
+        const label=select.closest('.field')?.querySelector('label');
+        const name=label?.textContent.trim() || (client ? 'Cliente' : 'Producto');
+        const wrap=document.createElement('div');wrap.className='lolita-search-select';
+        const trigger=document.createElement('button');trigger.type='button';trigger.className='lolita-search-trigger';trigger.id=id+'-trigger';
+        trigger.setAttribute('aria-haspopup','listbox');trigger.setAttribute('aria-expanded','false');trigger.setAttribute('aria-controls',id+'-list');
+        const value=document.createElement('span');value.id=id+'-value';value.className='lolita-search-value';trigger.append(value);
+        const chevron=document.createElement('span');chevron.className='lolita-search-chevron';chevron.setAttribute('aria-hidden','true');chevron.textContent='\u2304';trigger.append(chevron);
+        if(label){
+            if(!label.id) label.id=id+'-label';
+            label.htmlFor=trigger.id;trigger.setAttribute('aria-labelledby',label.id+' '+value.id);
+        } else trigger.setAttribute('aria-label',name);
+        const panel=document.createElement('div');panel.className='lolita-search-panel';panel.hidden=true;
+        const search=document.createElement('input');search.type='search';search.className='lolita-search-input';search.id=id+'-search';
+        search.placeholder=client ? 'Buscar cliente...' : 'Buscar producto o codigo...';search.autocomplete='off';search.spellcheck=false;
+        search.setAttribute('role','combobox');search.setAttribute('aria-label',client ? 'Buscar cliente' : 'Buscar producto o codigo');
+        search.setAttribute('aria-autocomplete','list');search.setAttribute('aria-controls',id+'-list');search.setAttribute('aria-expanded','false');
+        const list=document.createElement('div');list.className='lolita-search-options';list.id=id+'-list';list.setAttribute('role','listbox');list.setAttribute('aria-label',name);
+        const status=document.createElement('div');status.className='lolita-search-status';status.setAttribute('role','status');status.setAttribute('aria-live','polite');
+        panel.append(search,list,status);
+        select.after(wrap);wrap.append(select,trigger,panel);
+        select.classList.add('lolita-native-select');select.tabIndex=-1;select.setAttribute('aria-hidden','true');
+        let matches=[],highlight=0,signature='';
+        function position(){
+            if(panel.hidden) return;
+            const rect=trigger.getBoundingClientRect();
+            const viewport=window.visualViewport;
+            const top=viewport?.offsetTop || 0;
+            const bottom=top+(viewport?.height || window.innerHeight);
+            const below=bottom-rect.bottom-12,above=rect.top-top-12;
+            const up=below<210 && above>below;
+            panel.classList.toggle('is-above',up);
+            panel.style.width=Math.min(rect.width,window.innerWidth-24)+'px';
+            panel.style.left=Math.max(12,Math.min(rect.left,window.innerWidth-panel.offsetWidth-12))+'px';
+            panel.style.maxHeight=Math.max(100,Math.min(330,up ? above-6 : below-6))+'px';
+            panel.style.top=up ? Math.max(top+8,rect.top-panel.offsetHeight-6)+'px' : (rect.bottom+6)+'px';
+        }
+        function close(focus=false){
+            panel.hidden=true;trigger.setAttribute('aria-expanded','false');search.setAttribute('aria-expanded','false');
+            search.removeAttribute('aria-activedescendant');
+            if(active===controller) active=null;
+            if(focus && trigger.isConnected) trigger.focus();
+        }
+        function sync(){
+            const text=select.selectedOptions[0]?.textContent.trim() || (client ? 'Publico general' : 'Selecciona...');
+            if(value.textContent!==text) value.textContent=text;
+            if(trigger.title!==text) trigger.title=text;
+            if(trigger.disabled!==select.disabled) trigger.disabled=select.disabled;
+            if(select.disabled) close();
+            const next=[...select.options].map(option=>[option.value,option.textContent,option.disabled].join('|')).join('\n');
+            if(!panel.hidden && signature!==next){ signature=next;render(); }
+        }
+        function highlightRow(index){
+            highlight=Math.max(0,Math.min(index,matches.length-1));
+            [...list.children].forEach((row,i)=>row.classList.toggle('is-highlighted',i===highlight));
+            if(matches.length){
+                const row=list.children[highlight];
+                search.setAttribute('aria-activedescendant',row.id);
+                const top=row.offsetTop-list.offsetTop;
+                if(top<list.scrollTop) list.scrollTop=top;
+                else if(top+row.offsetHeight>list.scrollTop+list.clientHeight) list.scrollTop=top+row.offsetHeight-list.clientHeight;
+            } else search.removeAttribute('aria-activedescendant');
+        }
+        function choose(index){
+            const choice=matches[index];
+            if(!choice || select.disabled || !select.isConnected) return;
+            const option=[...select.options].find(item=>item.value===choice.value && !item.disabled);
+            if(!option) return;
+            const changed=select.value!==choice.value;
+            select.value=choice.value;
+            close(true);sync();
+            if(changed){
+                select.dispatchEvent(new Event('input',{bubbles:true}));
+                select.dispatchEvent(new Event('change',{bubbles:true}));
+                sync();
+            }
+        }
+        function render(){
+            matches=lolitaFilterSelectChoices(choicesFor(select),search.value);
+            list.replaceChildren();
+            matches.forEach((choice,index)=>{
+                const row=document.createElement('div');row.id=id+'-option-'+index;row.className='lolita-search-option';
+                row.setAttribute('role','option');row.setAttribute('aria-selected',String(choice.value===select.value));
+                const title=document.createElement('span');title.textContent=choice.label;row.append(title);
+                if(choice.detail){const detail=document.createElement('small');detail.textContent=choice.detail;row.append(detail);}
+                row.addEventListener('pointerdown',event=>event.preventDefault());
+                row.addEventListener('click',()=>choose(index));list.append(row);
+            });
+            status.textContent=matches.length ? `${matches.length} ${matches.length===1 ? 'resultado' : 'resultados'}` : 'Sin coincidencias';
+            highlightRow(0);position();
+        }
+        function open(){
+            if(select.disabled) return;
+            if(active && active!==controller) active.close();
+            active=controller;panel.hidden=false;search.value='';
+            trigger.setAttribute('aria-expanded','true');search.setAttribute('aria-expanded','true');
+            signature=[...select.options].map(option=>[option.value,option.textContent,option.disabled].join('|')).join('\n');
+            render();search.focus({preventScroll:true});position();
+        }
+        const controller={select,wrap,panel,close,sync,position};
+        enhanced.set(select,controller);controllers.add(controller);
+        trigger.addEventListener('click',()=>panel.hidden ? open() : close());
+        trigger.addEventListener('keydown',event=>{
+            if(['ArrowDown','ArrowUp'].includes(event.key)){event.preventDefault();open();}
+        });
+        search.addEventListener('input',render);
+        search.addEventListener('keydown',event=>{
+            if(event.isComposing) return;
+            if(event.key==='Escape'){event.preventDefault();event.stopPropagation();close(true);}
+            else if(event.key==='Tab') close();
+            else if(event.key==='ArrowDown' || event.key==='ArrowUp'){
+                event.preventDefault();highlightRow(highlight+(event.key==='ArrowDown'?1:-1));
+            } else if(event.key==='Enter'){event.preventDefault();choose(highlight);}
+        });
+        select.addEventListener('change',sync);
+        sync();
+    }
+    function scan(){
+        scheduled=false;
+        for(const controller of controllers){
+            if(!controller.select.isConnected){controller.close();controllers.delete(controller);}
+            else controller.sync();
+        }
+        document.querySelectorAll(selector).forEach(enhance);
+        if(active && !active.select.closest('#modal.open')) active.close();
+    }
+    function schedule(){if(!scheduled){scheduled=true;requestAnimationFrame(scan);}}
+    document.addEventListener('pointerdown',event=>{if(active && !active.wrap.contains(event.target)) active.close();},true);
+    document.addEventListener('focusin',event=>{if(active && !active.wrap.contains(event.target)) active.close();});
+    document.addEventListener('scroll',event=>{
+        if(!active || active.panel.contains(event.target)) return;
+        const rect=active.wrap.getBoundingClientRect();
+        if(rect.bottom<0 || rect.top>window.innerHeight) active.close(); else active.position();
+    },true);
+    window.addEventListener('resize',()=>active?.position());
+    window.visualViewport?.addEventListener('resize',()=>active?.position());
+    window.visualViewport?.addEventListener('scroll',()=>active?.position());
+    new MutationObserver(schedule).observe(document.body,{childList:true,subtree:true,attributes:true,attributeFilter:['disabled','selected','class']});
+    scan();
+})();
+/* ===== END SEARCHABLE SELECTS ===== */
+</script>
+<script>
+/* ===== CLIENT TICKETS V2 ===== */
+function lolitaClientPurchases(sales, clientId){
+    if(!clientId) return [];
+    return sales.filter(sale => sale.clientId === clientId).sort((a,b) =>
+        String(b.date || '').localeCompare(String(a.date || '')) ||
+        String(b.created || '').localeCompare(String(a.created || '')) ||
+        String(b.id).localeCompare(String(a.id)));
+}
+
+function lolitaClientStats(sales){
+    return {total:sales.reduce((sum,sale) => sum + (Number(sale.total) || 0),0),
+        count:sales.length,lastDate:sales[0]?.date || ''};
+}
+
+function lolitaTicketModel(sale){
+    const number = value => Number.isFinite(Number(value)) ? Number(value) : 0;
+    const items = lolitaSaleItemRows(sale).map(item => ({
+        name:String(item.productName || 'Producto'),qty:number(item.qty),
+        price:number(item.price),
+        amount:item.subtotal != null ? number(item.subtotal) : number(item.price)*number(item.qty),
+        promotion:String(item.offerName || item.campaignName || '')
+    }));
+    const subtotal = Math.round(items.reduce((sum,item) => sum+item.amount,0)*100)/100;
+    const total = number(sale.total);
+    return {id:String(sale.id || ''),folio:'V-'+String(sale.id || '').replace(/[^a-z0-9]/gi,'').slice(-12).toUpperCase(),
+        date:sale.date || '',client:String(sale.clientName || 'Público general'),items,subtotal,total,
+        adjustment:Math.round((total-subtotal)*100)/100};
+}
+
+function lolitaTicketMarkup(ticket){
+    return `<article class="ct-ticket" aria-label="Ticket de venta">
+        <header><h3>Ticket ${esc(ticket.folio)}</h3><p>${esc(fmtDate(ticket.date))}</p></header>
+        <div class="ct-ticket-client"><small>Cliente</small><strong>${esc(ticket.client)}</strong></div>
+        <table><thead><tr><th>Cant.</th><th>Producto</th><th>Importe</th></tr></thead>
+        <tbody>${ticket.items.map(item => `<tr><td>${item.qty}</td><td>${esc(item.name)}${item.promotion?`<small>${esc(item.promotion)}</small>`:''}<small>${money(item.price)} c/u</small></td><td>${money(item.amount)}</td></tr>`).join('')}</tbody></table>
+        <dl><div><dt>Subtotal</dt><dd>${money(ticket.subtotal)}</dd></div>
+        ${ticket.adjustment?`<div><dt>${ticket.adjustment<0?'Descuento adicional':'Ajuste'}</dt><dd>${money(ticket.adjustment)}</dd></div>`:''}
+        <div class="ct-ticket-total"><dt>Total</dt><dd>${money(ticket.total)}</dd></div></dl>
+        <footer>Gracias por tu compra.</footer></article>`;
+}
+
+if(typeof document !== 'undefined'){
+    var lolitaClientHistoryState = null;
+    const ticketStyle = `
+        .ct-ticket{background:#fff;color:#203a30;padding:26px;border:1px solid #e1e8e4;border-radius:8px;font:14px Arial,sans-serif;overflow-wrap:anywhere;box-sizing:border-box;}
+        .ct-ticket header{text-align:center;padding:0 0 22px;}.ct-ticket h3{font-size:18px!important;margin:0!important;color:#203a30!important;}.ct-ticket p{margin:8px 0 0;}
+        .ct-ticket small{display:block;color:#62756b;font-size:11px;margin:5px 0;}.ct-ticket-client{padding-bottom:18px;}.ct-ticket-client strong{display:block;}
+        .ct-ticket table{border-collapse:collapse;width:100%;table-layout:fixed;}.ct-ticket th,.ct-ticket td{text-align:left;padding:12px 5px;border-bottom:1px solid #e1e8e4;font-size:12px;vertical-align:top;white-space:normal;}
+        .ct-ticket th:first-child{width:42px;white-space:nowrap;}.ct-ticket th:last-child{width:84px;}.ct-ticket td:last-child,.ct-ticket th:last-child{text-align:right;font-variant-numeric:tabular-nums;}
+        .ct-ticket dl{margin:18px 0;}.ct-ticket dl>div{display:flex;justify-content:space-between;gap:12px;padding:8px;}.ct-ticket dd{margin:0;white-space:nowrap;}.ct-ticket-total{background:#e5f4ed;border-radius:6px;font-size:18px;font-weight:700;margin-top:8px;}
+        .ct-ticket footer{text-align:center;border-top:1px solid #d9e4dd;padding-top:20px;font-size:12px;}
+    `;
+    const style = document.createElement('style');
+    style.textContent = ticketStyle + `
+        #modalBox:has(.ct-workspace){width:min(1240px,calc(100vw - 32px))!important;max-width:1240px!important;}
+        #modalBox:has(.ct-single){width:min(480px,calc(100vw - 24px))!important;}
+        .ct-workspace{display:grid;grid-template-columns:minmax(0,1fr) 350px;gap:24px;align-items:start;}.ct-history,.ct-preview{min-width:0;}
+        .ct-preview{border-left:1px solid var(--line);padding-left:24px;}.ct-preview h4{font-size:14px;margin:0 0 18px;}.ct-client-heading{display:flex;gap:14px;align-items:center;margin-bottom:24px;}.ct-avatar{display:grid;place-items:center;background:var(--soft);color:var(--green);width:52px;height:52px;flex:none;border-radius:50%;font-size:18px;font-weight:700;}
+        .ct-client-heading h4{font-size:22px;margin:0;overflow-wrap:anywhere;}.ct-client-heading small{color:var(--muted);display:block;margin-top:6px;}.ct-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin-bottom:24px;gap:12px;}.ct-stats>div{min-width:0;border-right:1px solid var(--line);padding-right:12px;}.ct-stats>div:last-child{border:0;}.ct-stats small{color:var(--muted);display:block;font-size:11px;margin-bottom:8px;}.ct-stats strong{font-size:18px;overflow-wrap:anywhere;font-variant-numeric:tabular-nums;}
+        .ct-filters{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:16px;}.ct-filters input,.ct-filters select{font:inherit;font-size:12px;background:var(--card);color:var(--text);border:1px solid var(--line);border-radius:7px;min-height:44px;padding:10px 12px;box-sizing:border-box;}.ct-filters input:focus,.ct-filters select:focus{outline:2px solid var(--green);outline-offset:2px;}.ct-filters input{flex:1;min-width:130px!important;width:100%;}.ct-filters select{width:auto;min-width:130px;}.ct-table-wrap{overflow-x:auto;}.ct-history table{width:100%;border-collapse:collapse;}.ct-history th,.ct-history td{text-align:left;padding:13px 10px;border-bottom:1px solid var(--line);font-size:12px;}.ct-history th{color:var(--muted);font-size:11px;}.ct-history td:nth-child(2){overflow-wrap:anywhere;}.ct-history td:nth-child(3){min-width:120px;overflow-wrap:anywhere;}.ct-history tr.is-selected{background:var(--soft);}.ct-history td:nth-child(4){white-space:nowrap;}.ct-downloads{display:grid;gap:10px;margin-top:16px;}.ct-downloads button{display:flex;gap:10px;align-items:center;justify-content:center;min-height:44px;width:100%;}.ct-results{font-size:11px;color:var(--muted);margin:12px 0;}.ct-single{max-width:410px;margin:auto;}
+        @media(max-width:900px){.ct-workspace{grid-template-columns:minmax(0,1fr);}.ct-preview{border-left:0;border-top:1px solid var(--line);padding:24px 0 0;}.ct-preview .ct-ticket,.ct-preview .ct-downloads{max-width:410px;margin-left:auto;margin-right:auto;}}
+        @media(max-width:480px){#modalBox:has(.ct-workspace){width:calc(100vw - 16px)!important;padding:18px!important;}.ct-stats{gap:8px;}.ct-stats strong{font-size:15px;}.ct-client-heading h4{font-size:20px;}.ct-ticket{padding:18px;}.ct-history th,.ct-history td{padding:10px 7px;}.ct-ticket th:last-child{width:78px;}}
+    `;
+    document.head.append(style);
+
+    function actionButton(icon,label,handler,primary=false){
+        const button=document.createElement('button');button.type='button';
+        button.className=primary?'primary':'secondary';
+        button.innerHTML=lolitaV2Icon(icon)+'<span>'+esc(label)+'</span>';
+        button.onclick=handler;return button;
+    }
+
+    function mountTicket(target,sale){
+        if(!target) return;
+        target.innerHTML=lolitaTicketMarkup(lolitaTicketModel(sale));
+        const actions=document.createElement('div');actions.className='ct-downloads';
+        actions.append(actionButton('Download','Descargar imagen',()=>lolitaDownloadTicketImage(sale.id),true),
+            actionButton('Printer','Imprimir / guardar PDF',()=>lolitaExportTicketPdf(sale.id)));
+        target.append(actions);
+    }
+
+    function drawHistory(){
+        const root=document.querySelector('.ct-workspace');
+        if(!root || !lolitaClientHistoryState) return;
+        const state=lolitaClientHistoryState;
+        const all=lolitaClientPurchases(data.sales,state.clientId);
+        const stats=lolitaClientStats(all);
+        root.querySelector('.ct-stats').innerHTML=`<div><small>Total comprado</small><strong>${money(stats.total)}</strong></div><div><small>Compras</small><strong>${stats.count}</strong></div><div><small>Última compra</small><strong>${stats.lastDate?fmtDate(stats.lastDate):'—'}</strong></div>`;
+        const query=lolitaSelectNormalize(root.querySelector('#ctSearch').value);
+        const month=root.querySelector('#ctMonth').value;
+        const visible=all.filter(sale=>(!month || String(sale.date).slice(0,7)===month) &&
+            lolitaSelectNormalize([lolitaTicketModel(sale).folio,...lolitaSaleItemRows(sale).map(item=>item.productName)].join(' ')).includes(query));
+        if(!visible.some(sale=>sale.id===state.selectedId)) state.selectedId=visible[0]?.id || null;
+        const table=root.querySelector('.ct-table-wrap');
+        table.innerHTML=visible.length?`<table><thead><tr><th>Fecha</th><th>Folio</th><th>Productos</th><th>Total</th><th></th></tr></thead><tbody>${visible.map((sale,index)=>`<tr class="${sale.id===state.selectedId?'is-selected':''}"><td>${fmtDate(sale.date)}</td><td>${esc(lolitaTicketModel(sale).folio)}</td><td>${esc(lolitaSaleItemRows(sale).map(item=>item.productName).join(', '))}</td><td>${money(sale.total)}</td><td><button type="button" class="icon-btn" title="Ver ticket" aria-label="Ver ticket ${esc(lolitaTicketModel(sale).folio)}" data-ct-index="${index}" aria-pressed="${sale.id===state.selectedId}">${lolitaV2Icon('Receipt')}</button></td></tr>`).join('')}</tbody></table>`:'<div class="empty">No hay compras con esos filtros.</div>';
+        table.querySelectorAll('[data-ct-index]').forEach(button=>button.onclick=()=>{
+            state.selectedId=visible[Number(button.dataset.ctIndex)].id;
+            drawHistory();
+            root.querySelector('.ct-preview')?.scrollIntoView({block:'nearest',behavior:'smooth'});
+            root.querySelector('.ct-preview button')?.focus({preventScroll:true});
+        });
+        root.querySelector('.ct-results').textContent=visible.length+' de '+all.length+' compras';
+        const sale=visible.find(item=>item.id===state.selectedId);
+        const preview=root.querySelector('#ctTicket');
+        if(sale) mountTicket(preview,sale);
+        else preview.innerHTML='<div class="empty">Sin ticket seleccionado.</div>';
+    }
+
+    window.lolitaShowClientHistory=function(id){
+        const client=data.clients.find(item=>item.id===id);
+        if(!client) return toast('No encontré ese cliente');
+        lolitaClientHistoryState={clientId:id,selectedId:null};
+        const initials=client.name.trim().split(/\s+/).slice(0,2).map(word=>word[0]).join('').toUpperCase();
+        const months=[...new Set(lolitaClientPurchases(data.sales,id).map(sale=>String(sale.date || '').slice(0,7)).filter(value=>/^\d{4}-\d{2}$/.test(value)))];
+        openModal('Historial de compras',`<div class="ct-workspace"><section class="ct-history"><div class="ct-client-heading"><span class="ct-avatar">${esc(initials)}</span><div><h4>${esc(client.name)}</h4><small>Historial de compras</small></div></div><div class="ct-stats"></div><div class="ct-filters"><input type="search" id="ctSearch" placeholder="Buscar venta o producto" aria-label="Buscar compra"><select id="ctMonth" aria-label="Mes de compra"><option value="">Todas las fechas</option>${months.map(month=>`<option value="${month}">${month}</option>`).join('')}</select></div><div class="ct-table-wrap"></div><p class="ct-results" aria-live="polite"></p></section><aside class="ct-preview"><h4>Ticket de venta</h4><div id="ctTicket"></div></aside></div>`,()=>{});
+        document.querySelector('#modalBox > .modal-actions')?.remove();
+        document.querySelector('#ctSearch').oninput=drawHistory;
+        document.querySelector('#ctMonth').onchange=drawHistory;
+        drawHistory();
+    };
+
+    lolitaPrintSaleTicket=function(id){
+        const sale=data.sales.find(item=>item.id===id);
+        if(!sale) return toast('No encontré esa venta');
+        lolitaClientHistoryState=null;
+        openModal('Ticket de venta','<div class="ct-single" id="ctSingleTicket"></div>',()=>{});
+        document.querySelector('#modalBox > .modal-actions')?.remove();
+        mountTicket(document.querySelector('#ctSingleTicket'),sale);
+    };
+
+    window.lolitaExportTicketPdf=function(id){
+        const sale=data.sales.find(item=>item.id===id);
+        if(!sale) return toast('La venta ya no está disponible');
+        const ticket=lolitaTicketModel(sale);
+        const win=window.open('','_blank');
+        if(!win) return toast('Permite abrir la ventana del ticket para guardar el PDF');
+        win.document.write('<!doctype html><html lang="es"><head><meta charset="utf-8"><title>Ticket '+esc(ticket.folio)+'</title><style>'+ticketStyle+'body{margin:24px auto;max-width:440px;}button{padding:12px;margin-top:16px;}@media print{body{margin:0;max-width:none;}.ct-ticket{border:0;}button{display:none;}tr{break-inside:avoid;}@page{margin:14mm;}}</style></head><body>'+lolitaTicketMarkup(ticket)+'<button onclick="window.print()">Imprimir / guardar PDF</button></body></html>');
+        win.document.close();win.focus();win.print();
+    };
+
+    window.lolitaDownloadTicketImage=function(id){
+        const sale=data.sales.find(item=>item.id===id);
+        if(!sale) return toast('La venta ya no está disponible');
+        const ticket=lolitaTicketModel(sale);
+        const canvas=document.createElement('canvas');
+        const ctx=canvas.getContext('2d');
+        if(!ctx) return toast('No se pudo crear la imagen; utiliza PDF');
+        function lines(text,width){
+            const result=[];let line='';
+            for(const char of String(text)){
+                if(char==='\n' || (line && ctx.measureText(line+char).width>width)){result.push(line);line=char==='\n'?'':char;}
+                else line+=char;
+            }
+            if(line) result.push(line);
+            return result.length?result:[''];
+        }
+        ctx.font='24px Arial';
+        const rows=ticket.items.map(item=>({...item,lines:lines(item.name,380),promo:lines(item.promotion,380)}));
+        const clientLines=lines(ticket.client,660);
+        const height=500+clientLines.length*32+rows.reduce((sum,item)=>sum+Math.max(1,item.lines.length)*32+(item.promotion?item.promo.length*28:0)+66,0)+(ticket.adjustment?44:0);
+        if(height>30000) return toast('Este ticket es muy largo para una imagen. Utiliza PDF');
+        canvas.width=780;canvas.height=height;
+        ctx.fillStyle='#fff';ctx.fillRect(0,0,780,height);ctx.textBaseline='top';
+        let y=40;
+        function text(value,x,size=24,align='left',bold=false){ctx.font=(bold?'bold ':'')+size+'px Arial';ctx.fillStyle='#203a30';ctx.textAlign=align;ctx.fillText(String(value),x,y);}
+        function rule(){ctx.strokeStyle='#dce6df';ctx.beginPath();ctx.moveTo(44,y);ctx.lineTo(736,y);ctx.stroke();}
+        text('Ticket '+ticket.folio,390,30,'center',true);y+=46;text(fmtDate(ticket.date),390,22,'center');y+=60;
+        text('Cliente',44,20);y+=32;clientLines.forEach(line=>{text(line,44,24,'left',true);y+=32;});y+=24;rule();y+=20;
+        text('Cant.',44,20);text('Producto',120,20);text('Importe',736,20,'right');y+=36;rule();y+=22;
+        rows.forEach(item=>{
+            text(item.qty,44);text(money(item.amount),736,24,'right');
+            item.lines.forEach(line=>{text(line,120);y+=32;});
+            if(item.promotion) item.promo.forEach(line=>{text(line,120,20);y+=28;});
+            text(money(item.price)+' c/u',120,20);y+=42;rule();y+=24;
+        });
+        y+=4;text('Subtotal',44);text(money(ticket.subtotal),736,24,'right');y+=44;
+        if(ticket.adjustment){text(ticket.adjustment<0?'Descuento adicional':'Ajuste',44);text(money(ticket.adjustment),736,24,'right');y+=44;}
+        ctx.fillStyle='#e5f4ed';ctx.fillRect(34,y-10,712,58);text('TOTAL',44,28,'left',true);text(money(ticket.total),736,28,'right',true);y+=78;rule();y+=26;text('Gracias por tu compra.',390,22,'center');
+        canvas.toBlob(blob=>{
+            if(!blob) return toast('No se pudo descargar la imagen');
+            const url=URL.createObjectURL(blob);const link=document.createElement('a');
+            link.href=url;link.download='Ticket-'+ticket.folio+'.png';link.click();
+            setTimeout(()=>URL.revokeObjectURL(url),60000);
+        },'image/png');
+    };
+
+    const previousRenderClients=renderClients;
+    renderClients=function(){
+        previousRenderClients();
+        const clients=data.clients;
+        document.querySelectorAll('#clientTable tbody tr').forEach(row=>{
+            const edit=row.querySelector('button[onclick^="editClient("]');
+            const id=edit?.getAttribute('onclick')?.match(/^editClient\('([^']+)'\)/)?.[1];
+            const client=clients.find(item=>item.id===id);
+            if(!client) return;
+            const button=actionButton('Receipt','Historial',()=>lolitaShowClientHistory(client.id));
+            button.className='icon-btn';button.title='Historial de compras';button.setAttribute('aria-label','Historial de '+client.name);
+            button.innerHTML=lolitaV2Icon('Receipt');row.querySelector('.actions')?.prepend(button);
+        });
+        drawHistory();
+    };
+}
+/* ===== END CLIENT TICKETS V2 ===== */
 </script>
 </body>
 </html>
